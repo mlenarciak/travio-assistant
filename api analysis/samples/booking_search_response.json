@@ -1,0 +1,38 @@
+{
+  "cart": "1b0c2d11-0e24-45e7-9f9f-6a2e9b0150aa",
+  "search_id": "2c3c2fbc-8f3d-48f3-9c2b-2ad22b4d1f0a",
+  "step": 1,
+  "final": false,
+  "pick_type": "one",
+  "allow_partial": true,
+  "partial": false,
+  "groups": [
+    {
+      "idx": 0,
+      "service": 0,
+      "accommodation": 0,
+      "label": 0,
+      "type": "pick",
+      "pick_type": "one",
+      "items": [
+        {
+          "hotel_id": 101,
+          "name": "Hotel Italia",
+          "price_from": 120.0,
+          "rating": 4,
+          "next_step": {
+            "group_idx": 1,
+            "type": "pick",
+            "label": "Rooms",
+            "items": [
+              { "room_id": 551, "name": "Double", "board": "BB", "price": 120.0 },
+              { "room_id": 552, "name": "Double", "board": "HB", "price": 145.0 }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "warnings": []
+}
+

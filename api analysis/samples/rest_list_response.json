@@ -1,0 +1,16 @@
+{
+  "tot": 124,
+  "pages": 13,
+  "list": [
+    {
+      "id": 101,
+      "type": 1,
+      "code": "HTL-001",
+      "name": {"en": "Hotel Italia", "it": "Hotel Italia"},
+      "classification_id": {"id": 5, "code": "4S", "name": "Four Stars", "rating": 4},
+      "category": {"id": 2, "code": "HTL", "name": "Hotels"},
+      "_meta": {"creation_date": "2024-10-05T09:12:33Z", "last_update": "2025-01-11T15:41:10Z"}
+    }
+  ]
+}
+

@@ -1,0 +1,89 @@
+%% Travio API – Mermaid Diagrams
+
+%% 1) Authentication Flow
+flowchart TD
+  A[Client] -->|POST /auth {id,key}| B[Auth Service]
+  B -->|Validate credentials| C{Valid?}
+  C -- Yes --> D[Issue JWT]
+  D --> E[Response { token }]
+  C -- No --> F[401 Unauthorized]
+
+%% 2) Repository List Flow with Filters/Unfold
+flowchart TD
+  C1[Client] -->|GET /rest/{repository}?page,per_page,filters,sort_by,unfold| S1[Repository Controller]
+  S1 --> V1[Parse & Validate Query]
+  V1 --> Q1[Query Builder]
+  Q1 --> DB[(Data Store)]
+  DB --> R1[Raw Rows]
+  R1 --> U1[Unfold Link Fields]
+  U1 --> P1[Paginate & Shape]
+  P1 --> O1[200 { tot, pages, list }]
+
+%% 3) CRUD Overview
+flowchart LR
+  L1[Client] -- GET list --> RC1[ /rest/{repo} ]
+  L1 -- POST create --> RC1
+  L1 -- GET one --> RC2[ /rest/{repo}/{id} ]
+  L1 -- PUT update --> RC2
+  L1 -- DELETE --> RC2
+  RC1 & RC2 --> SEC[JWT Guard]
+  SEC --> DB2[(Data Store)]
+
+%% 4) Booking Search – High-Level Sequence
+sequenceDiagram
+  autonumber
+  participant C as Client
+  participant BS as Booking Service
+  participant PR as Providers/Aggregators
+  C->>BS: POST /booking/search { search[], occupancy[], ... }
+  BS->>PR: Fan-out queries by type (flights/hotels/...)
+  PR-->>BS: Availability + Rules
+  BS->>BS: Compute groups, step, pick_type
+  BS-->>C: { cart, search_id, step, final, groups[], warnings[] }
+  Note over C,BS: If expand_next_step=true, include immediate next group preview
+
+%% 5) Core ER Diagram (simplified)
+erDiagram
+  MASTER_DATA ||--o{ RESERVATIONS : client
+  MASTER_DATA ||--o{ RESERVATIONS : promoter
+  MASTER_DATA ||--o{ PAYMENTS : subject
+  RESERVATIONS ||--o{ PAX : has
+  RESERVATIONS ||--o{ RESERVATION_SERVICES : has
+  RESERVATION_SERVICES ||--o{ RESERVATION_ROWS : has
+  SERVICES ||--o{ SUBSERVICES : has
+  SERVICES }o--|| SERVICES_CATEGORIES : in
+  SERVICES }o--|| SERVICES_TYPOLOGIES : of
+  SUBSERVICES }o--o{ AMENITIES : tagged
+  PACKAGES ||--o{ DEPARTURES : has
+  PACKAGES }o--|| SERVICES_CATEGORIES : in
+  INVOICES ||--o{ JOURNAL_ENTRIES : posted
+  PAYMENTS ||--o{ JOURNAL_ENTRIES : posted
+  JOURNAL_ENTRIES }o--|| ACCOUNTING_REASONS : reason
+  JOURNAL_ROWS }o--|| ACCOUNTING_ACCOUNTS : account
+  RESERVATIONS }o--|| CURRENCIES : currency
+  RESERVATION_ROWS }o--|| VAT_TYPES : vat
+  GEO ||--o{ GEO : parent
+
+%% 6) Booking Groups Anatomy
+classDiagram
+  class BookingResponse {
+    string cart
+    string search_id
+    int step
+    bool final
+    string pick_type
+    bool allow_partial
+    bool partial
+    Group[] groups
+    string[] warnings
+  }
+  class Group {
+    int idx
+    int service
+    int accommodation
+    int label
+    enum type(pick|confirm|input)
+    enum pick_type(all|one|max_one|min_one|any)
+    any[] items
+  }
+

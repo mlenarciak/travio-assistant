@@ -1,0 +1,240 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  breakatwhitespace=false,
+  columns=fullflexible,
+  keepspaces=true,
+  upquote=true
+}
+\setlength{\emergencystretch}{3em}
+\usepackage{caption}
+\captionsetup{font=small}
+
+\title{Travio API: A Functional, Data, and Architectural Analysis}
+\author{Internal Engineering}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This paper analyzes the Travio API (v2.7.0) from a functional and data modeling perspective. We formalize the authentication model, the generic repository surface under \texttt{/rest}, and the multi-step booking workflow under \texttt{/booking/search}. We propose a normalized pseudo-schema, outline typical CRUD and query patterns, and discuss error and security concerns. We then identify modernization opportunities and conclude with a best-practice, scalable reference architecture including CRM integration.
+\end{abstract}
+
+\section{Introduction}
+The Travio API exposes a bearer-authenticated set of endpoints for travel operations: generic repositories (accounting, catalogs, anagraphics), and a provider-agnostic booking interface that orchestrates availability and selection across different service types (hotels, flights, activities, and more). The design follows an OpenAPI 3.1.0 specification with a consistent approach to pagination, filtering, sorting, and link unfolding.
+
+\section{Authentication}
+\textbf{Endpoint}: \texttt{POST /auth} with JSON body \{\texttt{id:int}, \texttt{key:string}\}. On success, the server returns a JWT token used in the \texttt{Authorization: Bearer} header for all protected routes. Failures yield \texttt{401 Unauthorized}. Tokens should be short-lived and revocable.
+
+\subsection{Intuition}
+The API separates credential exchange from data access; the stateless JWT supports horizontal scalability of the API tier and avoids server-side session persistence.
+
+\section{Generic Repositories}
+\textbf{Endpoints}: \texttt{/rest/{repository}} and \texttt{/rest/{repository}/{id}}. Repositories include entities such as \emph{services}, \emph{subservices}, \emph{master-data}, \emph{reservations}, \emph{payments}, \emph{invoices}, \emph{journal-entries}, \emph{amenities}, \emph{geo}, etc. The interface supports:
+\begin{itemize}[noitemsep]
+  \item List with pagination (\texttt{page}, \texttt{per\_page}), filtering (JSON-encoded \texttt{filters}), sorting (JSON-encoded \texttt{sort\_by}), and link unfolding (\texttt{unfold}).
+  \item Create with \texttt{data} and optional \texttt{options} (e.g., \texttt{allow\_id}, \texttt{check\_vat}).
+  \item Get one by id; optionally unfold linked fields.
+  \item Update with \texttt{data} subset; read-only fields are ignored.
+  \item Delete by id.
+\end{itemize}
+
+\subsection{Intuition}
+The repository pattern provides a unified surface over heterogeneous domains. Link-unfolding shifts N+1 joins to the API layer when needed. JSON-encoded filters provide flexibility without proliferating query params, at the cost of discoverability.
+
+\section{Booking Workflow}
+\textbf{Endpoint}: \texttt{POST /booking/search} allows one or more searches in a single request. Each search defines service \texttt{type}, date ranges or transport \texttt{segments}, and \texttt{occupancy}. The response returns a stateful context \texttt{(cart, search\_id, step)} and a list of \texttt{groups}, each requiring an action of type \texttt{pick}, \texttt{confirm}, or \texttt{input}. The contract includes \texttt{pick\_type}, \texttt{allow\_partial}, and \texttt{final} gating.
+
+\subsection{Intuition}
+The booking process is a guided multi-step state machine. The service aggregates diverse supplier semantics into a consistent set of group actions, deferring complex pricing, inventory, and selection logic behind a uniform interface.
+
+\section{Data Model (Pseudo-Schema)}
+This section proposes a relational pseudo-schema to capture major entities and links implied by the API.
+
+\subsection*{Core Catalog}
+\begin{lstlisting}
+SERVICES(id PK, type INT, code TEXT, name JSONB, classification_id FK, category_id FK,
+         typology_id FK, visibility JSONB, geo JSONB, descriptions JSONB, images JSONB,
+         video JSONB, amenities JSONB, stop_sales JSONB, schedule JSONB,
+         estimated_price_per_pax NUMERIC, supplier_hotel_id FK,
+         show_prices TEXT, accept_other_prices TEXT, meta JSONB, notes JSONB, tags INT[])
+
+SUBSERVICES(id PK, service_id FK, code TEXT, name JSONB, type INT, obsolete BOOL,
+            visibility JSONB, descriptions JSONB, images JSONB, video JSONB,
+            availability JSONB, amenities JSONB, cost JSONB, price JSONB,
+            occupancy JSONB, show_prices TEXT, accept_other_prices TEXT,
+            meta JSONB, notes JSONB, tags INT[])
+
+SERVICES_CATEGORIES(id PK, code TEXT, name TEXT)
+SERVICES_TYPOLOGIES(id PK, code TEXT, name TEXT, type INT)
+AMENITIES(id PK, type TEXT, name JSONB)
+CLASSIFICATIONS(id PK, code TEXT, name TEXT, rating NUMERIC)
+GEO(id PK, parent_id FK NULL, type TEXT, name JSONB, description JSONB, suppliers JSONB)
+TAGS(id PK, visible BOOL, reservation_default BOOL, parent_id FK NULL, name JSONB)
+
+PACKAGES(id PK, code TEXT, name JSONB, type_id FK, category_id FK,
+         shown_price NUMERIC, min_pax INT, max_pax INT,
+         descriptions JSONB, images JSONB, video JSONB,
+         visibility JSONB, geo JSONB, duration INT, schedule JSONB,
+         rows JSONB, attachments JSONB, guides INT[], meta JSONB, tags INT[])
+
+DEPARTURES(id PK, package_id FK, date DATE)
+\end{lstlisting}
+
+\subsection*{Anagraphics and Commerce}
+\begin{lstlisting}
+MASTER_DATA(id PK, profiles TEXT[], categories INT[], profile_type TEXT,
+            honorific_id FK, name TEXT, surname TEXT, company_name TEXT,
+            legal_form_id FK, commercial_name TEXT, full_name TEXT GENERATED,
+            tax_code TEXT, vat_country TEXT, vat_number TEXT, language TEXT,
+            nationality TEXT, birth DATE, birth_place TEXT, gender TEXT,
+            doc JSONB, username TEXT, password_hash TEXT, enabled BOOL,
+            pec TEXT, sdi_code TEXT, extra_ue BOOL, public_administration BOOL,
+            website TEXT, promoter_id FK, network_id FK,
+            logo JSONB, photo JSONB, invoice_master_data_id FK,
+            inbound_payments_master_data_id FK, outbound_payments_master_data_id FK,
+            contacts JSONB, addresses JSONB, price_lists TEXT[], meta JSONB,
+            notes JSONB, tags INT[])
+
+RESERVATIONS(id PK, heading_id FK, year INT, num TEXT,
+             from DATE, to DATE, status INT, status_history JSONB,
+             client_id FK, invoice_client_id FK, payment_client_id FK,
+             promoter_id FK, user_id FK, description TEXT, reference TEXT,
+             requested_by TEXT, first_pax TEXT, due TIMESTAMP, date TIMESTAMP,
+             cancellation_date TIMESTAMP NULL, confirmation_date TIMESTAMP NULL,
+             price JSONB, instalments JSONB, services JSONB,
+             attachments JSONB, departures JSONB, price_modifiers JSONB,
+             accounting_entries JSONB, api_key INT, meta JSONB, notes JSONB, tags INT[])
+
+PAX(id PK, reservation_id FK, name TEXT, surname TEXT, phone TEXT, email TEXT,
+    gender TEXT, doc JSONB, address TEXT, city TEXT, province TEXT, postal_code TEXT,
+    country_id FK, language TEXT, nationality TEXT, tax_code TEXT, age INT, birth DATE,
+    birth_place TEXT, notes TEXT, meta JSONB, tags INT[])
+
+PAYMENTS(id PK, method_id FK, number INT, date DATE, currency_id FK,
+         master_data_id FK, type TEXT, exchange_rate NUMERIC,
+         print_description TEXT, rows JSONB, journal_entries INT[], meta JSONB)
+
+INVOICES(id PK, year INT, number INT, full_number TEXT, date DATE, due DATE,
+         type_id FK, currency_id FK, master_data_id FK, reference_date DATE,
+         reference_number TEXT, journal_entries INT[], rows JSONB, meta JSONB)
+
+JOURNAL_ENTRIES(id PK, date DATE, number INT, full_number TEXT, accounting_reason_id FK,
+                vat_protocol_number INT, vat_protocol_suffix TEXT,
+                description TEXT, invoices INT[], payments INT[], rows JSONB, meta JSONB)
+
+CURRENCIES(id PK, code TEXT, name TEXT, symbol TEXT, decimals INT)
+PAYMENT_METHODS(id PK, name TEXT, gateway TEXT, credentials JSONB, test BOOL,
+                visible_in BOOL, visible_out BOOL,
+                accounting_reason_in_id FK, accounting_reason_out_id FK, meta JSONB)
+VAT_TYPES(id PK, code TEXT, name TEXT, percentage NUMERIC, type TEXT,
+         partially_deductible NUMERIC, e_invoice_type_out TEXT, e_invoice_type_in TEXT,
+         legal_reference TEXT, stamp_duty BOOL)
+ACCOUNTING_ACCOUNTS(id PK, number INT, full_number TEXT, name TEXT)
+ACCOUNTING_REASONS(id PK, name TEXT)
+\end{lstlisting}
+
+\section{Query and CRUD Patterns}
+\subsection*{Listing}
+\begin{lstlisting}[language=SQL]
+-- Pagination
+SELECT * FROM services ORDER BY code ASC OFFSET (page-1)*per_page LIMIT per_page;
+
+-- Filtering (example: type=1 AND preferred=true)
+SELECT * FROM services WHERE type = 1 AND preferred = true;
+
+-- Unfolding links (server-side join when requested)
+SELECT s.*, c.* AS category FROM services s
+JOIN services_categories c ON c.id = s.category_id
+WHERE ... ORDER BY ... LIMIT ...;
+\end{lstlisting}
+
+\subsection*{Create}
+\begin{lstlisting}[language=SQL]
+-- Read-only columns are computed/ignored on write.
+INSERT INTO master_data(name, surname, language, email) VALUES (...);
+\end{lstlisting}
+
+\subsection*{Update}
+\begin{lstlisting}[language=SQL]
+UPDATE master_data SET language='en', email='...' WHERE id = :id;
+\end{lstlisting}
+
+\subsection*{Delete}
+\begin{lstlisting}[language=SQL]
+DELETE FROM master_data WHERE id = :id;
+\end{lstlisting}
+
+\section{Error Handling and Security}
+\begin{itemize}[noitemsep]
+  \item Standard responses: 401 (unauthorized), 403 (forbidden), 404 (not found), 500 (error).
+  \item JWT bearer for all protected endpoints. Tokens should be audience-scoped and time-limited.
+  \item Validate JSON-encoded \texttt{filters}/\texttt{sort\_by}; reject overly complex or unsafe operators.
+  \item Enforce read-only fields server-side; ignore or reject on write.
+\end{itemize}
+
+\section{Small Diagrams (Mermaid snippets)}
+The repository includes a \texttt{diagrams.mmd} file with detailed Mermaid diagrams. Example:
+\begin{lstlisting}
+flowchart TD
+  Client -->|POST /auth| Auth
+  Auth -->|200 {token}| Client
+  Auth -->|401| Client
+\end{lstlisting}
+
+\section{Modernization Opportunities}
+\begin{itemize}[noitemsep]
+  \item OpenAPI-first development: generate server stubs, typed SDKs, and contract tests in CI.
+  \item Typed filters DSL: replace free-form JSON with a composable, validated filter grammar.
+  \item Idempotency keys: for POST/PUT to ensure safe retries.
+  \item Observability: distributed tracing, RED/SRE metrics, per-repo SLIs/SLOs.
+  \item Caching: per-repository read caching; booking availability edge caching with TTLs.
+  \item Outbox + Event streaming: decouple write-side from CRM and accounting sync.
+  \item Policy-as-code: authorization policies per repository and field-level guards.
+  \item Pagination defaults and hard caps; keyset pagination for hot paths.
+  \item Rate limiting and abuse prevention per token and IP.
+\end{itemize}
+
+\section{Best-Practice Scalable Rebuild (with CRM Integration)}
+\subsection*{Architecture}
+\begin{itemize}[noitemsep]
+  \item API Gateway (JWT validation, rate limit, request shaping, OpenAPI validation).
+  \item Services: Auth, Repositories (per-bounded-context modules), Booking Orchestrator.
+  \item Data: Postgres (primary), Redis (cache, rate-limit), S3-compatible storage (files).
+  \item Async: Kafka (or NATS) for events; Outbox pattern from Postgres.
+  \item CRM Integration: Event-driven (e.g., \texttt{reservation.created}, \texttt{payment.recorded}). Dedicated consumer pushes to CRM via reliable connectors.
+  \item Telemetry: OpenTelemetry traces/metrics/logs, dashboards per repo.
+\end{itemize}
+
+\subsection*{Data and Throughput}
+\begin{itemize}[noitemsep]
+  \item Read hot-paths (e.g., \texttt{/rest/services}) behind cache with stale-while-revalidate.
+  \item Writes go to DB; emit events via outbox + change data capture.
+  \item Booking: circuit-breakers and bulkheads per provider; parallel fan-out with timeouts and hedged requests.
+\end{itemize}
+
+\subsection*{API Design}
+\begin{itemize}[noitemsep]
+  \item Strongly typed SDKs; pagination and filter helpers; idempotency headers; consistent error model with codes.
+  \item Field masks or sparse fieldsets to control payload size.
+  \item Standardized expand/unfold semantics with maximum depth and limits.
+\end{itemize}
+
+\subsection*{Operations}
+\begin{itemize}[noitemsep]
+  \item CI: OpenAPI breaking-change detection; contract/integration tests per repo.
+  \item CD: canary releases; error budgets per endpoint; autoscaling based on p95 latency and RPS.
+\end{itemize}
+
+\section{Conclusion}
+The Travio API provides a uniform surface for heterogeneous travel operations. By formalizing filters, strengthening contracts, and adopting an event-driven, observable architecture with idempotent writes and robust caching, the platform can scale to tens of thousands of daily operations while integrating cleanly with CRM systems.
+
+\end{document}

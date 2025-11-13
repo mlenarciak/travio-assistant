@@ -1,0 +1,9 @@
+flowchart LR
+  L1[Client] -- GET list --> RC1[ /rest/:repo ]
+  L1 -- POST create --> RC1
+  L1 -- GET one --> RC2[ /rest/:repo/:id ]
+  L1 -- PUT update --> RC2
+  L1 -- DELETE --> RC2
+  RC1 --> SEC[JWT Guard]
+  RC2 --> SEC
+  SEC --> DB2[(Data Store)]

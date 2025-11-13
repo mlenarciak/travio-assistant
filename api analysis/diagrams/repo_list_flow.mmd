@@ -1,0 +1,9 @@
+flowchart TD
+  C1[Client] -->|GET list| S1[Repository Controller]
+  S1 --> V1[Parse & Validate Query]
+  V1 --> Q1[Query Builder]
+  Q1 --> DB[(Data Store)]
+  DB --> R1[Raw Rows]
+  R1 --> U1[Unfold Link Fields]
+  U1 --> P1[Paginate & Shape]
+  P1 --> O1[200 payload]

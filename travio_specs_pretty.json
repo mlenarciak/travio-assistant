@@ -1,0 +1,5428 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Travio API",
+    "version": "2.7.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.travio.it"
+    }
+  ],
+  "paths": {
+    "/auth": {
+      "post": {
+        "operationId": "auth",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Retrieve the authentication token",
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "key": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "key"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/rest/{repository}": {
+      "get": {
+        "operationId": "rest_list",
+        "tags": [
+          "REST"
+        ],
+        "description": "List all items in the repository",
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "accounting-accounts",
+                "accounting-reasons",
+                "airports",
+                "amenities",
+                "classifications",
+                "currencies",
+                "departures",
+                "geo",
+                "honorifics",
+                "instalments",
+                "invoice-types",
+                "invoices",
+                "journal-entries",
+                "legal-forms",
+                "master-data",
+                "master-data-categories",
+                "package-types",
+                "packages",
+                "pax",
+                "payment-conditions",
+                "payment-methods",
+                "payments",
+                "ports",
+                "reservation-links",
+                "reservations",
+                "services",
+                "services-categories",
+                "services-typologies",
+                "subservices",
+                "suppliers-hotels",
+                "tags",
+                "texts",
+                "vat-types"
+              ]
+            }
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "JSON encoded filters"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "JSON encoded sorting rules"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page number to visualize"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of items per page"
+          },
+          {
+            "name": "unfold",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unfolds the specified fields (they must be of type \"link\") - Comma-separated list"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tot": {
+                      "type": "integer",
+                      "description": "Total number of items"
+                    },
+                    "pages": {
+                      "type": "integer",
+                      "description": "Number of pages"
+                    },
+                    "list": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "description": "Item of the requested type"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "operationId": "rest_create",
+        "tags": [
+          "REST"
+        ],
+        "description": "Create one item",
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "accounting-accounts",
+                "accounting-reasons",
+                "airports",
+                "amenities",
+                "classifications",
+                "currencies",
+                "departures",
+                "geo",
+                "honorifics",
+                "instalments",
+                "invoice-types",
+                "invoices",
+                "journal-entries",
+                "legal-forms",
+                "master-data",
+                "master-data-categories",
+                "package-types",
+                "packages",
+                "pax",
+                "payment-conditions",
+                "payment-methods",
+                "payments",
+                "ports",
+                "reservation-links",
+                "reservations",
+                "services",
+                "services-categories",
+                "services-typologies",
+                "subservices",
+                "suppliers-hotels",
+                "tags",
+                "texts",
+                "vat-types"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "description": "The item to create"
+                  },
+                  "options": {
+                    "type": "object",
+                    "properties": {
+                      "allow_id": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Normally you cannot specify the id during creation, setting this to true will override that behaviour"
+                      },
+                      "check_vat": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "Only for \"master-data\": checks for the correctness of VAT number"
+                      },
+                      "send_signup_mail": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Only for \"master-data\": sends the signup mail"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "The id of the created item"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/rest/{repository}/{id}": {
+      "get": {
+        "operationId": "rest_get",
+        "tags": [
+          "REST"
+        ],
+        "description": "Get one item from the repository",
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "accounting-accounts",
+                "accounting-reasons",
+                "airports",
+                "amenities",
+                "classifications",
+                "currencies",
+                "departures",
+                "geo",
+                "honorifics",
+                "instalments",
+                "invoice-types",
+                "invoices",
+                "journal-entries",
+                "legal-forms",
+                "master-data",
+                "master-data-categories",
+                "package-types",
+                "packages",
+                "pax",
+                "payment-conditions",
+                "payment-methods",
+                "payments",
+                "ports",
+                "reservation-links",
+                "reservations",
+                "services",
+                "services-categories",
+                "services-typologies",
+                "subservices",
+                "suppliers-hotels",
+                "tags",
+                "texts",
+                "vat-types"
+              ]
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Item id"
+          },
+          {
+            "name": "unfold",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unfolds the specified fields (they must be of type \"link\") - Comma-separated list"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "description": "Requested item"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "put": {
+        "operationId": "rest_update",
+        "tags": [
+          "REST"
+        ],
+        "description": "Update one item",
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "accounting-accounts",
+                "accounting-reasons",
+                "airports",
+                "amenities",
+                "classifications",
+                "currencies",
+                "departures",
+                "geo",
+                "honorifics",
+                "instalments",
+                "invoice-types",
+                "invoices",
+                "journal-entries",
+                "legal-forms",
+                "master-data",
+                "master-data-categories",
+                "package-types",
+                "packages",
+                "pax",
+                "payment-conditions",
+                "payment-methods",
+                "payments",
+                "ports",
+                "reservation-links",
+                "reservations",
+                "services",
+                "services-categories",
+                "services-typologies",
+                "subservices",
+                "suppliers-hotels",
+                "tags",
+                "texts",
+                "vat-types"
+              ]
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Item id"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "description": "Properties that you want to edit"
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "rest_delete",
+        "tags": [
+          "REST"
+        ],
+        "description": "Delete one item",
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "accounting-accounts",
+                "accounting-reasons",
+                "airports",
+                "amenities",
+                "classifications",
+                "currencies",
+                "departures",
+                "geo",
+                "honorifics",
+                "instalments",
+                "invoice-types",
+                "invoices",
+                "journal-entries",
+                "legal-forms",
+                "master-data",
+                "master-data-categories",
+                "package-types",
+                "packages",
+                "pax",
+                "payment-conditions",
+                "payment-methods",
+                "payments",
+                "ports",
+                "reservation-links",
+                "reservations",
+                "services",
+                "services-categories",
+                "services-typologies",
+                "subservices",
+                "suppliers-hotels",
+                "tags",
+                "texts",
+                "vat-types"
+              ]
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Item id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/not_found"
+          },
+          "500": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/booking/search": {
+      "post": {
+        "operationId": "booking_search",
+        "tags": [
+          "Booking"
+        ],
+        "description": "Perform a new availability search",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Please note that from/to and segments properties are mutually exclusive, as well as ids, codes and geos",
+                "properties": {
+                  "cart": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Identifier of the cart you want to add this search to; refer to \"Cart and paxes management\" in the docs"
+                  },
+                  "search": {
+                    "type": "array",
+                    "description": "You can perform several searches in a single request (e.g., a flight and a hotel)",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "flights",
+                            "hotels",
+                            "transfers",
+                            "tours",
+                            "rentals",
+                            "cruises",
+                            "ferries",
+                            "trains",
+                            "insurances",
+                            "activities",
+                            "others",
+                            "packages"
+                          ]
+                        },
+                        "from": {
+                          "type": "string",
+                          "format": "date",
+                          "description": "Checkin date - Mutually exclusive with \"segments\""
+                        },
+                        "to": {
+                          "type": "string",
+                          "format": "date",
+                          "description": "Checkout date - Mutually exclusive with \"segments\""
+                        },
+                        "segments": {
+                          "type": "array",
+                          "description": "You can search for several segments in a row (e.g. a flight that goes FCO->LHR and back, or more)",
+                          "items": {
+                            "$ref": "#/components/schemas/segment"
+                          }
+                        },
+                        "occupancy": {
+                          "type": "array",
+                          "description": "Each item represent a room you are requesting. In caso of services that do not provide room support (flights, outdoor activities, etc), specify only one item in the list. For each room, you can choose whether to create new pax, or use existing ones. Please refer to \"Cart and paxes management\" section in the docs",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "adults": {
+                                    "type": "integer"
+                                  },
+                                  "children": {
+                                    "description": "Each item represents a child's age",
+                                    "type": "array",
+                                    "items": {
+                                      "type": "integer"
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "adults"
+                                ]
+                              },
+                              {
+                                "type": "array",
+                                "description": "Each item represents a pax id",
+                                "items": {
+                                  "type": "integer"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "merge_hotels": {
+                          "type": "boolean",
+                          "description": "If results for the same hotel are returned from more than one provider, you can choose if you want two different items or a merged one (with a subsequent disambiguation step)",
+                          "default": false
+                        },
+                        "tags": {
+                          "type": "array",
+                          "items": {
+                            "description": "Id of a specific tag you want to add to the reservation",
+                            "type": "integer"
+                          }
+                        },
+                        "extra": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "occupancy"
+                      ]
+                    }
+                  },
+                  "client_country": {
+                    "type": "string",
+                    "description": "Optional user nationality, used by some of the suppliers"
+                  },
+                  "per_page": {
+                    "type": "integer",
+                    "default": 10
+                  },
+                  "sort_by": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string"
+                        },
+                        "dir": {
+                          "type": "string",
+                          "enum": [
+                            "asc",
+                            "desc"
+                          ],
+                          "default": "asc"
+                        }
+                      },
+                      "required": [
+                        "key"
+                      ]
+                    }
+                  },
+                  "filters": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "filter": {
+                          "type": "string"
+                        },
+                        "operator": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "oneOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "array"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "filter",
+                        "value"
+                      ]
+                    }
+                  },
+                  "expand_next_step": {
+                    "type": "boolean",
+                    "description": "If true, each item in the response is gonna have a \"next_step\" property (if supported) with the list of its sub-items (e.g. rooms for a hotel)",
+                    "default": false
+                  }
+                },
+                "required": [
+                  "search"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Work in progress",
+                  "properties": {
+                    "cart": {
+                      "type": "string",
+                      "format": "uuid",
+                      "description": "Id of the cart you are working in"
+                    },
+                    "search_id": {
+                      "type": "string",
+                      "format": "uuid",
+                      "description": "Id of this search; use this id throughout the whole booking process up to the \"add to cart\" request"
+                    },
+                    "step": {
+                      "type": "integer",
+                      "description": "Identifier of this step - Use this in the next request in order to refer to this list"
+                    },
+                    "final": {
+                      "type": "boolean",
+                      "description": "If this flag is true, you are in the final step and can proceed to \"add to cart\""
+                    },
+                    "pick_type": {
+                      "type": "string",
+                      "description": "If and how many groups needs to be satisfied with the subsequent request",
+                      "enum": [
+                        "all",
+                        "one",
+                        "max_one",
+                        "min_one",
+                        "any",
+                        "external"
+                      ]
+                    },
+                    "allow_partial": {
+                      "type": "boolean",
+                      "description": "Some suppliers allow to temporarily pick a single group even if they are all required, for the only purpose of glimpsing into the next step and retrieve its items"
+                    },
+                    "partial": {
+                      "type": "boolean",
+                      "description": "Whenever a partial step is performed (see \"allow_partial\" property), this flag will be true in the response, indicating the this is a response for informative purposes only and should not be used to build the next request"
+                    },
+                    "groups": {
+                      "type": "array",
+                      "description": "The items are returned in groups, and for each group you will have to perform a specific action (indicated by the group \"type\")",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "idx": {
+                            "type": "integer",
+                            "description": "Index of the group, you must use this to refer to the group in the subsequent request"
+                          },
+                          "service": {
+                            "type": "integer",
+                            "description": "Only for informative purposes, if there are more than one service, this will be the index of the service this group belongs to"
+                          },
+                          "accommodation": {
+                            "type": "integer",
+                            "description": "Index of the accommodation this group belongs to (from the original \"occupancy\" parameter in the search request)"
+                          },
+                          "label": {
+                            "type": "integer",
+                            "description": "Optional descriptive label"
+                          },
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "pick",
+                              "confirm",
+                              "input"
+                            ]
+                          },
+                          "pick_type": {
+                            "type": "string",
+                            "description": "Only present in \"pick\" groups",
+                            "enum": [
+                              "all",
+                              "one",
+                              "max_one",
+                              "min_one",
+                              "any"
+                            ]
+                          },
+                          "items": {
+                            "type": "array",
+                            "description": "List of the actual items belonging to this group"
+                          }
+                        }
+                      }
+                    },
+                    "warnings": {
+                      "type": "array",
+                      "description": "If some warnings are issued, they will be reported here in a textual format",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/unauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "multilang_string": {
+        "type": "object",
+        "description": "Helper item for strings that need to be passed in multiple languages",
+        "properties": {
+          "it": {
+            "type": "string"
+          },
+          "en": {
+            "type": "string"
+          },
+          "ru": {
+            "type": "string"
+          },
+          "fr": {
+            "type": "string"
+          },
+          "de": {
+            "type": "string"
+          },
+          "es": {
+            "type": "string"
+          }
+        }
+      },
+      "descriptions_list": {
+        "type": "array",
+        "description": "List of paragraphs in multiple languages",
+        "items": {
+          "type": "object",
+          "properties": {
+            "lang": {
+              "type": "string",
+              "enum": [
+                "it",
+                "en",
+                "ru",
+                "fr",
+                "de",
+                "es"
+              ]
+            },
+            "paragraphs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "tag": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "text": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "file": {
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "When reading, this is the URL of the file"
+          },
+          {
+            "type": "object",
+            "required": [
+              "data",
+              "mime"
+            ],
+            "description": "When writing, you have to pass base64 encoded data and mime type",
+            "properties": {
+              "data": {
+                "type": "string",
+                "description": "Base64 encoded file data"
+              },
+              "mime": {
+                "type": "string",
+                "description": "MIME type of the file"
+              }
+            }
+          }
+        ]
+      },
+      "accounting-accounts": {
+        "type": "object",
+        "description": "Conti contabili",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "number": {
+            "description": "Numero",
+            "type": "integer"
+          },
+          "full_number": {
+            "description": "Numero completo",
+            "type": "string",
+            "readOnly": true
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "accounting-reasons": {
+        "type": "object",
+        "description": "Causali contabili",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "airports": {
+        "type": "object",
+        "description": "Aeroporti",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "code": {
+            "description": "Codice",
+            "type": "string"
+          },
+          "name": {
+            "description": "Nome",
+            "$ref": "#/components/schemas/multilang_string"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "amenities": {
+        "type": "object",
+        "description": "Amenities",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "type": {
+            "description": "Tipo",
+            "type": "string"
+          },
+          "name": {
+            "description": "Nome",
+            "$ref": "#/components/schemas/multilang_string"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "classifications": {
+        "type": "object",
+        "description": "Classificazioni",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "code": {
+            "description": "Codice",
+            "type": "string"
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string"
+          },
+          "rating": {
+            "description": "Stelle",
+            "type": "number"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "currencies": {
+        "type": "object",
+        "description": "Valute",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "code": {
+            "description": "Codice",
+            "type": "string"
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string"
+          },
+          "symbol": {
+            "description": "Simbolo",
+            "type": "string"
+          },
+          "decimals": {
+            "description": "Decimali",
+            "type": "integer"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "departures": {
+        "type": "object",
+        "description": "Partenze",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "package": {
+            "description": "Pacchetto",
+            "$ref": "#/components/schemas/packages",
+            "format": "link:packages"
+          },
+          "date": {
+            "description": "Data",
+            "type": "string",
+            "format": "date"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "geo": {
+        "type": "object",
+        "description": "Destinazioni geografiche",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "parent": {
+            "description": "Parent",
+            "$ref": "#/components/schemas/geo",
+            "format": "link:geo"
+          },
+          "type": {
+            "description": "Tipo",
+            "type": "string",
+            "readOnly": true
+          },
+          "name": {
+            "description": "Nome",
+            "$ref": "#/components/schemas/multilang_string"
+          },
+          "description": {
+            "description": "Descrizione",
+            "$ref": "#/components/schemas/multilang_string"
+          },
+          "suppliers": {
+            "description": "Associazioni fornitori",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "supplier": {
+                  "description": "Fornitore",
+                  "type": "string"
+                },
+                "code": {
+                  "description": "Codice",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "honorifics": {
+        "type": "object",
+        "description": "Forme di cortesia",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string"
+          },
+          "default": {
+            "description": "Default",
+            "type": "boolean"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "instalments": {
+        "type": "object",
+        "description": "Rate",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "reference": {
+            "description": "Riferimento",
+            "readOnly": true
+          },
+          "subject_type": {
+            "description": "Tipo soggetto",
+            "type": "string",
+            "readOnly": true
+          },
+          "date": {
+            "description": "Data",
+            "type": "string",
+            "format": "date"
+          },
+          "amount": {
+            "description": "Importo",
+            "type": "number"
+          },
+          "paid": {
+            "description": "Pagato",
+            "type": "number",
+            "readOnly": true
+          },
+          "remaining": {
+            "description": "Residuo",
+            "type": "number",
+            "readOnly": true
+          },
+          "visible": {
+            "description": "Visibile",
+            "type": "boolean"
+          },
+          "complete": {
+            "description": "Completa",
+            "type": "boolean",
+            "readOnly": true
+          },
+          "payment_through": {
+            "description": "Pagamento tramite",
+            "$ref": "#/components/schemas/payment-methods",
+            "format": "link:payment-methods"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "invoice-types": {
+        "type": "object",
+        "description": "Tipi documento",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "code": {
+            "description": "Codice",
+            "type": "string"
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string"
+          },
+          "print_description": {
+            "description": "Descrizione sulla stampa",
+            "type": "string"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "invoices": {
+        "type": "object",
+        "description": "Fatture",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "year": {
+            "description": "Anno",
+            "type": "integer",
+            "readOnly": true
+          },
+          "number": {
+            "description": "Progressivo",
+            "type": "integer",
+            "readOnly": true
+          },
+          "full_number": {
+            "description": "Numero completo",
+            "type": "string",
+            "readOnly": true
+          },
+          "date": {
+            "description": "Data",
+            "type": "string",
+            "format": "date"
+          },
+          "due": {
+            "description": "Scadenza",
+            "type": "string",
+            "format": "date"
+          },
+          "type": {
+            "description": "Tipo documento",
+            "$ref": "#/components/schemas/invoice-types",
+            "format": "link:invoice-types"
+          },
+          "currency": {
+            "description": "Valuta",
+            "$ref": "#/components/schemas/currencies",
+            "format": "link:currencies"
+          },
+          "master_data": {
+            "description": "Anagrafica",
+            "$ref": "#/components/schemas/master-data",
+            "format": "link:master-data"
+          },
+          "reference_date": {
+            "description": "Data riferimento",
+            "type": "string",
+            "format": "date"
+          },
+          "reference_number": {
+            "description": "Numero riferimento",
+            "type": "string"
+          },
+          "journal_entries": {
+            "description": "Scritture di prima nota",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/journal-entries",
+              "format": "link:journal-entries"
+            },
+            "readOnly": true
+          },
+          "rows": {
+            "description": "Righe",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "description": "Descrizione",
+                  "type": "string"
+                },
+                "amount": {
+                  "description": "Imponibile",
+                  "type": "number"
+                },
+                "num": {
+                  "description": "Quantità",
+                  "type": "number"
+                },
+                "vat_type": {
+                  "description": "Aliquota IVA",
+                  "$ref": "#/components/schemas/vat-types",
+                  "format": "link:vat-types"
+                },
+                "vat_percentage": {
+                  "description": "Percentuale IVA",
+                  "type": "number"
+                },
+                "vat_amount": {
+                  "description": "Totale IVA",
+                  "type": "number"
+                },
+                "taxed_amount": {
+                  "description": "Importo",
+                  "type": "number",
+                  "readOnly": true
+                },
+                "total_amount": {
+                  "description": "Totale",
+                  "type": "number",
+                  "readOnly": true
+                },
+                "stamp_duty": {
+                  "description": "Bollo",
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "journal-entries": {
+        "type": "object",
+        "description": "Scritture di prima nota",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "date": {
+            "description": "Data",
+            "type": "string",
+            "format": "date"
+          },
+          "number": {
+            "description": "Progressivo",
+            "type": "integer"
+          },
+          "full_number": {
+            "description": "Numero completo",
+            "type": "string",
+            "readOnly": true
+          },
+          "accounting_reason": {
+            "description": "Causale",
+            "$ref": "#/components/schemas/accounting-reasons",
+            "format": "link:accounting-reasons"
+          },
+          "vat_protocol_number": {
+            "description": "Protocollo IVA",
+            "type": "integer"
+          },
+          "vat_protocol_suffix": {
+            "description": "Suffisso protocollo IVA",
+            "type": "string"
+          },
+          "description": {
+            "description": "Descrizione",
+            "type": "string"
+          },
+          "invoices": {
+            "description": "Fatture collegate",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/invoices",
+              "format": "link:invoices"
+            },
+            "readOnly": true
+          },
+          "payments": {
+            "description": "Pagamenti collegati",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/payments",
+              "format": "link:payments"
+            },
+            "readOnly": true
+          },
+          "rows": {
+            "description": "Righe",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "description": "Tipo",
+                  "type": "string",
+                  "enum": [
+                    "account",
+                    "client",
+                    "supplier"
+                  ]
+                },
+                "master_data": {
+                  "description": "Anagrafica",
+                  "$ref": "#/components/schemas/master-data",
+                  "format": "link:master-data"
+                },
+                "account": {
+                  "description": "Conto",
+                  "$ref": "#/components/schemas/accounting-accounts",
+                  "format": "link:accounting-accounts"
+                },
+                "debit": {
+                  "description": "Dare",
+                  "type": "number"
+                },
+                "credit": {
+                  "description": "Avere",
+                  "type": "number"
+                },
+                "notes": {
+                  "description": "Note",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "legal-forms": {
+        "type": "object",
+        "description": "Forme giuridiche",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string"
+          },
+          "default": {
+            "description": "Default",
+            "type": "boolean"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "master-data": {
+        "type": "object",
+        "description": "Anagrafiche",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "profiles": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "customer",
+                "supplier",
+                "printing_data",
+                "promoter",
+                "network",
+                "employee",
+                "guide"
+              ]
+            },
+            "example": [
+              "customer"
+            ]
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/master-data-categories",
+              "format": "link:master-data-categories"
+            },
+            "description": "Currently only one category is supported, in the future we plan to allow for more than one",
+            "example": [
+              1
+            ]
+          },
+          "profile_type": {
+            "description": "Tipo profilo",
+            "type": "string",
+            "enum": [
+              "company",
+              "professional",
+              "private"
+            ],
+            "example": "company"
+          },
+          "honorific": {
+            "description": "Forma di cortesia",
+            "$ref": "#/components/schemas/honorifics",
+            "format": "link:honorifics"
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string",
+            "example": "Mario"
+          },
+          "surname": {
+            "description": "Cognome",
+            "type": "string",
+            "example": "Rossi"
+          },
+          "company_name": {
+            "description": "Ragione sociale",
+            "type": "string",
+            "example": "EDitt"
+          },
+          "legal_form": {
+            "description": "Forma giuridica",
+            "$ref": "#/components/schemas/legal-forms",
+            "format": "link:legal-forms"
+          },
+          "commercial_name": {
+            "description": "Denominazione commerciale",
+            "type": "string",
+            "example": "Travio"
+          },
+          "full_name": {
+            "description": "(Nome completo) Will be auto-filled by Travio with: commercial_name if present, otherwise: company_name+legal_form if company, name+surname if private",
+            "type": "string",
+            "readOnly": true
+          },
+          "tax_code": {
+            "description": "Codice fiscale",
+            "type": "string",
+            "example": "RSSMRA80A01H501A"
+          },
+          "vat_country": {
+            "description": "Nazione partita IVA",
+            "type": "string",
+            "example": "IT"
+          },
+          "vat_number": {
+            "description": "Partita IVA",
+            "type": "string",
+            "example": "12345678901"
+          },
+          "language": {
+            "description": "Lingua",
+            "type": "string",
+            "example": "it"
+          },
+          "nationality": {
+            "description": "Nazionalità",
+            "type": "string",
+            "example": "IT"
+          },
+          "birth": {
+            "description": "Data di nascita",
+            "type": "string",
+            "format": "date",
+            "example": "1980-01-01"
+          },
+          "birth_place": {
+            "description": "Luogo di nascita",
+            "type": "string",
+            "example": "Roma"
+          },
+          "gender": {
+            "description": "Sesso",
+            "type": "string",
+            "enum": [
+              "M",
+              "F"
+            ],
+            "example": "M"
+          },
+          "doc_type": {
+            "description": "Documento identità: tipo",
+            "type": "string",
+            "example": "Carta identità"
+          },
+          "doc_number": {
+            "description": "Documento identità: numero",
+            "type": "string",
+            "example": "AX123456"
+          },
+          "doc_issued": {
+            "description": "Documento identità: data emissione",
+            "type": "string",
+            "format": "date",
+            "example": "2020-01-01"
+          },
+          "doc_issuer": {
+            "description": "Documento identità: ente emissione",
+            "type": "string",
+            "example": "Comune di Roma"
+          },
+          "doc_due": {
+            "description": "Documento identità: data scadenza",
+            "type": "string",
+            "format": "date",
+            "example": "2025-01-01"
+          },
+          "username": {
+            "description": "Username",
+            "type": "string",
+            "example": "mario.rossi"
+          },
+          "password": {
+            "description": "Password",
+            "type": "string",
+            "format": "password",
+            "writeOnly": true
+          },
+          "enabled": {
+            "description": "Abilitato",
+            "type": "boolean"
+          },
+          "pec": {
+            "description": "PEC",
+            "type": "string",
+            "example": "mario.rossi@pec.it"
+          },
+          "sdi_code": {
+            "description": "Codice SDI per fatturazione elettronica",
+            "type": "string",
+            "example": "0000000"
+          },
+          "extra_ue": {
+            "description": "Extra UE",
+            "type": "boolean"
+          },
+          "public_administration": {
+            "description": "Pubblica amministrazione",
+            "type": "boolean"
+          },
+          "website": {
+            "description": "Sito web",
+            "type": "string",
+            "example": "https://www.travio.it"
+          },
+          "promoter": {
+            "description": "Promotore",
+            "$ref": "#/components/schemas/master-data",
+            "format": "link:master-data"
+          },
+          "network": {
+            "description": "Network di appartenenza",
+            "$ref": "#/components/schemas/master-data",
+            "format": "link:master-data"
+          },
+          "logo": {
+            "$ref": "#/components/schemas/file",
+            "format": "file"
+          },
+          "photo": {
+            "$ref": "#/components/schemas/file",
+            "format": "file"
+          },
+          "invoice_master_data": {
+            "description": "Anagrafica di fatturazione",
+            "$ref": "#/components/schemas/master-data",
+            "format": "link:master-data"
+          },
+          "inbound_payments_master_data": {
+            "description": "Anagrafica per riscossioni",
+            "$ref": "#/components/schemas/master-data",
+            "format": "link:master-data"
+          },
+          "outbound_payments_master_data": {
+            "description": "Anagrafica per pagamenti",
+            "$ref": "#/components/schemas/master-data",
+            "format": "link:master-data"
+          },
+          "contacts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "nullable": true
+                },
+                "name": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "email": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "fax": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "example": [
+              {
+                "name": "Reparto booking",
+                "phone": [
+                  "+39 123456789"
+                ],
+                "email": [
+                  "mario.rossi@gmail.com"
+                ]
+              }
+            ]
+          },
+          "addresses": {
+            "description": "Indirizzi",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "description": "Tipo",
+                  "type": "string",
+                  "enum": [
+                    "legal",
+                    "operational",
+                    "residence"
+                  ],
+                  "example": "legal"
+                },
+                "address": {
+                  "description": "Indirizzo",
+                  "type": "string",
+                  "example": "Via Roma 1"
+                },
+                "postal_code": {
+                  "description": "Cap",
+                  "type": "string",
+                  "example": "00100"
+                },
+                "legacy": {
+                  "type": "object",
+                  "properties": {
+                    "city": {
+                      "description": "Città",
+                      "type": "string",
+                      "example": "Roma"
+                    },
+                    "province": {
+                      "description": "Provincia",
+                      "type": "string",
+                      "example": "RM"
+                    },
+                    "region": {
+                      "description": "Regione",
+                      "type": "string",
+                      "example": "Lazio"
+                    },
+                    "country": {
+                      "description": "Nazione / stato",
+                      "type": "string",
+                      "example": "IT"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "price_lists": {
+            "description": "Listini",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "listino1",
+              "listino2"
+            ]
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "master-data-categories": {
+        "type": "object",
+        "description": "Categorie anagrafiche",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "code": {
+            "description": "Codice",
+            "type": "string"
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string"
+          },
+          "payment_condition": {
+            "description": "Condizione di pagamento",
+            "$ref": "#/components/schemas/payment-conditions",
+            "format": "link:payment-conditions"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "package-types": {
+        "type": "object",
+        "description": "Tipi pacchetto",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "packages": {
+        "type": "object",
+        "description": "Pacchetti",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "code": {
+            "description": "Codice",
+            "type": "string",
+            "readOnly": true
+          },
+          "name": {
+            "description": "Nome",
+            "$ref": "#/components/schemas/multilang_string"
+          },
+          "type": {
+            "description": "Tipo",
+            "$ref": "#/components/schemas/package-types",
+            "format": "link:package-types"
+          },
+          "category": {
+            "description": "Categoria",
+            "$ref": "#/components/schemas/services-categories",
+            "format": "link:services-categories"
+          },
+          "shown_price": {
+            "description": "Prezzo da mostrare",
+            "type": "number"
+          },
+          "min_pax": {
+            "description": "Numero minimo partecipanti",
+            "type": "integer"
+          },
+          "max_pax": {
+            "description": "Numero massimo partecipanti",
+            "type": "integer"
+          },
+          "descriptions": {
+            "$ref": "#/components/schemas/descriptions_list"
+          },
+          "images": {
+            "description": "Immagini",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "description": "URL",
+                  "type": "string",
+                  "readOnly": true
+                },
+                "thumb": {
+                  "description": "Thumb",
+                  "type": "string",
+                  "readOnly": true
+                },
+                "description": {
+                  "description": "Descrizione",
+                  "type": "string"
+                },
+                "tag": {
+                  "description": "Tag",
+                  "$ref": "#/components/schemas/tags",
+                  "format": "link:tags"
+                }
+              }
+            }
+          },
+          "video": {
+            "description": "Video",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "youtube": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "visibility": {
+            "description": "Visibilità",
+            "type": "object",
+            "properties": {
+              "internal": {
+                "description": "Visibile booking interno",
+                "type": "boolean"
+              },
+              "web": {
+                "description": "Visibile web/api",
+                "type": "boolean"
+              }
+            }
+          },
+          "geo": {
+            "description": "Associazioni geografiche"
+          },
+          "duration": {
+            "description": "Durata",
+            "type": "integer",
+            "readOnly": true
+          },
+          "departures": {
+            "description": "Partenze",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "description": "Departure date",
+                  "type": "string",
+                  "format": "date"
+                },
+                "departure": {
+                  "description": "Detailed departure element",
+                  "$ref": "#/components/schemas/departures",
+                  "format": "link:departures"
+                },
+                "external": {
+                  "description": "Esterna",
+                  "type": "boolean",
+                  "readOnly": true
+                },
+                "departure_airport": {
+                  "description": "Departure airport",
+                  "$ref": "#/components/schemas/airports",
+                  "format": "link:airports",
+                  "deprecated": true
+                },
+                "arrival_airport": {
+                  "description": "Arrival airport",
+                  "$ref": "#/components/schemas/airports",
+                  "format": "link:airports",
+                  "deprecated": true
+                },
+                "departure_port": {
+                  "description": "Departure port",
+                  "$ref": "#/components/schemas/ports",
+                  "format": "link:ports",
+                  "deprecated": true
+                },
+                "arrival_port": {
+                  "description": "Arrival port",
+                  "$ref": "#/components/schemas/ports",
+                  "format": "link:ports",
+                  "deprecated": true
+                },
+                "routes": {
+                  "description": "Tratte",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "departure": {
+                        "description": "Partenza",
+                        "type": "object",
+                        "properties": {
+                          "airport": {
+                            "$ref": "#/components/schemas/airports",
+                            "format": "link:airports"
+                          },
+                          "port": {
+                            "$ref": "#/components/schemas/ports",
+                            "format": "link:ports"
+                          }
+                        }
+                      },
+                      "arrival": {
+                        "description": "Arrivo",
+                        "type": "object",
+                        "properties": {
+                          "airport": {
+                            "$ref": "#/components/schemas/airports",
+                            "format": "link:airports"
+                          },
+                          "port": {
+                            "$ref": "#/components/schemas/ports",
+                            "format": "link:ports"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "readOnly": true
+          },
+          "schedule": {
+            "description": "Itinerario",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "day": {
+                  "description": "Giorno",
+                  "type": "integer"
+                },
+                "name": {
+                  "description": "Nome",
+                  "$ref": "#/components/schemas/multilang_string"
+                },
+                "description": {
+                  "description": "Descrizione",
+                  "$ref": "#/components/schemas/multilang_string"
+                },
+                "images": {
+                  "description": "Immagini",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "description": "URL",
+                        "type": "string",
+                        "readOnly": true
+                      },
+                      "thumb": {
+                        "description": "Thumb",
+                        "type": "string",
+                        "readOnly": true
+                      },
+                      "description": {
+                        "description": "Descrizione",
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "rows": {
+            "description": "Righe",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "service",
+                    "subservice",
+                    "tag",
+                    "api",
+                    "bus"
+                  ]
+                },
+                "reference": {
+                  "type": "boolean"
+                },
+                "from": {
+                  "type": "integer"
+                },
+                "to": {
+                  "type": "integer"
+                },
+                "service": {
+                  "$ref": "#/components/schemas/services",
+                  "format": "link:services"
+                },
+                "subservice": {
+                  "$ref": "#/components/schemas/subservices",
+                  "format": "link:subservices"
+                },
+                "tag": {
+                  "$ref": "#/components/schemas/tags",
+                  "format": "link:tags"
+                }
+              }
+            }
+          },
+          "_attachments": {
+            "description": "Allegati",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "description": "Data",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "name": {
+                  "description": "Nome",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "URL",
+                  "type": "string"
+                }
+              }
+            },
+            "readOnly": true
+          },
+          "guides": {
+            "description": "Guide",
+            "type": "array",
+            "items": {
+              "description": "Guida",
+              "$ref": "#/components/schemas/master-data",
+              "format": "link:master-data"
+            }
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "pax": {
+        "type": "object",
+        "description": "Pax",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "reservation": {
+            "description": "Pratica",
+            "$ref": "#/components/schemas/reservations",
+            "format": "link:reservations"
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string",
+            "example": "Mario"
+          },
+          "surname": {
+            "description": "Cognome",
+            "type": "string",
+            "example": "Rossi"
+          },
+          "phone": {
+            "description": "Telefono",
+            "type": "string",
+            "example": "3331234567"
+          },
+          "email": {
+            "description": "Email",
+            "type": "string",
+            "example": "mario.rossi@gmail.com"
+          },
+          "gender": {
+            "description": "Sesso",
+            "type": "string",
+            "enum": [
+              "M",
+              "F"
+            ],
+            "example": "M"
+          },
+          "doc_type": {
+            "description": "Documento identità: tipo",
+            "type": "string",
+            "example": "Carta identità"
+          },
+          "doc_number": {
+            "description": "Documento identità: numero",
+            "type": "string",
+            "example": "AX123456"
+          },
+          "doc_issued": {
+            "description": "Documento identità: data emissione",
+            "type": "string",
+            "format": "date",
+            "example": "2020-01-01"
+          },
+          "doc_due": {
+            "description": "Documento identità: data scadenza",
+            "type": "string",
+            "format": "date",
+            "example": "2025-01-01"
+          },
+          "address": {
+            "description": "Indirizzo",
+            "type": "string",
+            "example": "Via Roma 1"
+          },
+          "city": {
+            "description": "Città",
+            "type": "string",
+            "example": "Roma"
+          },
+          "province": {
+            "description": "Provincia",
+            "type": "string",
+            "example": "RM"
+          },
+          "postal_code": {
+            "description": "CAP",
+            "type": "string",
+            "example": "00100"
+          },
+          "country": {
+            "description": "Nazione",
+            "$ref": "#/components/schemas/geo",
+            "format": "link:geo"
+          },
+          "language": {
+            "description": "Lingua",
+            "type": "string",
+            "example": "Italiano"
+          },
+          "nationality": {
+            "description": "Nazionalità",
+            "type": "string",
+            "example": "Italiana"
+          },
+          "tax_code": {
+            "description": "Codice fiscale",
+            "type": "string",
+            "example": "RSSMRA80A01H501E"
+          },
+          "age": {
+            "description": "Età",
+            "type": "integer",
+            "example": 40
+          },
+          "_age": {
+            "description": "Età calcolata",
+            "type": "integer",
+            "readOnly": true
+          },
+          "birth": {
+            "description": "Data di nascita",
+            "type": "string",
+            "format": "date",
+            "example": "1980-01-01"
+          },
+          "birth_place": {
+            "description": "Luogo di nascita",
+            "type": "string",
+            "example": "Roma"
+          },
+          "notes": {
+            "description": "Note",
+            "type": "string"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "payment-conditions": {
+        "type": "object",
+        "description": "Condizioni di pagamento",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string"
+          },
+          "is_full_payment": {
+            "description": "Saldo immediato",
+            "type": "boolean",
+            "readOnly": true
+          },
+          "rows": {
+            "description": "Righe",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "description": "Importo",
+                  "type": "number"
+                },
+                "type": {
+                  "description": "Tipo",
+                  "type": "string"
+                },
+                "schedule_num": {
+                  "description": "Num",
+                  "type": "integer"
+                },
+                "schedule_unit": {
+                  "description": "Unità",
+                  "type": "string"
+                },
+                "schedule_type": {
+                  "description": "Schedule type",
+                  "type": "string"
+                },
+                "schedule_reference": {
+                  "description": "Ref",
+                  "type": "string"
+                },
+                "allow_monday": {
+                  "description": "Consenti Lunedì",
+                  "type": "boolean"
+                },
+                "allow_tuesday": {
+                  "description": "Consenti Martedì",
+                  "type": "boolean"
+                },
+                "allow_wednesday": {
+                  "description": "Consenti Mercoledì",
+                  "type": "boolean"
+                },
+                "allow_thursday": {
+                  "description": "Consenti Giovedì",
+                  "type": "boolean"
+                },
+                "allow_friday": {
+                  "description": "Consenti Venerdì",
+                  "type": "boolean"
+                },
+                "allow_saturday": {
+                  "description": "Consenti Sabato",
+                  "type": "boolean"
+                },
+                "allow_sunday": {
+                  "description": "Consenti Domenica",
+                  "type": "boolean"
+                },
+                "allow_holiday": {
+                  "description": "Consenti festivi",
+                  "type": "boolean"
+                },
+                "fixed_days": {
+                  "description": "Giorni mese fissi",
+                  "type": "string"
+                },
+                "round_off": {
+                  "description": "Arrotonda",
+                  "type": "string",
+                  "enum": [
+                    "move up",
+                    "closest",
+                    "same month",
+                    "postpone"
+                  ],
+                  "example": "move up"
+                },
+                "payment_through": {
+                  "description": "Metodo di pagamento",
+                  "$ref": "#/components/schemas/payment-methods",
+                  "format": "link:payment-methods"
+                }
+              }
+            }
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "payment-methods": {
+        "type": "object",
+        "description": "Metodi di pagamento",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string"
+          },
+          "special": {
+            "description": "Tipo speciale",
+            "type": "string",
+            "deprecated": true
+          },
+          "gateway": {
+            "description": "Gateway di pagamento",
+            "type": "string"
+          },
+          "credentials": {
+            "description": "Credenziali",
+            "type": "object"
+          },
+          "test": {
+            "description": "Credenziali: è test?",
+            "type": "boolean"
+          },
+          "visible_in": {
+            "description": "Visibile per entrate",
+            "type": "boolean"
+          },
+          "visible_out": {
+            "description": "Visibile per uscite",
+            "type": "boolean"
+          },
+          "accounting_reason_in": {
+            "description": "Causale contabile entrate",
+            "$ref": "#/components/schemas/accounting-reasons",
+            "format": "link:accounting-reasons"
+          },
+          "accounting_reason_out": {
+            "description": "Causale contabile uscite",
+            "$ref": "#/components/schemas/accounting-reasons",
+            "format": "link:accounting-reasons"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "payments": {
+        "type": "object",
+        "description": "Movimenti finanziari",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "method": {
+            "description": "Metodo di pagamento",
+            "$ref": "#/components/schemas/payment-methods",
+            "format": "link:payment-methods"
+          },
+          "number": {
+            "description": "Progressivo",
+            "type": "integer",
+            "readOnly": true
+          },
+          "date": {
+            "description": "Data",
+            "type": "string",
+            "format": "date"
+          },
+          "currency": {
+            "description": "Valuta",
+            "$ref": "#/components/schemas/currencies",
+            "format": "link:currencies"
+          },
+          "master_data": {
+            "description": "Anagrafica",
+            "$ref": "#/components/schemas/master-data",
+            "format": "link:master-data"
+          },
+          "type": {
+            "description": "Tipo",
+            "type": "string"
+          },
+          "exchange_rate": {
+            "description": "Tasso di cambio",
+            "type": "number"
+          },
+          "print_description": {
+            "description": "Descrizioen sulla stampa",
+            "type": "string",
+            "readOnly": true
+          },
+          "journal_entries": {
+            "description": "Scritture di prima nota",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/journal-entries",
+              "format": "link:journal-entries"
+            },
+            "readOnly": true
+          },
+          "rows": {
+            "description": "Righe",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "description": "Tipo",
+                  "type": "string",
+                  "enum": [
+                    "C",
+                    "F"
+                  ],
+                  "example": "C"
+                },
+                "description": {
+                  "description": "Descrizione",
+                  "type": "string"
+                },
+                "in_amount": {
+                  "description": "Importo incassato",
+                  "type": "number"
+                },
+                "out_amount": {
+                  "description": "Importo pagato",
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "ports": {
+        "type": "object",
+        "description": "Porti",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "code": {
+            "description": "Codice",
+            "type": "string"
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string"
+          },
+          "description": {
+            "description": "Descrizione",
+            "type": "string"
+          },
+          "is_departing": {
+            "description": "Porto di partenza",
+            "type": "boolean"
+          },
+          "mappings": {
+            "description": "Mappature",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "supplier": {
+                  "description": "Fornitore",
+                  "type": "integer"
+                },
+                "code": {
+                  "description": "Codice fornitore",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "reservation-links": {
+        "type": "object",
+        "description": "Configurazioni link pratiche",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string"
+          },
+          "logo": {
+            "type": "string",
+            "readOnly": true
+          },
+          "primary_color": {
+            "description": "Colore primario",
+            "type": "string"
+          },
+          "secondary_color": {
+            "description": "Colore secondario",
+            "type": "string"
+          },
+          "enable_pax": {
+            "description": "Abilita modifica pax",
+            "type": "boolean"
+          },
+          "enable_payment": {
+            "description": "Abilita pagamento",
+            "type": "boolean"
+          },
+          "show_subservices_info": {
+            "description": "Mostra info sottoservizi",
+            "type": "boolean"
+          },
+          "visible": {
+            "description": "Visibile",
+            "type": "boolean"
+          },
+          "descriptions_tag": {
+            "description": "Tag descrizioni",
+            "type": "string"
+          },
+          "minutes_due": {
+            "description": "Scadenza default dopo... (minuti)",
+            "type": "integer"
+          },
+          "privacy_text": {
+            "description": "Testo privacy",
+            "$ref": "#/components/schemas/texts",
+            "format": "link:texts"
+          },
+          "terms_text": {
+            "description": "Testo condizioni",
+            "$ref": "#/components/schemas/texts",
+            "format": "link:texts"
+          },
+          "payments": {
+            "description": "Metodi di pagamento",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "method": {
+                  "description": "Metodo di pagamento",
+                  "$ref": "#/components/schemas/payment-methods",
+                  "format": "link:payment-methods"
+                },
+                "alias": {
+                  "description": "Alias",
+                  "type": "string"
+                },
+                "description": {
+                  "description": "Descrizione",
+                  "type": "string"
+                },
+                "info": {
+                  "description": "Info",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "reservations": {
+        "type": "object",
+        "description": "Pratiche",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "heading": {
+            "description": "Intestazione",
+            "$ref": "#/components/schemas/master-data",
+            "format": "link:master-data"
+          },
+          "year": {
+            "description": "Anno",
+            "type": "integer"
+          },
+          "num": {
+            "description": "Numero",
+            "type": "string",
+            "readOnly": true
+          },
+          "from": {
+            "description": "Dal",
+            "type": "string",
+            "format": "date",
+            "readOnly": true
+          },
+          "to": {
+            "description": "Al",
+            "type": "string",
+            "format": "date",
+            "readOnly": true
+          },
+          "status": {
+            "description": "Stato",
+            "type": "integer"
+          },
+          "status_history": {
+            "description": "Cronologia stati",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "description": "Stato",
+                  "type": "integer"
+                },
+                "date": {
+                  "description": "Data",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "user": {
+                  "description": "Utente",
+                  "$ref": "#/components/schemas/master-data",
+                  "format": "link:master-data"
+                }
+              }
+            },
+            "readOnly": true
+          },
+          "client": {
+            "description": "Cliente",
+            "$ref": "#/components/schemas/master-data",
+            "format": "link:master-data"
+          },
+          "invoice_client": {
+            "description": "Anagrafica fatturazione",
+            "$ref": "#/components/schemas/master-data",
+            "format": "link:master-data"
+          },
+          "payment_client": {
+            "description": "Anagrafica riscossione",
+            "$ref": "#/components/schemas/master-data",
+            "format": "link:master-data"
+          },
+          "promoter": {
+            "description": "Promotore",
+            "$ref": "#/components/schemas/master-data",
+            "format": "link:master-data"
+          },
+          "user": {
+            "description": "Utente gestione",
+            "$ref": "#/components/schemas/master-data",
+            "format": "link:master-data"
+          },
+          "description": {
+            "description": "Descrizione",
+            "type": "string"
+          },
+          "reference": {
+            "description": "Riferimento",
+            "type": "string"
+          },
+          "requested_by": {
+            "description": "Richiedente",
+            "type": "string"
+          },
+          "first_pax": {
+            "description": "Beneficiario",
+            "type": "string",
+            "readOnly": true
+          },
+          "due": {
+            "description": "Scadenza",
+            "type": "string",
+            "format": "date-time"
+          },
+          "date": {
+            "description": "Data",
+            "type": "string",
+            "format": "date-time"
+          },
+          "cancellation_date": {
+            "description": "Data annullamento",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "confirmation_date": {
+            "description": "Data conferma",
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "price": {
+            "description": "Prezzo",
+            "type": "object",
+            "properties": {
+              "gross": {
+                "description": "Prezzo lordo",
+                "type": "number",
+                "readOnly": true
+              },
+              "commission": {
+                "description": "Commissione",
+                "type": "number",
+                "readOnly": true
+              },
+              "net": {
+                "description": "Prezzo netto",
+                "type": "number",
+                "readOnly": true
+              }
+            },
+            "readOnly": true
+          },
+          "pax": {
+            "description": "Pax",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/pax"
+            }
+          },
+          "instalments": {
+            "description": "Rate",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "description": "Data",
+                  "type": "string",
+                  "format": "date"
+                },
+                "amount": {
+                  "description": "Importo",
+                  "type": "number"
+                },
+                "paid": {
+                  "description": "Pagato",
+                  "type": "number",
+                  "readOnly": true
+                },
+                "remaining": {
+                  "description": "Da pagare",
+                  "type": "number",
+                  "readOnly": true
+                },
+                "visible": {
+                  "description": "Visibile",
+                  "type": "boolean"
+                },
+                "complete": {
+                  "description": "Completa",
+                  "type": "boolean",
+                  "readOnly": true
+                },
+                "subject": {
+                  "description": "Soggetto",
+                  "type": "integer",
+                  "readOnly": true
+                },
+                "payment_link": {
+                  "description": "Link pagamento",
+                  "type": "string",
+                  "readOnly": true
+                }
+              }
+            },
+            "readOnly": true
+          },
+          "services": {
+            "description": "Servizi",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "service": {
+                  "description": "Servizio",
+                  "$ref": "#/components/schemas/services",
+                  "format": "link:services",
+                  "readOnly": true
+                },
+                "type": {
+                  "description": "Tipo",
+                  "type": "string",
+                  "readOnly": true
+                },
+                "name": {
+                  "description": "Nome",
+                  "type": "string",
+                  "readOnly": true
+                },
+                "hotel_reference": {
+                  "description": "Riferimento hotel esterno",
+                  "$ref": "#/components/schemas/suppliers-hotels",
+                  "format": "link:suppliers-hotels",
+                  "readOnly": true
+                },
+                "payment_condition_client": {
+                  "description": "Condizione di pagamento cliente",
+                  "$ref": "#/components/schemas/payment-conditions",
+                  "format": "link:payment-conditions"
+                },
+                "payment_condition_supplier": {
+                  "description": "Condizione di pagamento fornitore",
+                  "$ref": "#/components/schemas/payment-conditions",
+                  "format": "link:payment-conditions"
+                },
+                "rows": {
+                  "description": "Righe",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "subservice": {
+                        "description": "Sottoservizio",
+                        "$ref": "#/components/schemas/subservices",
+                        "format": "link:subservices"
+                      },
+                      "scope": {
+                        "description": "Ambito",
+                        "type": "string",
+                        "enum": [
+                          "accommodation",
+                          "boarding",
+                          "extra",
+                          "other"
+                        ],
+                        "example": "accommodation"
+                      },
+                      "name": {
+                        "description": "Nome",
+                        "type": "string"
+                      },
+                      "num": {
+                        "description": "Num",
+                        "type": "integer"
+                      },
+                      "from": {
+                        "description": "Dal",
+                        "type": "object",
+                        "properties": {
+                          "date": {
+                            "description": "Data",
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "time": {
+                            "description": "Ora",
+                            "type": "string",
+                            "format": "time"
+                          }
+                        }
+                      },
+                      "to": {
+                        "description": "Al",
+                        "type": "object",
+                        "properties": {
+                          "date": {
+                            "description": "Data",
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "time": {
+                            "description": "Ora",
+                            "type": "string",
+                            "format": "time"
+                          }
+                        }
+                      },
+                      "supplier": {
+                        "description": "Fornitore",
+                        "$ref": "#/components/schemas/master-data",
+                        "format": "link:master-data"
+                      },
+                      "on_site": {
+                        "description": "In loco",
+                        "type": "boolean"
+                      },
+                      "manual": {
+                        "description": "Manuale",
+                        "type": "boolean"
+                      },
+                      "accommodations": {
+                        "description": "Sistemazioni"
+                      },
+                      "occupancy": {
+                        "description": "Occupancy"
+                      },
+                      "status": {
+                        "description": "Stato",
+                        "type": "integer"
+                      },
+                      "price": {
+                        "description": "Prezzo",
+                        "type": "object",
+                        "properties": {
+                          "gross": {
+                            "description": "Prezzo lordo",
+                            "type": "number"
+                          },
+                          "commission": {
+                            "description": "Commissione",
+                            "type": "number"
+                          },
+                          "net": {
+                            "description": "Prezzo netto",
+                            "type": "number"
+                          },
+                          "currency": {
+                            "description": "Valuta",
+                            "$ref": "#/components/schemas/currencies",
+                            "format": "link:currencies"
+                          }
+                        }
+                      },
+                      "cost": {
+                        "description": "Costo",
+                        "type": "object",
+                        "properties": {
+                          "gross": {
+                            "description": "Costo lordo",
+                            "type": "number"
+                          },
+                          "commission": {
+                            "description": "Commissione",
+                            "type": "number"
+                          },
+                          "net": {
+                            "description": "Costo netto",
+                            "type": "number"
+                          },
+                          "currency": {
+                            "description": "Valuta",
+                            "$ref": "#/components/schemas/currencies",
+                            "format": "link:currencies"
+                          }
+                        }
+                      },
+                      "cancellation_policies": {
+                        "description": "Politiche di cancellazione"
+                      },
+                      "cost_cancellation_policies": {
+                        "description": "Politiche di cancellazione costi"
+                      },
+                      "price_components": {
+                        "description": "Componenti prezzo",
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "side": {
+                              "description": "Lato",
+                              "type": "string",
+                              "enum": [
+                                "cost",
+                                "price"
+                              ],
+                              "example": "cost"
+                            },
+                            "type": {
+                              "description": "Tipo",
+                              "type": "string",
+                              "enum": [
+                                "base",
+                                "discount",
+                                "commission",
+                                "markup",
+                                "tax"
+                              ],
+                              "example": "base"
+                            },
+                            "level": {
+                              "description": "Livello",
+                              "type": "integer"
+                            },
+                            "description": {
+                              "description": "Descrizione",
+                              "type": "string"
+                            },
+                            "percentage": {
+                              "description": "Percentuale",
+                              "type": "number"
+                            },
+                            "include_vat": {
+                              "description": "Includi IVA nella percentuale",
+                              "type": "boolean"
+                            },
+                            "computed_on": {
+                              "description": "Applicato a",
+                              "type": "string",
+                              "enum": [
+                                "price-gross",
+                                "price-net",
+                                "cost-gross",
+                                "cost-net",
+                                "profit"
+                              ],
+                              "example": "price-gross"
+                            },
+                            "percentage_amount": {
+                              "description": "Importo percentuale",
+                              "type": "number"
+                            },
+                            "amount": {
+                              "description": "Importo",
+                              "type": "number"
+                            },
+                            "vat_type": {
+                              "description": "Tipo IVA",
+                              "$ref": "#/components/schemas/vat-types",
+                              "format": "link:vat-types"
+                            },
+                            "vat_percentage": {
+                              "description": "Percentuale IVA",
+                              "type": "number"
+                            },
+                            "vat_included": {
+                              "description": "IVA inclusa",
+                              "type": "boolean"
+                            },
+                            "accounting_account": {
+                              "description": "Conto contabile",
+                              "$ref": "#/components/schemas/accounting-accounts",
+                              "format": "link:accounting-accounts"
+                            }
+                          }
+                        }
+                      },
+                      "show_price": {
+                        "description": "Mostra prezzo",
+                        "type": "string",
+                        "enum": [
+                          "no",
+                          "hide",
+                          "yes"
+                        ]
+                      },
+                      "accept_other_prices": {
+                        "description": "Accetta altri prezzi",
+                        "type": "string",
+                        "enum": [
+                          "no",
+                          "priority",
+                          "yes"
+                        ]
+                      }
+                    }
+                  },
+                  "readOnly": true
+                }
+              }
+            }
+          },
+          "attachments": {
+            "description": "Documenti",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "description": "Data",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "name": {
+                  "description": "Nome",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "URL",
+                  "type": "string"
+                }
+              }
+            },
+            "readOnly": true,
+            "deprecated": true
+          },
+          "_attachments": {
+            "description": "Allegati",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "description": "Data",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "name": {
+                  "description": "Nome",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "URL",
+                  "type": "string"
+                }
+              }
+            },
+            "readOnly": true
+          },
+          "departures": {
+            "description": "Partenze",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "departure": {
+                  "description": "Partenza",
+                  "$ref": "#/components/schemas/departures",
+                  "format": "link:departures"
+                }
+              }
+            },
+            "readOnly": true
+          },
+          "price_modifiers": {
+            "description": "Modificatori prezzo",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "side": {
+                  "description": "Lato",
+                  "type": "string",
+                  "enum": [
+                    "cost",
+                    "price"
+                  ],
+                  "example": "cost"
+                },
+                "type": {
+                  "description": "Tipo",
+                  "type": "string",
+                  "enum": [
+                    "base",
+                    "discount",
+                    "commission",
+                    "markup",
+                    "tax"
+                  ],
+                  "example": "base"
+                },
+                "level": {
+                  "description": "Livello",
+                  "type": "integer"
+                },
+                "description": {
+                  "description": "Descrizione",
+                  "type": "string"
+                },
+                "percentage": {
+                  "description": "Percentuale",
+                  "type": "number"
+                },
+                "include_vat": {
+                  "description": "Includi IVA nella percentuale",
+                  "type": "boolean"
+                },
+                "computed_on": {
+                  "description": "Applicato a",
+                  "type": "string",
+                  "enum": [
+                    "price-gross",
+                    "price-net",
+                    "cost-gross",
+                    "cost-net",
+                    "profit"
+                  ],
+                  "example": "price-gross"
+                },
+                "percentage_amount": {
+                  "description": "Importo percentuale",
+                  "type": "number"
+                },
+                "amount": {
+                  "description": "Importo",
+                  "type": "number"
+                },
+                "vat_type": {
+                  "description": "Tipo IVA",
+                  "$ref": "#/components/schemas/vat-types",
+                  "format": "link:vat-types"
+                },
+                "vat_percentage": {
+                  "description": "Percentuale IVA",
+                  "type": "number"
+                },
+                "vat_included": {
+                  "description": "IVA inclusa",
+                  "type": "boolean"
+                },
+                "accounting_account": {
+                  "description": "Conto contabile",
+                  "$ref": "#/components/schemas/accounting-accounts",
+                  "format": "link:accounting-accounts"
+                },
+                "master_data": {
+                  "description": "Anagrafica",
+                  "$ref": "#/components/schemas/master-data",
+                  "format": "link:master-data"
+                }
+              }
+            }
+          },
+          "accounting_entries": {
+            "description": "Partite amministrazione",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "subject": {
+                  "description": "Anagrafica",
+                  "$ref": "#/components/schemas/master-data",
+                  "format": "link:master-data"
+                },
+                "type": {
+                  "description": "Tipo",
+                  "type": "string",
+                  "enum": [
+                    "client",
+                    "supplier"
+                  ],
+                  "example": "client"
+                },
+                "currency": {
+                  "description": "Valuta",
+                  "$ref": "#/components/schemas/currencies",
+                  "format": "link:currencies"
+                },
+                "payments": {
+                  "description": "Pagamenti",
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "description": "Totale",
+                      "type": "number"
+                    },
+                    "paid": {
+                      "description": "Pagato",
+                      "type": "number"
+                    },
+                    "remaining": {
+                      "description": "Residuo",
+                      "type": "number"
+                    },
+                    "list": {
+                      "description": "Lista pagamenti",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "date": {
+                            "description": "Data",
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "amount": {
+                            "description": "Importo",
+                            "type": "number"
+                          },
+                          "payment": {
+                            "description": "Movimento finanziario",
+                            "$ref": "#/components/schemas/payments",
+                            "format": "link:payments"
+                          },
+                          "method": {
+                            "description": "Metodo di pagamento",
+                            "$ref": "#/components/schemas/payment-methods",
+                            "format": "link:payment-methods"
+                          }
+                        }
+                      },
+                      "readOnly": true
+                    }
+                  }
+                }
+              }
+            },
+            "readOnly": true
+          },
+          "api_key": {
+            "description": "Chiave API",
+            "type": "integer"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "services": {
+        "type": "object",
+        "description": "Servizi",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "type": {
+            "description": "Tipo",
+            "type": "integer",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13
+            ],
+            "example": 1
+          },
+          "typology": {
+            "description": "Tipologia",
+            "$ref": "#/components/schemas/services-typologies",
+            "format": "link:services-typologies"
+          },
+          "code": {
+            "description": "Codice",
+            "type": "string",
+            "example": "HTL-001"
+          },
+          "name": {
+            "description": "Nome",
+            "$ref": "#/components/schemas/multilang_string",
+            "example": "Hotel Italia"
+          },
+          "location": {
+            "description": "Coordinate",
+            "type": "object",
+            "properties": {
+              "lat": {
+                "description": "Coordinate: latitudine",
+                "type": "number"
+              },
+              "lng": {
+                "description": "Coordinate: longitudine",
+                "type": "number"
+              }
+            },
+            "example": {
+              "lat": 45.123456,
+              "lng": 9.123456
+            }
+          },
+          "classification": {
+            "description": "Stelle",
+            "type": "number",
+            "readOnly": true
+          },
+          "classification_id": {
+            "description": "Classificazione",
+            "$ref": "#/components/schemas/classifications",
+            "format": "link:classifications"
+          },
+          "master_data": {
+            "description": "Anagrafica struttura",
+            "$ref": "#/components/schemas/master-data",
+            "format": "link:master-data"
+          },
+          "supplier": {
+            "description": "Anagrafica fornitore",
+            "$ref": "#/components/schemas/master-data",
+            "format": "link:master-data"
+          },
+          "visibility": {
+            "description": "Visibilità",
+            "type": "object",
+            "properties": {
+              "internal_single": {
+                "description": "Visibile booking interno (singolo)",
+                "type": "boolean"
+              },
+              "internal_package": {
+                "description": "Visibile booking interno (in pacchetto)",
+                "type": "boolean"
+              },
+              "web_single": {
+                "description": "Visibile web/api (singolo)",
+                "type": "boolean"
+              },
+              "web_package": {
+                "description": "Visibile web/api (in pacchetto)",
+                "type": "boolean"
+              }
+            }
+          },
+          "category": {
+            "description": "Categoria",
+            "$ref": "#/components/schemas/services-categories",
+            "format": "link:services-categories"
+          },
+          "preferred": {
+            "description": "Preferito",
+            "type": "boolean"
+          },
+          "geo": {
+            "description": "Associazioni geografiche"
+          },
+          "descriptions": {
+            "$ref": "#/components/schemas/descriptions_list"
+          },
+          "images": {
+            "description": "Immagini",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "description": "URL",
+                  "type": "string",
+                  "readOnly": true
+                },
+                "thumb": {
+                  "description": "Thumb",
+                  "type": "string",
+                  "readOnly": true
+                },
+                "description": {
+                  "description": "Descrizione",
+                  "type": "string"
+                },
+                "tag": {
+                  "description": "Tag",
+                  "$ref": "#/components/schemas/tags",
+                  "format": "link:tags"
+                }
+              }
+            }
+          },
+          "video": {
+            "description": "Video",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "youtube": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "availability": {
+            "description": "Disponibilità",
+            "type": "array",
+            "readOnly": true
+          },
+          "amenities": {
+            "description": "Amenities",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/amenities",
+              "format": "link:amenities"
+            }
+          },
+          "departures": {
+            "description": "Partenze",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "description": "Departure date",
+                  "type": "string",
+                  "format": "date",
+                  "readOnly": true
+                },
+                "expected_duration": {
+                  "description": "Duration in days",
+                  "type": "integer",
+                  "readOnly": true
+                }
+              }
+            },
+            "readOnly": true
+          },
+          "schedule": {
+            "description": "Itinerario",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "day": {
+                  "description": "Giorno",
+                  "type": "integer"
+                },
+                "name": {
+                  "description": "Nome",
+                  "$ref": "#/components/schemas/multilang_string"
+                },
+                "description": {
+                  "description": "Descrizione",
+                  "$ref": "#/components/schemas/multilang_string"
+                },
+                "images": {
+                  "description": "Immagini",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "description": "URL",
+                        "type": "string",
+                        "readOnly": true
+                      },
+                      "thumb": {
+                        "description": "Thumb",
+                        "type": "string",
+                        "readOnly": true
+                      },
+                      "description": {
+                        "description": "Descrizione",
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "stop_sales": {
+            "description": "Stop sales",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "created": {
+                  "description": "Comunicato il",
+                  "type": "string",
+                  "format": "date"
+                },
+                "from": {
+                  "description": "Dal",
+                  "type": "string",
+                  "format": "date"
+                },
+                "to": {
+                  "description": "Al",
+                  "type": "string",
+                  "format": "date"
+                },
+                "type": {
+                  "description": "Tipo",
+                  "type": "string",
+                  "enum": [
+                    "closed",
+                    "open",
+                    "on_request"
+                  ]
+                },
+                "notes": {
+                  "description": "Note",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "subservices": {
+            "description": "Sottoservizi",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/subservices"
+            },
+            "readOnly": true
+          },
+          "_attachments": {
+            "description": "Allegati",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "description": "Data",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "name": {
+                  "description": "Nome",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "URL",
+                  "type": "string"
+                }
+              }
+            },
+            "readOnly": true
+          },
+          "estimated_price_per_pax": {
+            "description": "Prezzo stimato per pax",
+            "type": "number",
+            "readOnly": true
+          },
+          "supplier_hotel": {
+            "description": "Hotel fornitore associato",
+            "$ref": "#/components/schemas/suppliers-hotels",
+            "format": "link:suppliers-hotels"
+          },
+          "show_prices": {
+            "description": "Esposizione prezzi",
+            "type": "string",
+            "enum": [
+              "yes",
+              "no",
+              "hide"
+            ]
+          },
+          "accept_other_prices": {
+            "description": "Accetta altri prezzi",
+            "type": "string",
+            "enum": [
+              "yes",
+              "no",
+              "priority"
+            ]
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "services-categories": {
+        "type": "object",
+        "description": "Categorie servizi",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "code": {
+            "description": "Codice",
+            "type": "string"
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "services-typologies": {
+        "type": "object",
+        "description": "Tipologie servizi",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "code": {
+            "description": "Codice",
+            "type": "string"
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string"
+          },
+          "type": {
+            "description": "Tipo",
+            "type": "integer",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13
+            ],
+            "example": 1
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "subservices": {
+        "type": "object",
+        "description": "Sottoservizi",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "service": {
+            "description": "Servizio",
+            "$ref": "#/components/schemas/services",
+            "format": "link:services",
+            "readOnly": true
+          },
+          "code": {
+            "description": "Codice",
+            "type": "string",
+            "readOnly": true
+          },
+          "name": {
+            "description": "Nome",
+            "$ref": "#/components/schemas/multilang_string"
+          },
+          "type": {
+            "description": "Tipo",
+            "type": "integer"
+          },
+          "obsolete": {
+            "description": "Obsoleto",
+            "type": "boolean"
+          },
+          "visibility": {
+            "description": "Visibilità",
+            "type": "object",
+            "properties": {
+              "internal_single": {
+                "description": "Visibile booking interno (singolo)",
+                "type": "boolean"
+              },
+              "internal_package": {
+                "description": "Visibile booking interno (in pacchetto)",
+                "type": "boolean"
+              },
+              "web_single": {
+                "description": "Visibile web/api (singolo)",
+                "type": "boolean"
+              },
+              "web_package": {
+                "description": "Visibile web/api (in pacchetto)",
+                "type": "boolean"
+              }
+            }
+          },
+          "descriptions": {
+            "$ref": "#/components/schemas/descriptions_list"
+          },
+          "images": {
+            "description": "Immagini",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "description": "URL",
+                  "type": "string",
+                  "readOnly": true
+                },
+                "thumb": {
+                  "description": "Thumb",
+                  "type": "string",
+                  "readOnly": true
+                },
+                "description": {
+                  "description": "Descrizione",
+                  "type": "string"
+                },
+                "tag": {
+                  "description": "Tag",
+                  "$ref": "#/components/schemas/tags",
+                  "format": "link:tags"
+                }
+              }
+            }
+          },
+          "video": {
+            "description": "Video",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "youtube": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "availability": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "type": {
+                  "type": "integer"
+                },
+                "qty": {
+                  "type": "integer"
+                },
+                "min_stay": {
+                  "type": "integer"
+                },
+                "release": {
+                  "type": "integer"
+                }
+              }
+            },
+            "readOnly": true
+          },
+          "amenities": {
+            "description": "Amenities",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/amenities",
+              "format": "link:amenities"
+            }
+          },
+          "cost": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "active": {
+                  "type": "boolean"
+                },
+                "unit": {
+                  "type": "string"
+                },
+                "time_unit": {
+                  "type": "string",
+                  "enum": [
+                    "days",
+                    "nights",
+                    "fixed",
+                    "weeks",
+                    "hours"
+                  ]
+                },
+                "amount": {
+                  "type": "number"
+                }
+              }
+            },
+            "readOnly": true
+          },
+          "price": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "active": {
+                  "type": "boolean"
+                },
+                "unit": {
+                  "type": "string"
+                },
+                "time_unit": {
+                  "type": "string",
+                  "enum": [
+                    "days",
+                    "nights",
+                    "fixed",
+                    "weeks",
+                    "hours"
+                  ]
+                },
+                "amount": {
+                  "type": "number"
+                },
+                "markup": {
+                  "type": "number"
+                },
+                "_price": {
+                  "type": "number",
+                  "readOnly": true
+                }
+              }
+            },
+            "readOnly": true
+          },
+          "occupancy": {
+            "description": "Occupancy",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "description": "Nome",
+                  "type": "string"
+                },
+                "from": {
+                  "description": "Dal",
+                  "type": "string",
+                  "format": "date"
+                },
+                "to": {
+                  "description": "Al",
+                  "type": "string",
+                  "format": "date"
+                },
+                "occupancy": {}
+              }
+            }
+          },
+          "show_prices": {
+            "description": "Esposizione prezzi",
+            "type": "string",
+            "enum": [
+              "default",
+              "yes",
+              "no",
+              "hide"
+            ]
+          },
+          "accept_other_prices": {
+            "description": "Accetta altri prezzi",
+            "type": "string",
+            "enum": [
+              "default",
+              "yes",
+              "no",
+              "priority"
+            ]
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "suppliers-hotels": {
+        "type": "object",
+        "description": "Hotel fornitori esterni",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "type": {
+            "description": "Tipo",
+            "type": "integer"
+          },
+          "name": {
+            "description": "Nome",
+            "$ref": "#/components/schemas/multilang_string"
+          },
+          "location": {
+            "description": "Coordinate"
+          },
+          "classification": {
+            "description": "Classificazione",
+            "type": "number"
+          },
+          "geo": {
+            "description": "Geo",
+            "type": "array"
+          },
+          "descriptions": {
+            "$ref": "#/components/schemas/descriptions_list"
+          },
+          "images": {
+            "description": "Immagini",
+            "type": "array"
+          },
+          "amenities": {
+            "description": "Amenities",
+            "type": "array"
+          },
+          "subservices": {
+            "description": "Camere"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "tags": {
+        "type": "object",
+        "description": "Tags",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "visible": {
+            "description": "Visibile",
+            "type": "boolean"
+          },
+          "reservation_default": {
+            "description": "Default per pratiche",
+            "type": "boolean"
+          },
+          "parent": {
+            "description": "Appartiene a...",
+            "$ref": "#/components/schemas/tags",
+            "format": "link:tags"
+          },
+          "name": {
+            "description": "Nome",
+            "$ref": "#/components/schemas/multilang_string"
+          },
+          "_full_name": {
+            "description": "Nome completo",
+            "$ref": "#/components/schemas/multilang_string",
+            "readOnly": true
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "texts": {
+        "type": "object",
+        "description": "Testi",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string"
+          },
+          "text": {
+            "description": "Testo",
+            "$ref": "#/components/schemas/multilang_string"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "vat-types": {
+        "type": "object",
+        "description": "Aliquote IVA",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "code": {
+            "description": "Codice",
+            "type": "string"
+          },
+          "name": {
+            "description": "Nome",
+            "type": "string"
+          },
+          "percentage": {
+            "description": "Perc. aliquota",
+            "type": "number"
+          },
+          "type": {
+            "description": "Tipo",
+            "type": "string",
+            "enum": [
+              "non_taxable",
+              "nondeductible",
+              "exempt",
+              "excluded",
+              "stamp_duty",
+              "exempt_74ter"
+            ]
+          },
+          "partially_deductible": {
+            "description": "Detraibilità parziale",
+            "type": "number"
+          },
+          "e_invoice_type_out": {
+            "description": "Natura per fatt. emesse",
+            "type": "string"
+          },
+          "e_invoice_type_in": {
+            "description": "Natura per fatt. ricevute",
+            "type": "string"
+          },
+          "legal_reference": {
+            "description": "Riferimento normativo",
+            "type": "string"
+          },
+          "stamp_duty": {
+            "description": "Valida per bollo",
+            "type": "boolean"
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "last_update": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              }
+            }
+          },
+          "_notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "_tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "segment": {
+        "type": "object",
+        "description": "A specific segment from point A to point B of a transport service (e.g., flights, ships, etc)",
+        "properties": {
+          "from": {
+            "$ref": "#/components/schemas/segment_point"
+          },
+          "to": {
+            "$ref": "#/components/schemas/segment_point"
+          }
+        },
+        "required": [
+          "from"
+        ]
+      },
+      "segment_point": {
+        "type": "object",
+        "description": "A departure or arrival point, to be used in \"segment\" objects (see above)",
+        "properties": {
+          "points": {
+            "type": "array",
+            "description": "Specific geographical point; you can refer to the point via a standard code, whose type may vary accordingly to the service type it is needed for. For example, you will use IATA for flights, or UIC for trains, etc",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "IATA",
+                    "ICAO",
+                    "UIC",
+                    "UN/LOCODE",
+                    "service",
+                    "legacy-station",
+                    "legacy-port",
+                    "other",
+                    "custom"
+                  ]
+                },
+                "code": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "code"
+              ]
+            }
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "time": {
+            "type": "string",
+            "format": "time"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "responses": {
+      "not_found": {
+        "description": "The specified resource was not found"
+      },
+      "unauthorized": {
+        "description": "Missing authentication"
+      },
+      "forbidden": {
+        "description": "You cannot perform this action"
+      },
+      "error": {
+        "description": "Error while executing the request"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}

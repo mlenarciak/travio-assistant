@@ -1,0 +1,19 @@
+{
+  "method": "GET",
+  "endpoint": "/rest/services",
+  "query": {
+    "page": 1,
+    "per_page": 10,
+    "sort_by": { "code": "asc" },
+    "filters": {
+      "type": { "op": "eq", "value": 1 },
+      "preferred": { "op": "eq", "value": true }
+    },
+    "unfold": "classification_id,category,typology"
+  },
+  "notes": [
+    "In practice, `filters` and `sort_by` are JSON-encoded strings in the query string.",
+    "Example: /rest/services?filters=%7B%22type%22%3A%7B%22op%22%3A%22eq%22%2C%22value%22%3A1%7D%7D&sort_by=%7B%22code%22%3A%22asc%22%7D"
+  ]
+}
+

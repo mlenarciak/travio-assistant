@@ -1,0 +1,11 @@
+sequenceDiagram
+  autonumber
+  participant C as Client
+  participant BS as Booking Service
+  participant PR as Providers/Aggregators
+  C->>BS: POST booking/search
+  BS->>PR: Fan-out queries by type (flights/hotels/...)
+  PR-->>BS: Availability and rules
+  BS->>BS: Compute groups and step
+  BS-->>C: Return payload
+  Note over C,BS: expand_next_step -> preview next group

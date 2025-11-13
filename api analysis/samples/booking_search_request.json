@@ -1,0 +1,22 @@
+{
+  "cart": "1b0c2d11-0e24-45e7-9f9f-6a2e9b0150aa",
+  "search": [
+    {
+      "type": "hotels",
+      "from": "2025-06-10",
+      "to": "2025-06-14",
+      "occupancy": [
+        { "adults": 2, "children": [5] }
+      ],
+      "extra": { "board": "breakfast" }
+    }
+  ],
+  "filters": [
+    { "filter": "price", "operator": "<=", "value": 150.0 },
+    { "filter": "rating", "operator": ">=", "value": 4 }
+  ],
+  "sort_by": [ { "key": "price", "dir": "asc" } ],
+  "per_page": 10,
+  "expand_next_step": true
+}
+

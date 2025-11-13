@@ -1,0 +1,2046 @@
+{
+  "127229": {
+    "name": "Hotel 10 Cottages",
+    "raw": {
+      "it": "Hotel 10 Cottages",
+      "en": "Hotel 10 Cottages",
+      "de": "Hotel 10 Cottages",
+      "fr": "Hotel 10 Cottages",
+      "ru": "Hotel 10 Cottages",
+      "es": "Hotel 10 Cottages"
+    }
+  },
+  "2620": {
+    "name": "Maritime",
+    "raw": {
+      "it": "Maritime",
+      "en": "Maritime",
+      "de": "Maritime",
+      "fr": "Maritime",
+      "ru": "Maritime",
+      "es": "Maritime"
+    }
+  },
+  "189258": {
+    "name": "Red Planet Manila Bay",
+    "raw": {
+      "it": "Red Planet Manila Bay",
+      "en": "Red Planet Manila Bay",
+      "de": "Red Planet Manila Bay",
+      "fr": "Red Planet Manila Bay",
+      "ru": "Red Planet Manila Bay",
+      "es": "Red Planet Manila Bay"
+    }
+  },
+  "321437": {
+    "name": "Grand Ring",
+    "raw": {
+      "it": "Grand Ring",
+      "en": "Grand Ring",
+      "de": "Grand Ring",
+      "fr": "Grand Ring",
+      "ru": "Grand Ring",
+      "es": "Grand Ring"
+    }
+  },
+  "149245": {
+    "name": "Florida Inn Ocean",
+    "raw": {
+      "it": "Florida Inn Ocean",
+      "en": "Florida Inn Ocean",
+      "de": "Florida Inn Ocean",
+      "fr": "Florida Inn Ocean",
+      "ru": "Florida Inn Ocean",
+      "es": "Florida Inn Ocean"
+    }
+  },
+  "203327": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/203327: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"203327\\\",\\\"found\\\":false}\"}"
+  },
+  "178095": {
+    "name": "Grand Mercure Ambassador Seoul Yongsan",
+    "raw": {
+      "it": "Grand Mercure Ambassador Seoul Yongsan",
+      "en": "Grand Mercure Ambassador Seoul Yongsan",
+      "de": "Grand Mercure Ambassador Seoul Yongsan",
+      "fr": "Grand Mercure Ambassador Seoul Yongsan",
+      "ru": "Grand Mercure Ambassador Seoul Yongsan",
+      "es": "Grand Mercure Ambassador Seoul Yongsan"
+    }
+  },
+  "106365": {
+    "name": "Ramada by Wyndham East Orange",
+    "raw": {
+      "it": "Ramada by Wyndham East Orange",
+      "en": "Ramada by Wyndham East Orange",
+      "de": "Ramada by Wyndham East Orange",
+      "fr": "Ramada by Wyndham East Orange",
+      "ru": "Ramada by Wyndham East Orange",
+      "es": "Ramada by Wyndham East Orange"
+    }
+  },
+  "102857": {
+    "name": "Gran Nobile Macae",
+    "raw": {
+      "it": "Gran Nobile Macae",
+      "en": "Gran Nobile Macae",
+      "de": "Gran Nobile Macae",
+      "fr": "Gran Nobile Macae",
+      "ru": "Gran Nobile Macae",
+      "es": "Gran Nobile Macae"
+    }
+  },
+  "106635": {
+    "name": "The Townhouse Hotel",
+    "raw": {
+      "it": "The Townhouse Hotel",
+      "en": "The Townhouse Hotel",
+      "de": "The Townhouse Hotel",
+      "fr": "The Townhouse Hotel",
+      "ru": "The Townhouse Hotel",
+      "es": "The Townhouse Hotel"
+    }
+  },
+  "106730": {
+    "name": "Callam Court Ocean View",
+    "raw": {
+      "it": "Callam Court Ocean View",
+      "en": "Callam Court Ocean View",
+      "de": "Callam Court Ocean View",
+      "fr": "Callam Court Ocean View",
+      "ru": "Callam Court Ocean View",
+      "es": "Callam Court Ocean View"
+    }
+  },
+  "115485": {
+    "name": "First",
+    "raw": {
+      "it": "First",
+      "en": "First",
+      "de": "First",
+      "fr": "First",
+      "ru": "First",
+      "es": "First"
+    }
+  },
+  "115486": {
+    "name": "Homey Apartments",
+    "raw": {
+      "it": "Homey Apartments",
+      "en": "Homey Apartments",
+      "de": "Homey Apartments",
+      "fr": "Homey Apartments",
+      "ru": "Homey Apartments",
+      "es": "Homey Apartments"
+    }
+  },
+  "108762": {
+    "name": "Hostel Sklep",
+    "raw": {
+      "it": "Hostel Sklep",
+      "en": "Hostel Sklep",
+      "de": "Hostel Sklep",
+      "fr": "Hostel Sklep",
+      "ru": "Hostel Sklep",
+      "es": "Hostel Sklep"
+    }
+  },
+  "167005": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/167005: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"167005\\\",\\\"found\\\":false}\"}"
+  },
+  "219119": {
+    "name": "RedDoorz Syariah near RRI Malang",
+    "raw": {
+      "it": "RedDoorz Syariah near RRI Malang",
+      "en": "RedDoorz Syariah near RRI Malang",
+      "de": "RedDoorz Syariah near RRI Malang",
+      "fr": "RedDoorz Syariah near RRI Malang",
+      "ru": "RedDoorz Syariah near RRI Malang",
+      "es": "RedDoorz Syariah near RRI Malang"
+    }
+  },
+  "137893": {
+    "name": "Villa Maritza",
+    "raw": {
+      "it": "Villa Maritza",
+      "en": "Villa Maritza",
+      "de": "Villa Maritza",
+      "fr": "Villa Maritza",
+      "ru": "Villa Maritza",
+      "es": "Villa Maritza"
+    }
+  },
+  "300668": {
+    "name": "Shade at Desert Ridge",
+    "raw": {
+      "it": "Shade at Desert Ridge",
+      "en": "Shade at Desert Ridge",
+      "de": "Shade at Desert Ridge",
+      "fr": "Shade at Desert Ridge",
+      "ru": "Shade at Desert Ridge",
+      "es": "Shade at Desert Ridge"
+    }
+  },
+  "106676": {
+    "name": "Millenium Palace",
+    "raw": {
+      "it": "Millenium Palace",
+      "en": "Millenium Palace",
+      "de": "Millenium Palace",
+      "fr": "Millenium Palace",
+      "ru": "Millenium Palace",
+      "es": "Millenium Palace"
+    }
+  },
+  "188833": {
+    "name": "Nani Mocenigo Palace",
+    "raw": {
+      "it": "Nani Mocenigo Palace",
+      "en": "Nani Mocenigo Palace",
+      "de": "Nani Mocenigo Palace",
+      "fr": "Nani Mocenigo Palace",
+      "ru": "Nani Mocenigo Palace",
+      "es": "Nani Mocenigo Palace"
+    }
+  },
+  "99780": {
+    "name": "Judd Hotel",
+    "raw": {
+      "it": "Judd Hotel",
+      "en": "Judd Hotel",
+      "de": "Judd Hotel",
+      "fr": "Judd Hotel",
+      "ru": "Judd Hotel",
+      "es": "Judd Hotel"
+    }
+  },
+  "99790": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/99790: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"99790\\\",\\\"found\\\":false}\"}"
+  },
+  "13218": {
+    "name": "Hampton Inn Vero Beach",
+    "raw": {
+      "it": "Hampton Inn Vero Beach",
+      "en": "Hampton Inn Vero Beach",
+      "de": "Hampton Inn Vero Beach",
+      "fr": "Hampton Inn Vero Beach",
+      "ru": "Hampton Inn Vero Beach",
+      "es": "Hampton Inn Vero Beach"
+    }
+  },
+  "195074": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/195074: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"195074\\\",\\\"found\\\":false}\"}"
+  },
+  "186": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/186: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"186\\\",\\\"found\\\":false}\"}"
+  },
+  "100453": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/100453: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"100453\\\",\\\"found\\\":false}\"}"
+  },
+  "213572": {
+    "name": "NICHOLS VILLAGE HOTEL AND SPA",
+    "raw": {
+      "it": "NICHOLS VILLAGE HOTEL AND SPA",
+      "en": "NICHOLS VILLAGE HOTEL AND SPA",
+      "de": "NICHOLS VILLAGE HOTEL AND SPA",
+      "fr": "NICHOLS VILLAGE HOTEL AND SPA",
+      "ru": "NICHOLS VILLAGE HOTEL AND SPA",
+      "es": "NICHOLS VILLAGE HOTEL AND SPA"
+    }
+  },
+  "106707": {
+    "name": "Villa Delona",
+    "raw": {
+      "it": "Villa Delona",
+      "en": "Villa Delona",
+      "de": "Villa Delona",
+      "fr": "Villa Delona",
+      "ru": "Villa Delona",
+      "es": "Villa Delona"
+    }
+  },
+  "99937": {
+    "name": "Spring Lodge",
+    "raw": {
+      "it": "Spring Lodge",
+      "en": "Spring Lodge",
+      "de": "Spring Lodge",
+      "fr": "Spring Lodge",
+      "ru": "Spring Lodge",
+      "es": "Spring Lodge"
+    }
+  },
+  "187414": {
+    "name": "Courtyard by Marriott New Carrollton Landover",
+    "raw": {
+      "it": "Courtyard by Marriott New Carrollton Landover",
+      "en": "Courtyard by Marriott New Carrollton Landover",
+      "de": "Courtyard by Marriott New Carrollton Landover",
+      "fr": "Courtyard by Marriott New Carrollton Landover",
+      "ru": "Courtyard by Marriott New Carrollton Landover",
+      "es": "Courtyard by Marriott New Carrollton Landover"
+    }
+  },
+  "111038": {
+    "name": "Jinjiang Inn Shanghai Hailun Rd",
+    "raw": {
+      "it": "Jinjiang Inn Shanghai Hailun Rd",
+      "en": "Jinjiang Inn Shanghai Hailun Rd",
+      "de": "Jinjiang Inn Shanghai Hailun Rd",
+      "fr": "Jinjiang Inn Shanghai Hailun Rd",
+      "ru": "Jinjiang Inn Shanghai Hailun Rd",
+      "es": "Jinjiang Inn Shanghai Hailun Rd"
+    }
+  },
+  "13216": {
+    "name": "Renaissance Palm Springs Hotel",
+    "raw": {
+      "it": "Renaissance Palm Springs Hotel",
+      "en": "Renaissance Palm Springs Hotel",
+      "de": "Renaissance Palm Springs Hotel",
+      "fr": "Renaissance Palm Springs Hotel",
+      "ru": "Renaissance Palm Springs Hotel",
+      "es": "Renaissance Palm Springs Hotel"
+    }
+  },
+  "182190": {
+    "name": "Hilton Garden Inn Santa Marta",
+    "raw": {
+      "it": "Hilton Garden Inn Santa Marta",
+      "en": "Hilton Garden Inn Santa Marta",
+      "de": "Hilton Garden Inn Santa Marta",
+      "fr": "Hilton Garden Inn Santa Marta",
+      "ru": "Hilton Garden Inn Santa Marta",
+      "es": "Hilton Garden Inn Santa Marta"
+    }
+  },
+  "181750": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/181750: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"181750\\\",\\\"found\\\":false}\"}"
+  },
+  "309862": {
+    "name": "Ostello Stella Marina",
+    "raw": {
+      "it": "Ostello Stella Marina",
+      "en": "Ostello Stella Marina",
+      "de": "Ostello Stella Marina",
+      "fr": "Ostello Stella Marina",
+      "ru": "Ostello Stella Marina",
+      "es": "Ostello Stella Marina"
+    }
+  },
+  "13131": {
+    "name": "Hampton Inn & Suites Nashville-Smyrna",
+    "raw": {
+      "it": "Hampton Inn & Suites Nashville-Smyrna",
+      "en": "Hampton Inn & Suites Nashville-Smyrna",
+      "de": "Hampton Inn & Suites Nashville-Smyrna",
+      "fr": "Hampton Inn & Suites Nashville-Smyrna",
+      "ru": "Hampton Inn & Suites Nashville-Smyrna",
+      "es": "Hampton Inn & Suites Nashville-Smyrna"
+    }
+  },
+  "252340": {
+    "name": "Hilton Newark Airport",
+    "raw": {
+      "it": "Hilton Newark Airport",
+      "en": "Hilton Newark Airport",
+      "de": "Hilton Newark Airport",
+      "fr": "Hilton Newark Airport",
+      "ru": "Hilton Newark Airport",
+      "es": "Hilton Newark Airport"
+    }
+  },
+  "13892": {
+    "name": "Tradewinds Island Grand Resort",
+    "raw": {
+      "it": "Tradewinds Island Grand Resort",
+      "en": "Tradewinds Island Grand Resort",
+      "de": "Tradewinds Island Grand Resort",
+      "fr": "Tradewinds Island Grand Resort",
+      "ru": "Tradewinds Island Grand Resort",
+      "es": "Tradewinds Island Grand Resort"
+    }
+  },
+  "1132": {
+    "name": "Maeva Particuliers Le Hameau du Sauget",
+    "raw": {
+      "it": "Maeva Particuliers Le Hameau du Sauget",
+      "en": "Maeva Particuliers Le Hameau du Sauget",
+      "de": "Maeva Particuliers Le Hameau du Sauget",
+      "fr": "Maeva Particuliers Le Hameau du Sauget",
+      "ru": "Maeva Particuliers Le Hameau du Sauget",
+      "es": "Maeva Particuliers Le Hameau du Sauget"
+    }
+  },
+  "113767": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/113767: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"113767\\\",\\\"found\\\":false}\"}"
+  },
+  "347811": {
+    "name": "Airy Eco Kemang Ampera Raya Gang Sosial 29A Jakarta",
+    "raw": {
+      "it": "Airy Eco Kemang Ampera Raya Gang Sosial 29A Jakarta",
+      "en": "Airy Eco Kemang Ampera Raya Gang Sosial 29A Jakarta",
+      "de": "Airy Eco Kemang Ampera Raya Gang Sosial 29A Jakarta",
+      "fr": "Airy Eco Kemang Ampera Raya Gang Sosial 29A Jakarta",
+      "ru": "Airy Eco Kemang Ampera Raya Gang Sosial 29A Jakarta",
+      "es": "Airy Eco Kemang Ampera Raya Gang Sosial 29A Jakarta"
+    }
+  },
+  "226925": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/226925: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"226925\\\",\\\"found\\\":false}\"}"
+  },
+  "137920": {
+    "name": "Howard Park",
+    "raw": {
+      "it": "Howard Park",
+      "en": "Howard Park",
+      "de": "Howard Park",
+      "fr": "Howard Park",
+      "ru": "Howard Park",
+      "es": "Howard Park"
+    }
+  },
+  "119769": {
+    "name": "Larkspur Landing Milpitas",
+    "raw": {
+      "it": "Larkspur Landing Milpitas",
+      "en": "Larkspur Landing Milpitas",
+      "de": "Larkspur Landing Milpitas",
+      "fr": "Larkspur Landing Milpitas",
+      "ru": "Larkspur Landing Milpitas",
+      "es": "Larkspur Landing Milpitas"
+    }
+  },
+  "123311": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/123311: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"123311\\\",\\\"found\\\":false}\"}"
+  },
+  "215530": {
+    "name": "APARTELLE DE FRANCESCA",
+    "raw": {
+      "it": "APARTELLE DE FRANCESCA",
+      "en": "APARTELLE DE FRANCESCA",
+      "de": "APARTELLE DE FRANCESCA",
+      "fr": "APARTELLE DE FRANCESCA",
+      "ru": "APARTELLE DE FRANCESCA",
+      "es": "APARTELLE DE FRANCESCA"
+    }
+  },
+  "285002": {
+    "name": "Resort Management Group",
+    "raw": {
+      "it": "Resort Management Group",
+      "en": "Resort Management Group",
+      "de": "Resort Management Group",
+      "fr": "Resort Management Group",
+      "ru": "Resort Management Group",
+      "es": "Resort Management Group"
+    }
+  },
+  "288972": {
+    "name": "Fashion 6 Apartment",
+    "raw": {
+      "it": "Fashion 6 Apartment",
+      "en": "Fashion 6 Apartment",
+      "de": "Fashion 6 Apartment",
+      "fr": "Fashion 6 Apartment",
+      "ru": "Fashion 6 Apartment",
+      "es": "Fashion 6 Apartment"
+    }
+  },
+  "141226": {
+    "name": "Quality Inn & Suites",
+    "raw": {
+      "it": "Quality Inn & Suites",
+      "en": "Quality Inn & Suites",
+      "de": "Quality Inn & Suites",
+      "fr": "Quality Inn & Suites",
+      "ru": "Quality Inn & Suites",
+      "es": "Quality Inn & Suites"
+    }
+  },
+  "106671": {
+    "name": "Super 8 by Wyndham Natchitoches",
+    "raw": {
+      "it": "Super 8 by Wyndham Natchitoches",
+      "en": "Super 8 by Wyndham Natchitoches",
+      "de": "Super 8 by Wyndham Natchitoches",
+      "fr": "Super 8 by Wyndham Natchitoches",
+      "ru": "Super 8 by Wyndham Natchitoches",
+      "es": "Super 8 by Wyndham Natchitoches"
+    }
+  },
+  "106364": {
+    "name": "Days Inn by Wyndham Nashville TN",
+    "raw": {
+      "it": "Days Inn by Wyndham Nashville TN",
+      "en": "Days Inn by Wyndham Nashville TN",
+      "de": "Days Inn by Wyndham Nashville TN",
+      "fr": "Days Inn by Wyndham Nashville TN",
+      "ru": "Days Inn by Wyndham Nashville TN",
+      "es": "Days Inn by Wyndham Nashville TN"
+    }
+  },
+  "291532": {
+    "name": "Golf19",
+    "raw": {
+      "it": "Golf19",
+      "en": "Golf19",
+      "de": "Golf19",
+      "fr": "Golf19",
+      "ru": "Golf19",
+      "es": "Golf19"
+    }
+  },
+  "122321": {
+    "name": "Holiday Inn Express Vancouver Metrotown (Burnaby)",
+    "raw": {
+      "it": "Holiday Inn Express Vancouver Metrotown (Burnaby)",
+      "en": "Holiday Inn Express Vancouver Metrotown (Burnaby)",
+      "de": "Holiday Inn Express Vancouver Metrotown (Burnaby)",
+      "fr": "Holiday Inn Express Vancouver Metrotown (Burnaby)",
+      "ru": "Holiday Inn Express Vancouver Metrotown (Burnaby)",
+      "es": "Holiday Inn Express Vancouver Metrotown (Burnaby)"
+    }
+  },
+  "100811": {
+    "name": "Hotel Delle Rose",
+    "raw": {
+      "it": "Hotel Delle Rose",
+      "en": "Hotel Delle Rose",
+      "de": "Hotel Delle Rose",
+      "fr": "Hotel Delle Rose",
+      "ru": "Hotel Delle Rose",
+      "es": "Hotel Delle Rose"
+    }
+  },
+  "348310": {
+    "name": "RedDoorz Plus near Commonwealth Regalado",
+    "raw": {
+      "it": "RedDoorz Plus near Commonwealth Regalado",
+      "en": "RedDoorz Plus near Commonwealth Regalado",
+      "de": "RedDoorz Plus near Commonwealth Regalado",
+      "fr": "RedDoorz Plus near Commonwealth Regalado",
+      "ru": "RedDoorz Plus near Commonwealth Regalado",
+      "es": "RedDoorz Plus near Commonwealth Regalado"
+    }
+  },
+  "101105": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/101105: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"101105\\\",\\\"found\\\":false}\"}"
+  },
+  "353733": {
+    "name": "Albergo Quattro Fontane Venezia",
+    "raw": {
+      "it": "Albergo Quattro Fontane Venezia",
+      "en": "Albergo Quattro Fontane Venezia",
+      "de": "Albergo Quattro Fontane Venezia",
+      "fr": "Albergo Quattro Fontane Venezia",
+      "ru": "Albergo Quattro Fontane Venezia",
+      "es": "Albergo Quattro Fontane Venezia"
+    }
+  },
+  "336814": {
+    "name": "Hampton Inn &amp; Suites McAllen",
+    "raw": {
+      "it": "Hampton Inn &amp; Suites McAllen",
+      "en": "Hampton Inn &amp; Suites McAllen",
+      "de": "Hampton Inn &amp; Suites McAllen",
+      "fr": "Hampton Inn &amp; Suites McAllen",
+      "ru": "Hampton Inn &amp; Suites McAllen",
+      "es": "Hampton Inn &amp; Suites McAllen"
+    }
+  },
+  "102004": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/102004: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"102004\\\",\\\"found\\\":false}\"}"
+  },
+  "235156": {
+    "name": "ORANGE INTERNATIONAL",
+    "raw": {
+      "it": "ORANGE INTERNATIONAL",
+      "en": "ORANGE INTERNATIONAL",
+      "de": "ORANGE INTERNATIONAL",
+      "fr": "ORANGE INTERNATIONAL",
+      "ru": "ORANGE INTERNATIONAL",
+      "es": "ORANGE INTERNATIONAL"
+    }
+  },
+  "100782": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/100782: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"100782\\\",\\\"found\\\":false}\"}"
+  },
+  "106703": {
+    "name": "Dietz",
+    "raw": {
+      "it": "Dietz",
+      "en": "Dietz",
+      "de": "Dietz",
+      "fr": "Dietz",
+      "ru": "Dietz",
+      "es": "Dietz"
+    }
+  },
+  "100857": {
+    "name": "Vista Suites and Spa Hotel",
+    "raw": {
+      "it": "Vista Suites and Spa Hotel",
+      "en": "Vista Suites and Spa Hotel",
+      "de": "Vista Suites and Spa Hotel",
+      "fr": "Vista Suites and Spa Hotel",
+      "ru": "Vista Suites and Spa Hotel",
+      "es": "Vista Suites and Spa Hotel"
+    }
+  },
+  "59121": {
+    "name": "Marina Cap Monastir Appart Hotel",
+    "raw": {
+      "it": "Marina Cap Monastir Appart Hotel",
+      "en": "Marina Cap Monastir Appart Hotel",
+      "de": "Marina Cap Monastir Appart Hotel",
+      "fr": "Marina Cap Monastir Appart Hotel",
+      "ru": "Marina Cap Monastir Appart Hotel",
+      "es": "Marina Cap Monastir Appart Hotel"
+    }
+  },
+  "99876": {
+    "name": "Royal London Hotel By Saba",
+    "raw": {
+      "it": "Royal London Hotel By Saba",
+      "en": "Royal London Hotel By Saba",
+      "de": "Royal London Hotel By Saba",
+      "fr": "Royal London Hotel By Saba",
+      "ru": "Royal London Hotel By Saba",
+      "es": "Royal London Hotel By Saba"
+    }
+  },
+  "44643": {
+    "name": "East Beijing",
+    "raw": {
+      "it": "East Beijing",
+      "en": "East Beijing",
+      "de": "East Beijing",
+      "fr": "East Beijing",
+      "ru": "East Beijing",
+      "es": "East Beijing"
+    }
+  },
+  "101048": {
+    "name": "Holiday Inn Express Hotel & Suites Los Alamos Entr",
+    "raw": {
+      "it": "Holiday Inn Express Hotel & Suites Los Alamos Entr",
+      "en": "Holiday Inn Express Hotel & Suites Los Alamos Entr",
+      "de": "Holiday Inn Express Hotel & Suites Los Alamos Entr",
+      "fr": "Holiday Inn Express Hotel & Suites Los Alamos Entr",
+      "ru": "Holiday Inn Express Hotel & Suites Los Alamos Entr",
+      "es": "Holiday Inn Express Hotel & Suites Los Alamos Entr"
+    }
+  },
+  "297188": {
+    "name": "Lónsleira Apartments",
+    "raw": {
+      "it": "Lónsleira Apartments",
+      "en": "Lónsleira Apartments",
+      "de": "Lónsleira Apartments",
+      "fr": "Lónsleira Apartments",
+      "ru": "Lónsleira Apartments",
+      "es": "Lónsleira Apartments"
+    }
+  },
+  "103687": {
+    "name": "Midland Resort & Convention Center",
+    "raw": {
+      "it": "Midland Resort & Convention Center",
+      "en": "Midland Resort & Convention Center",
+      "de": "Midland Resort & Convention Center",
+      "fr": "Midland Resort & Convention Center",
+      "ru": "Midland Resort & Convention Center",
+      "es": "Midland Resort & Convention Center"
+    }
+  },
+  "99757": {
+    "name": "The Blowfish Hotel",
+    "raw": {
+      "it": "The Blowfish Hotel",
+      "en": "The Blowfish Hotel",
+      "de": "The Blowfish Hotel",
+      "fr": "The Blowfish Hotel",
+      "ru": "The Blowfish Hotel",
+      "es": "The Blowfish Hotel"
+    }
+  },
+  "194048": {
+    "name": "Quinta do Algarvio",
+    "raw": {
+      "it": "Quinta do Algarvio",
+      "en": "Quinta do Algarvio",
+      "de": "Quinta do Algarvio",
+      "fr": "Quinta do Algarvio",
+      "ru": "Quinta do Algarvio",
+      "es": "Quinta do Algarvio"
+    }
+  },
+  "100289": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/100289: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"100289\\\",\\\"found\\\":false}\"}"
+  },
+  "105959": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/105959: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"105959\\\",\\\"found\\\":false}\"}"
+  },
+  "308094": {
+    "name": "Radisson Blu Hotel, Lagos Ikeja",
+    "raw": {
+      "it": "Radisson Blu Hotel, Lagos Ikeja",
+      "en": "Radisson Blu Hotel, Lagos Ikeja",
+      "de": "Radisson Blu Hotel, Lagos Ikeja",
+      "fr": "Radisson Blu Hotel, Lagos Ikeja",
+      "ru": "Radisson Blu Hotel, Lagos Ikeja",
+      "es": "Radisson Blu Hotel, Lagos Ikeja"
+    }
+  },
+  "100751": {
+    "name": "Super 8 by Wyndham Lincoln",
+    "raw": {
+      "it": "Super 8 by Wyndham Lincoln",
+      "en": "Super 8 by Wyndham Lincoln",
+      "de": "Super 8 by Wyndham Lincoln",
+      "fr": "Super 8 by Wyndham Lincoln",
+      "ru": "Super 8 by Wyndham Lincoln",
+      "es": "Super 8 by Wyndham Lincoln"
+    }
+  },
+  "137904": {
+    "name": "The Urr Valley Country House Hotel",
+    "raw": {
+      "it": "The Urr Valley Country House Hotel",
+      "en": "The Urr Valley Country House Hotel",
+      "de": "The Urr Valley Country House Hotel",
+      "fr": "The Urr Valley Country House Hotel",
+      "ru": "The Urr Valley Country House Hotel",
+      "es": "The Urr Valley Country House Hotel"
+    }
+  },
+  "189256": {
+    "name": "Jungfrau Lodge Swiss Mountain",
+    "raw": {
+      "it": "Jungfrau Lodge Swiss Mountain",
+      "en": "Jungfrau Lodge Swiss Mountain",
+      "de": "Jungfrau Lodge Swiss Mountain",
+      "fr": "Jungfrau Lodge Swiss Mountain",
+      "ru": "Jungfrau Lodge Swiss Mountain",
+      "es": "Jungfrau Lodge Swiss Mountain"
+    }
+  },
+  "222637": {
+    "name": "43 STATION HOTEL",
+    "raw": {
+      "it": "43 STATION HOTEL",
+      "en": "43 STATION HOTEL",
+      "de": "43 STATION HOTEL",
+      "fr": "43 STATION HOTEL",
+      "ru": "43 STATION HOTEL",
+      "es": "43 STATION HOTEL"
+    }
+  },
+  "128053": {
+    "name": "Hampton Inn Adairsville",
+    "raw": {
+      "it": "Hampton Inn Adairsville",
+      "en": "Hampton Inn Adairsville",
+      "de": "Hampton Inn Adairsville",
+      "fr": "Hampton Inn Adairsville",
+      "ru": "Hampton Inn Adairsville",
+      "es": "Hampton Inn Adairsville"
+    }
+  },
+  "188204": {
+    "name": "Lavona Hotel Dammam",
+    "raw": {
+      "it": "Lavona Hotel Dammam",
+      "en": "Lavona Hotel Dammam",
+      "de": "Lavona Hotel Dammam",
+      "fr": "Lavona Hotel Dammam",
+      "ru": "Lavona Hotel Dammam",
+      "es": "Lavona Hotel Dammam"
+    }
+  },
+  "201885": {
+    "name": "HEROES HOTEL",
+    "raw": {
+      "it": "HEROES HOTEL",
+      "en": "HEROES HOTEL",
+      "de": "HEROES HOTEL",
+      "fr": "HEROES HOTEL",
+      "ru": "HEROES HOTEL",
+      "es": "HEROES HOTEL"
+    }
+  },
+  "213593": {
+    "name": "GOLDCOAST HOTEL",
+    "raw": {
+      "it": "GOLDCOAST HOTEL",
+      "en": "GOLDCOAST HOTEL",
+      "de": "GOLDCOAST HOTEL",
+      "fr": "GOLDCOAST HOTEL",
+      "ru": "GOLDCOAST HOTEL",
+      "es": "GOLDCOAST HOTEL"
+    }
+  },
+  "199029": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/199029: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"199029\\\",\\\"found\\\":false}\"}"
+  },
+  "109921": {
+    "name": "Saint James",
+    "raw": {
+      "it": "Saint James",
+      "en": "Saint James",
+      "de": "Saint James",
+      "fr": "Saint James",
+      "ru": "Saint James",
+      "es": "Saint James"
+    }
+  },
+  "213122": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/213122: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"213122\\\",\\\"found\\\":false}\"}"
+  },
+  "220097": {
+    "name": "NEW EVE S KIOSK DIVE RESORT",
+    "raw": {
+      "it": "NEW EVE S KIOSK DIVE RESORT",
+      "en": "NEW EVE S KIOSK DIVE RESORT",
+      "de": "NEW EVE S KIOSK DIVE RESORT",
+      "fr": "NEW EVE S KIOSK DIVE RESORT",
+      "ru": "NEW EVE S KIOSK DIVE RESORT",
+      "es": "NEW EVE S KIOSK DIVE RESORT"
+    }
+  },
+  "287101": {
+    "name": "CHALET FFS LES4VENTS",
+    "raw": {
+      "it": "CHALET FFS LES4VENTS",
+      "en": "CHALET FFS LES4VENTS",
+      "de": "CHALET FFS LES4VENTS",
+      "fr": "CHALET FFS LES4VENTS",
+      "ru": "CHALET FFS LES4VENTS",
+      "es": "CHALET FFS LES4VENTS"
+    }
+  },
+  "370977": {
+    "name": "Loving Clouds Family Inn",
+    "raw": {
+      "it": "Loving Clouds Family Inn",
+      "en": "Loving Clouds Family Inn",
+      "de": "Loving Clouds Family Inn",
+      "fr": "Loving Clouds Family Inn",
+      "ru": "Loving Clouds Family Inn",
+      "es": "Loving Clouds Family Inn"
+    }
+  },
+  "100848": {
+    "name": "Villa Dirce",
+    "raw": {
+      "it": "Villa Dirce",
+      "en": "Villa Dirce",
+      "de": "Villa Dirce",
+      "fr": "Villa Dirce",
+      "ru": "Villa Dirce",
+      "es": "Villa Dirce"
+    }
+  },
+  "44644": {
+    "name": "The Maids Head Hotel",
+    "raw": {
+      "it": "The Maids Head Hotel",
+      "en": "The Maids Head Hotel",
+      "de": "The Maids Head Hotel",
+      "fr": "The Maids Head Hotel",
+      "ru": "The Maids Head Hotel",
+      "es": "The Maids Head Hotel"
+    }
+  },
+  "46199": {
+    "name": "Hotel Zeus",
+    "raw": {
+      "it": "Hotel Zeus",
+      "en": "Hotel Zeus",
+      "de": "Hotel Zeus",
+      "fr": "Hotel Zeus",
+      "ru": "Hotel Zeus",
+      "es": "Hotel Zeus"
+    }
+  },
+  "46393": {
+    "name": "Andy Hotel",
+    "raw": {
+      "it": "Andy Hotel",
+      "en": "Andy Hotel",
+      "de": "Andy Hotel",
+      "fr": "Andy Hotel",
+      "ru": "Andy Hotel",
+      "es": "Andy Hotel"
+    }
+  },
+  "222632": {
+    "name": "ST ATHANS HOTEL",
+    "raw": {
+      "it": "ST ATHANS HOTEL",
+      "en": "ST ATHANS HOTEL",
+      "de": "ST ATHANS HOTEL",
+      "fr": "ST ATHANS HOTEL",
+      "ru": "ST ATHANS HOTEL",
+      "es": "ST ATHANS HOTEL"
+    }
+  },
+  "100534": {
+    "name": "Hotel Kleinmünchen Garni",
+    "raw": {
+      "it": "Hotel Kleinmünchen Garni",
+      "en": "Hotel Kleinmünchen Garni",
+      "de": "Hotel Kleinmünchen Garni",
+      "fr": "Hotel Kleinmünchen Garni",
+      "ru": "Hotel Kleinmünchen Garni",
+      "es": "Hotel Kleinmünchen Garni"
+    }
+  },
+  "186437": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/186437: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"186437\\\",\\\"found\\\":false}\"}"
+  },
+  "122322": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/122322: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"122322\\\",\\\"found\\\":false}\"}"
+  },
+  "106697": {
+    "name": "Zum blauen Hecht",
+    "raw": {
+      "it": "Zum blauen Hecht",
+      "en": "Zum blauen Hecht",
+      "de": "Zum blauen Hecht",
+      "fr": "Zum blauen Hecht",
+      "ru": "Zum blauen Hecht",
+      "es": "Zum blauen Hecht"
+    }
+  },
+  "188539": {
+    "name": "B&B Prado Velodrome",
+    "raw": {
+      "it": "B&B Prado Velodrome",
+      "en": "B&B Prado Velodrome",
+      "de": "B&B Prado Velodrome",
+      "fr": "B&B Prado Velodrome",
+      "ru": "B&B Prado Velodrome",
+      "es": "B&B Prado Velodrome"
+    }
+  },
+  "115488": {
+    "name": "Residencial Jenny",
+    "raw": {
+      "it": "Residencial Jenny",
+      "en": "Residencial Jenny",
+      "de": "Residencial Jenny",
+      "fr": "Residencial Jenny",
+      "ru": "Residencial Jenny",
+      "es": "Residencial Jenny"
+    }
+  },
+  "208071": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/208071: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"208071\\\",\\\"found\\\":false}\"}"
+  },
+  "219029": {
+    "name": "RedDoorz Plus near Universitas Negeri Makassar",
+    "raw": {
+      "it": "RedDoorz Plus near Universitas Negeri Makassar",
+      "en": "RedDoorz Plus near Universitas Negeri Makassar",
+      "de": "RedDoorz Plus near Universitas Negeri Makassar",
+      "fr": "RedDoorz Plus near Universitas Negeri Makassar",
+      "ru": "RedDoorz Plus near Universitas Negeri Makassar",
+      "es": "RedDoorz Plus near Universitas Negeri Makassar"
+    }
+  },
+  "108760": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/108760: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"108760\\\",\\\"found\\\":false}\"}"
+  },
+  "109783": {
+    "name": "Eden Montmartre",
+    "raw": {
+      "it": "Eden Montmartre",
+      "en": "Eden Montmartre",
+      "de": "Eden Montmartre",
+      "fr": "Eden Montmartre",
+      "ru": "Eden Montmartre",
+      "es": "Eden Montmartre"
+    }
+  },
+  "191536": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/191536: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"191536\\\",\\\"found\\\":false}\"}"
+  },
+  "176248": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/176248: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"176248\\\",\\\"found\\\":false}\"}"
+  },
+  "99933": {
+    "name": "La Paz Apart Hotel",
+    "raw": {
+      "it": "La Paz Apart Hotel",
+      "en": "La Paz Apart Hotel",
+      "de": "La Paz Apart Hotel",
+      "fr": "La Paz Apart Hotel",
+      "ru": "La Paz Apart Hotel",
+      "es": "La Paz Apart Hotel"
+    }
+  },
+  "100472": {
+    "name": "Stella d'Italia",
+    "raw": {
+      "it": "Stella d'Italia",
+      "en": "Stella d'Italia",
+      "de": "Stella d'Italia",
+      "fr": "Stella d'Italia",
+      "ru": "Stella d'Italia",
+      "es": "Stella d'Italia"
+    }
+  },
+  "100748": {
+    "name": "Art House Rooms",
+    "raw": {
+      "it": "Art House Rooms",
+      "en": "Art House Rooms",
+      "de": "Art House Rooms",
+      "fr": "Art House Rooms",
+      "ru": "Art House Rooms",
+      "es": "Art House Rooms"
+    }
+  },
+  "105823": {
+    "name": "Dormy Inn Soga",
+    "raw": {
+      "it": "Dormy Inn Soga",
+      "en": "Dormy Inn Soga",
+      "de": "Dormy Inn Soga",
+      "fr": "Dormy Inn Soga",
+      "ru": "Dormy Inn Soga",
+      "es": "Dormy Inn Soga"
+    }
+  },
+  "100454": {
+    "name": "Hyde Park West",
+    "raw": {
+      "it": "Hyde Park West",
+      "en": "Hyde Park West",
+      "de": "Hyde Park West",
+      "fr": "Hyde Park West",
+      "ru": "Hyde Park West",
+      "es": "Hyde Park West"
+    }
+  },
+  "100455": {
+    "name": "Ramada Hotel &Conference Center by Wyndham Lansing",
+    "raw": {
+      "it": "Ramada Hotel &Conference Center by Wyndham Lansing",
+      "en": "Ramada Hotel &Conference Center by Wyndham Lansing",
+      "de": "Ramada Hotel &Conference Center by Wyndham Lansing",
+      "fr": "Ramada Hotel &Conference Center by Wyndham Lansing",
+      "ru": "Ramada Hotel &Conference Center by Wyndham Lansing",
+      "es": "Ramada Hotel &Conference Center by Wyndham Lansing"
+    }
+  },
+  "346017": {
+    "name": "No6 Nijo-Hotel",
+    "raw": {
+      "it": "No6 Nijo-Hotel",
+      "en": "No6 Nijo-Hotel",
+      "de": "No6 Nijo-Hotel",
+      "fr": "No6 Nijo-Hotel",
+      "ru": "No6 Nijo-Hotel",
+      "es": "No6 Nijo-Hotel"
+    }
+  },
+  "101484": {
+    "name": "Super 8 by Wyndham Lafayette",
+    "raw": {
+      "it": "Super 8 by Wyndham Lafayette",
+      "en": "Super 8 by Wyndham Lafayette",
+      "de": "Super 8 by Wyndham Lafayette",
+      "fr": "Super 8 by Wyndham Lafayette",
+      "ru": "Super 8 by Wyndham Lafayette",
+      "es": "Super 8 by Wyndham Lafayette"
+    }
+  },
+  "216052": {
+    "name": "GOLDEN LOTUS HALONG HOTEL",
+    "raw": {
+      "it": "GOLDEN LOTUS HALONG HOTEL",
+      "en": "GOLDEN LOTUS HALONG HOTEL",
+      "de": "GOLDEN LOTUS HALONG HOTEL",
+      "fr": "GOLDEN LOTUS HALONG HOTEL",
+      "ru": "GOLDEN LOTUS HALONG HOTEL",
+      "es": "GOLDEN LOTUS HALONG HOTEL"
+    }
+  },
+  "109842": {
+    "name": "Les Etangs De Corot",
+    "raw": {
+      "it": "Les Etangs De Corot",
+      "en": "Les Etangs De Corot",
+      "de": "Les Etangs De Corot",
+      "fr": "Les Etangs De Corot",
+      "ru": "Les Etangs De Corot",
+      "es": "Les Etangs De Corot"
+    }
+  },
+  "339922": {
+    "name": "Aratos Hotel",
+    "raw": {
+      "it": "Aratos Hotel",
+      "en": "Aratos Hotel",
+      "de": "Aratos Hotel",
+      "fr": "Aratos Hotel",
+      "ru": "Aratos Hotel",
+      "es": "Aratos Hotel"
+    }
+  },
+  "102239": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/102239: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"102239\\\",\\\"found\\\":false}\"}"
+  },
+  "102601": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/102601: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"102601\\\",\\\"found\\\":false}\"}"
+  },
+  "283208": {
+    "name": "Logis Hôtel les Sapins",
+    "raw": {
+      "it": "Logis Hôtel les Sapins",
+      "en": "Logis Hôtel les Sapins",
+      "de": "Logis Hôtel les Sapins",
+      "fr": "Logis Hôtel les Sapins",
+      "ru": "Logis Hôtel les Sapins",
+      "es": "Logis Hôtel les Sapins"
+    }
+  },
+  "214487": {
+    "name": "MOU HOTEL DEBAO",
+    "raw": {
+      "it": "MOU HOTEL DEBAO",
+      "en": "MOU HOTEL DEBAO",
+      "de": "MOU HOTEL DEBAO",
+      "fr": "MOU HOTEL DEBAO",
+      "ru": "MOU HOTEL DEBAO",
+      "es": "MOU HOTEL DEBAO"
+    }
+  },
+  "117364": {
+    "name": "Coral Ocean Point Resort",
+    "raw": {
+      "it": "Coral Ocean Point Resort",
+      "en": "Coral Ocean Point Resort",
+      "de": "Coral Ocean Point Resort",
+      "fr": "Coral Ocean Point Resort",
+      "ru": "Coral Ocean Point Resort",
+      "es": "Coral Ocean Point Resort"
+    }
+  },
+  "105733": {
+    "name": "Residence Nuraghe",
+    "raw": {
+      "it": "Residence Nuraghe",
+      "en": "Residence Nuraghe",
+      "de": "Residence Nuraghe",
+      "fr": "Residence Nuraghe",
+      "ru": "Residence Nuraghe",
+      "es": "Residence Nuraghe"
+    }
+  },
+  "106687": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/106687: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"106687\\\",\\\"found\\\":false}\"}"
+  },
+  "104225": {
+    "name": "Santander Plaza",
+    "raw": {
+      "it": "Santander Plaza",
+      "en": "Santander Plaza",
+      "de": "Santander Plaza",
+      "fr": "Santander Plaza",
+      "ru": "Santander Plaza",
+      "es": "Santander Plaza"
+    }
+  },
+  "152254": {
+    "name": "Boutique Hotel Stolica",
+    "raw": {
+      "it": "Boutique Hotel Stolica",
+      "en": "Boutique Hotel Stolica",
+      "de": "Boutique Hotel Stolica",
+      "fr": "Boutique Hotel Stolica",
+      "ru": "Boutique Hotel Stolica",
+      "es": "Boutique Hotel Stolica"
+    }
+  },
+  "152256": {
+    "name": "Atlas Hotel Skiathos",
+    "raw": {
+      "it": "Atlas Hotel Skiathos",
+      "en": "Atlas Hotel Skiathos",
+      "de": "Atlas Hotel Skiathos",
+      "fr": "Atlas Hotel Skiathos",
+      "ru": "Atlas Hotel Skiathos",
+      "es": "Atlas Hotel Skiathos"
+    }
+  },
+  "152255": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/152255: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"152255\\\",\\\"found\\\":false}\"}"
+  },
+  "152258": {
+    "name": "Maritim Hotel Plaza Tirana",
+    "raw": {
+      "it": "Maritim Hotel Plaza Tirana",
+      "en": "Maritim Hotel Plaza Tirana",
+      "de": "Maritim Hotel Plaza Tirana",
+      "fr": "Maritim Hotel Plaza Tirana",
+      "ru": "Maritim Hotel Plaza Tirana",
+      "es": "Maritim Hotel Plaza Tirana"
+    }
+  },
+  "152259": {
+    "name": "William'S Houses",
+    "raw": {
+      "it": "William'S Houses",
+      "en": "William'S Houses",
+      "de": "William'S Houses",
+      "fr": "William'S Houses",
+      "ru": "William'S Houses",
+      "es": "William'S Houses"
+    }
+  },
+  "112435": {
+    "name": "Barbieri",
+    "raw": {
+      "it": "Barbieri",
+      "en": "Barbieri",
+      "de": "Barbieri",
+      "fr": "Barbieri",
+      "ru": "Barbieri",
+      "es": "Barbieri"
+    }
+  },
+  "343341": {
+    "name": "LadyBug Hotel",
+    "raw": {
+      "it": "LadyBug Hotel",
+      "en": "LadyBug Hotel",
+      "de": "LadyBug Hotel",
+      "fr": "LadyBug Hotel",
+      "ru": "LadyBug Hotel",
+      "es": "LadyBug Hotel"
+    }
+  },
+  "175619": {
+    "name": "Turquesa Maya",
+    "raw": {
+      "it": "Turquesa Maya",
+      "en": "Turquesa Maya",
+      "de": "Turquesa Maya",
+      "fr": "Turquesa Maya",
+      "ru": "Turquesa Maya",
+      "es": "Turquesa Maya"
+    }
+  },
+  "115491": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/115491: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"115491\\\",\\\"found\\\":false}\"}"
+  },
+  "214662": {
+    "name": "CHALET HILL RESORT KHAO YAI",
+    "raw": {
+      "it": "CHALET HILL RESORT KHAO YAI",
+      "en": "CHALET HILL RESORT KHAO YAI",
+      "de": "CHALET HILL RESORT KHAO YAI",
+      "fr": "CHALET HILL RESORT KHAO YAI",
+      "ru": "CHALET HILL RESORT KHAO YAI",
+      "es": "CHALET HILL RESORT KHAO YAI"
+    }
+  },
+  "187432": {
+    "name": "TownePlace Suites Seattle South Renton",
+    "raw": {
+      "it": "TownePlace Suites Seattle South Renton",
+      "en": "TownePlace Suites Seattle South Renton",
+      "de": "TownePlace Suites Seattle South Renton",
+      "fr": "TownePlace Suites Seattle South Renton",
+      "ru": "TownePlace Suites Seattle South Renton",
+      "es": "TownePlace Suites Seattle South Renton"
+    }
+  },
+  "188815": {
+    "name": "B&B Hôtel Lyon Saint Priest",
+    "raw": {
+      "it": "B&B Hôtel Lyon Saint Priest",
+      "en": "B&B Hôtel Lyon Saint Priest",
+      "de": "B&B Hôtel Lyon Saint Priest",
+      "fr": "B&B Hôtel Lyon Saint Priest",
+      "ru": "B&B Hôtel Lyon Saint Priest",
+      "es": "B&B Hôtel Lyon Saint Priest"
+    }
+  },
+  "138962": {
+    "name": "Jinjiang Inn Shanghai Pudong Huinan",
+    "raw": {
+      "it": "Jinjiang Inn Shanghai Pudong Huinan",
+      "en": "Jinjiang Inn Shanghai Pudong Huinan",
+      "de": "Jinjiang Inn Shanghai Pudong Huinan",
+      "fr": "Jinjiang Inn Shanghai Pudong Huinan",
+      "ru": "Jinjiang Inn Shanghai Pudong Huinan",
+      "es": "Jinjiang Inn Shanghai Pudong Huinan"
+    }
+  },
+  "158492": {
+    "name": "Rodeway Inn near Coachella",
+    "raw": {
+      "it": "Rodeway Inn near Coachella",
+      "en": "Rodeway Inn near Coachella",
+      "de": "Rodeway Inn near Coachella",
+      "fr": "Rodeway Inn near Coachella",
+      "ru": "Rodeway Inn near Coachella",
+      "es": "Rodeway Inn near Coachella"
+    }
+  },
+  "189822": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/189822: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"189822\\\",\\\"found\\\":false}\"}"
+  },
+  "183551": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/183551: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"183551\\\",\\\"found\\\":false}\"}"
+  },
+  "346016": {
+    "name": "Amata Lanna Jangmuang",
+    "raw": {
+      "it": "Amata Lanna Jangmuang",
+      "en": "Amata Lanna Jangmuang",
+      "de": "Amata Lanna Jangmuang",
+      "fr": "Amata Lanna Jangmuang",
+      "ru": "Amata Lanna Jangmuang",
+      "es": "Amata Lanna Jangmuang"
+    }
+  },
+  "223320": {
+    "name": "OYO 1964 APARTMENT AAJO",
+    "raw": {
+      "it": "OYO 1964 APARTMENT AAJO",
+      "en": "OYO 1964 APARTMENT AAJO",
+      "de": "OYO 1964 APARTMENT AAJO",
+      "fr": "OYO 1964 APARTMENT AAJO",
+      "ru": "OYO 1964 APARTMENT AAJO",
+      "es": "OYO 1964 APARTMENT AAJO"
+    }
+  },
+  "175111": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/175111: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"175111\\\",\\\"found\\\":false}\"}"
+  },
+  "175672": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/175672: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"175672\\\",\\\"found\\\":false}\"}"
+  },
+  "176407": {
+    "name": "GreenTree Inn Jianhu  Oubaoliya Zunyuan Express",
+    "raw": {
+      "it": "GreenTree Inn Jianhu  Oubaoliya Zunyuan Express",
+      "en": "GreenTree Inn Jianhu  Oubaoliya Zunyuan Express",
+      "de": "GreenTree Inn Jianhu  Oubaoliya Zunyuan Express",
+      "fr": "GreenTree Inn Jianhu  Oubaoliya Zunyuan Express",
+      "ru": "GreenTree Inn Jianhu  Oubaoliya Zunyuan Express",
+      "es": "GreenTree Inn Jianhu  Oubaoliya Zunyuan Express"
+    }
+  },
+  "176043": {
+    "name": "Candlewood Suites Omaha Millard Area",
+    "raw": {
+      "it": "Candlewood Suites Omaha Millard Area",
+      "en": "Candlewood Suites Omaha Millard Area",
+      "de": "Candlewood Suites Omaha Millard Area",
+      "fr": "Candlewood Suites Omaha Millard Area",
+      "ru": "Candlewood Suites Omaha Millard Area",
+      "es": "Candlewood Suites Omaha Millard Area"
+    }
+  },
+  "176045": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/176045: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"176045\\\",\\\"found\\\":false}\"}"
+  },
+  "132706": {
+    "name": "Akti Panela",
+    "raw": {
+      "it": "Akti Panela",
+      "en": "Akti Panela",
+      "de": "Akti Panela",
+      "fr": "Akti Panela",
+      "ru": "Akti Panela",
+      "es": "Akti Panela"
+    }
+  },
+  "177313": {
+    "name": "The Smith Hotel",
+    "raw": {
+      "it": "The Smith Hotel",
+      "en": "The Smith Hotel",
+      "de": "The Smith Hotel",
+      "fr": "The Smith Hotel",
+      "ru": "The Smith Hotel",
+      "es": "The Smith Hotel"
+    }
+  },
+  "179215": {
+    "name": "Vital",
+    "raw": {
+      "it": "Vital",
+      "en": "Vital",
+      "de": "Vital",
+      "fr": "Vital",
+      "ru": "Vital",
+      "es": "Vital"
+    }
+  },
+  "188569": {
+    "name": "Ramada Plaza Istanbul Asia Airport",
+    "raw": {
+      "it": "Ramada Plaza Istanbul Asia Airport",
+      "en": "Ramada Plaza Istanbul Asia Airport",
+      "de": "Ramada Plaza Istanbul Asia Airport",
+      "fr": "Ramada Plaza Istanbul Asia Airport",
+      "ru": "Ramada Plaza Istanbul Asia Airport",
+      "es": "Ramada Plaza Istanbul Asia Airport"
+    }
+  },
+  "279262": {
+    "name": "Kiwi House",
+    "raw": {
+      "it": "Kiwi House",
+      "en": "Kiwi House",
+      "de": "Kiwi House",
+      "fr": "Kiwi House",
+      "ru": "Kiwi House",
+      "es": "Kiwi House"
+    }
+  },
+  "188532": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/188532: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"188532\\\",\\\"found\\\":false}\"}"
+  },
+  "189840": {
+    "name": "IntercityHotel Frankfurt Hauptbahnhof Süd",
+    "raw": {
+      "it": "IntercityHotel Frankfurt Hauptbahnhof Süd",
+      "en": "IntercityHotel Frankfurt Hauptbahnhof Süd",
+      "de": "IntercityHotel Frankfurt Hauptbahnhof Süd",
+      "fr": "IntercityHotel Frankfurt Hauptbahnhof Süd",
+      "ru": "IntercityHotel Frankfurt Hauptbahnhof Süd",
+      "es": "IntercityHotel Frankfurt Hauptbahnhof Süd"
+    }
+  },
+  "222635": {
+    "name": "HOSTEL CALIFORNIA",
+    "raw": {
+      "it": "HOSTEL CALIFORNIA",
+      "en": "HOSTEL CALIFORNIA",
+      "de": "HOSTEL CALIFORNIA",
+      "fr": "HOSTEL CALIFORNIA",
+      "ru": "HOSTEL CALIFORNIA",
+      "es": "HOSTEL CALIFORNIA"
+    }
+  },
+  "220270": {
+    "name": "BLUE HORIZON HOSTEL",
+    "raw": {
+      "it": "BLUE HORIZON HOSTEL",
+      "en": "BLUE HORIZON HOSTEL",
+      "de": "BLUE HORIZON HOSTEL",
+      "fr": "BLUE HORIZON HOSTEL",
+      "ru": "BLUE HORIZON HOSTEL",
+      "es": "BLUE HORIZON HOSTEL"
+    }
+  },
+  "191997": {
+    "name": "ZEN Rooms Basic Quirino Station",
+    "raw": {
+      "it": "ZEN Rooms Basic Quirino Station",
+      "en": "ZEN Rooms Basic Quirino Station",
+      "de": "ZEN Rooms Basic Quirino Station",
+      "fr": "ZEN Rooms Basic Quirino Station",
+      "ru": "ZEN Rooms Basic Quirino Station",
+      "es": "ZEN Rooms Basic Quirino Station"
+    }
+  },
+  "192635": {
+    "name": "Jatiuca Suites Resort By Slaviero Hoteis",
+    "raw": {
+      "it": "Jatiuca Suites Resort By Slaviero Hoteis",
+      "en": "Jatiuca Suites Resort By Slaviero Hoteis",
+      "de": "Jatiuca Suites Resort By Slaviero Hoteis",
+      "fr": "Jatiuca Suites Resort By Slaviero Hoteis",
+      "ru": "Jatiuca Suites Resort By Slaviero Hoteis",
+      "es": "Jatiuca Suites Resort By Slaviero Hoteis"
+    }
+  },
+  "192622": {
+    "name": "Select Hotel Mainz",
+    "raw": {
+      "it": "Select Hotel Mainz",
+      "en": "Select Hotel Mainz",
+      "de": "Select Hotel Mainz",
+      "fr": "Select Hotel Mainz",
+      "ru": "Select Hotel Mainz",
+      "es": "Select Hotel Mainz"
+    }
+  },
+  "246326": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/246326: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"246326\\\",\\\"found\\\":false}\"}"
+  },
+  "192610": {
+    "name": "The niu Dairy",
+    "raw": {
+      "it": "The niu Dairy",
+      "en": "The niu Dairy",
+      "de": "The niu Dairy",
+      "fr": "The niu Dairy",
+      "ru": "The niu Dairy",
+      "es": "The niu Dairy"
+    }
+  },
+  "211936": {
+    "name": "HUGGA PAI",
+    "raw": {
+      "it": "HUGGA PAI",
+      "en": "HUGGA PAI",
+      "de": "HUGGA PAI",
+      "fr": "HUGGA PAI",
+      "ru": "HUGGA PAI",
+      "es": "HUGGA PAI"
+    }
+  },
+  "204515": {
+    "name": "Hotel Sol Bariloche",
+    "raw": {
+      "it": "Hotel Sol Bariloche",
+      "en": "Hotel Sol Bariloche",
+      "de": "Hotel Sol Bariloche",
+      "fr": "Hotel Sol Bariloche",
+      "ru": "Hotel Sol Bariloche",
+      "es": "Hotel Sol Bariloche"
+    }
+  },
+  "204510": {
+    "name": "PARK HYATT KYOTO",
+    "raw": {
+      "it": "PARK HYATT KYOTO",
+      "en": "PARK HYATT KYOTO",
+      "de": "PARK HYATT KYOTO",
+      "fr": "PARK HYATT KYOTO",
+      "ru": "PARK HYATT KYOTO",
+      "es": "PARK HYATT KYOTO"
+    }
+  },
+  "300949": {
+    "name": "Hotel Plaza Caribe",
+    "raw": {
+      "it": "Hotel Plaza Caribe",
+      "en": "Hotel Plaza Caribe",
+      "de": "Hotel Plaza Caribe",
+      "fr": "Hotel Plaza Caribe",
+      "ru": "Hotel Plaza Caribe",
+      "es": "Hotel Plaza Caribe"
+    }
+  },
+  "195905": {
+    "name": "RedDoorz @ Panglima Sudirman",
+    "raw": {
+      "it": "RedDoorz @ Panglima Sudirman",
+      "en": "RedDoorz @ Panglima Sudirman",
+      "de": "RedDoorz @ Panglima Sudirman",
+      "fr": "RedDoorz @ Panglima Sudirman",
+      "ru": "RedDoorz @ Panglima Sudirman",
+      "es": "RedDoorz @ Panglima Sudirman"
+    }
+  },
+  "196074": {
+    "name": "Sdivine Fátima Hotel, Congress & Spirituality",
+    "raw": {
+      "it": "Sdivine Fátima Hotel, Congress & Spirituality",
+      "en": "Sdivine Fátima Hotel, Congress & Spirituality",
+      "de": "Sdivine Fátima Hotel, Congress & Spirituality",
+      "fr": "Sdivine Fátima Hotel, Congress & Spirituality",
+      "ru": "Sdivine Fátima Hotel, Congress & Spirituality",
+      "es": "Sdivine Fátima Hotel, Congress & Spirituality"
+    }
+  },
+  "237430": {
+    "name": "BRIDGE HOTEL",
+    "raw": {
+      "it": "BRIDGE HOTEL",
+      "en": "BRIDGE HOTEL",
+      "de": "BRIDGE HOTEL",
+      "fr": "BRIDGE HOTEL",
+      "ru": "BRIDGE HOTEL",
+      "es": "BRIDGE HOTEL"
+    }
+  },
+  "230547": {
+    "name": "QUEEN CENTRAL APARTMENT HOTEL",
+    "raw": {
+      "it": "QUEEN CENTRAL APARTMENT HOTEL",
+      "en": "QUEEN CENTRAL APARTMENT HOTEL",
+      "de": "QUEEN CENTRAL APARTMENT HOTEL",
+      "fr": "QUEEN CENTRAL APARTMENT HOTEL",
+      "ru": "QUEEN CENTRAL APARTMENT HOTEL",
+      "es": "QUEEN CENTRAL APARTMENT HOTEL"
+    }
+  },
+  "220067": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/220067: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"220067\\\",\\\"found\\\":false}\"}"
+  },
+  "221529": {
+    "name": "APARTAMENTOS BUENAVISTA",
+    "raw": {
+      "it": "APARTAMENTOS BUENAVISTA",
+      "en": "APARTAMENTOS BUENAVISTA",
+      "de": "APARTAMENTOS BUENAVISTA",
+      "fr": "APARTAMENTOS BUENAVISTA",
+      "ru": "APARTAMENTOS BUENAVISTA",
+      "es": "APARTAMENTOS BUENAVISTA"
+    }
+  },
+  "243945": {
+    "name": "Hotel Casa Turquesa",
+    "raw": {
+      "it": "Hotel Casa Turquesa",
+      "en": "Hotel Casa Turquesa",
+      "de": "Hotel Casa Turquesa",
+      "fr": "Hotel Casa Turquesa",
+      "ru": "Hotel Casa Turquesa",
+      "es": "Hotel Casa Turquesa"
+    }
+  },
+  "225866": {
+    "name": "GAJI HOTEL",
+    "raw": {
+      "it": "GAJI HOTEL",
+      "en": "GAJI HOTEL",
+      "de": "GAJI HOTEL",
+      "fr": "GAJI HOTEL",
+      "ru": "GAJI HOTEL",
+      "es": "GAJI HOTEL"
+    }
+  },
+  "234575": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/234575: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"234575\\\",\\\"found\\\":false}\"}"
+  },
+  "215587": {
+    "name": "MAI LINH HOTEL",
+    "raw": {
+      "it": "MAI LINH HOTEL",
+      "en": "MAI LINH HOTEL",
+      "de": "MAI LINH HOTEL",
+      "fr": "MAI LINH HOTEL",
+      "ru": "MAI LINH HOTEL",
+      "es": "MAI LINH HOTEL"
+    }
+  },
+  "206648": {
+    "name": "SIRI HERITAGE BANGKOK HOTEL",
+    "raw": {
+      "it": "SIRI HERITAGE BANGKOK HOTEL",
+      "en": "SIRI HERITAGE BANGKOK HOTEL",
+      "de": "SIRI HERITAGE BANGKOK HOTEL",
+      "fr": "SIRI HERITAGE BANGKOK HOTEL",
+      "ru": "SIRI HERITAGE BANGKOK HOTEL",
+      "es": "SIRI HERITAGE BANGKOK HOTEL"
+    }
+  },
+  "206653": {
+    "name": "CASA RESIDENCE HOTEL BANGKOK",
+    "raw": {
+      "it": "CASA RESIDENCE HOTEL BANGKOK",
+      "en": "CASA RESIDENCE HOTEL BANGKOK",
+      "de": "CASA RESIDENCE HOTEL BANGKOK",
+      "fr": "CASA RESIDENCE HOTEL BANGKOK",
+      "ru": "CASA RESIDENCE HOTEL BANGKOK",
+      "es": "CASA RESIDENCE HOTEL BANGKOK"
+    }
+  },
+  "206647": {
+    "name": "BANGKOK RIVER LOKA",
+    "raw": {
+      "it": "BANGKOK RIVER LOKA",
+      "en": "BANGKOK RIVER LOKA",
+      "de": "BANGKOK RIVER LOKA",
+      "fr": "BANGKOK RIVER LOKA",
+      "ru": "BANGKOK RIVER LOKA",
+      "es": "BANGKOK RIVER LOKA"
+    }
+  },
+  "207042": {
+    "name": "KYRIAD HOTEL AIRPORT JAKARTA",
+    "raw": {
+      "it": "KYRIAD HOTEL AIRPORT JAKARTA",
+      "en": "KYRIAD HOTEL AIRPORT JAKARTA",
+      "de": "KYRIAD HOTEL AIRPORT JAKARTA",
+      "fr": "KYRIAD HOTEL AIRPORT JAKARTA",
+      "ru": "KYRIAD HOTEL AIRPORT JAKARTA",
+      "es": "KYRIAD HOTEL AIRPORT JAKARTA"
+    }
+  },
+  "207043": {
+    "name": "EXTENDED STAY AMERICA PHILADELPHIA MT LAUREL PACIL",
+    "raw": {
+      "it": "EXTENDED STAY AMERICA PHILADELPHIA MT LAUREL PACIL",
+      "en": "EXTENDED STAY AMERICA PHILADELPHIA MT LAUREL PACIL",
+      "de": "EXTENDED STAY AMERICA PHILADELPHIA MT LAUREL PACIL",
+      "fr": "EXTENDED STAY AMERICA PHILADELPHIA MT LAUREL PACIL",
+      "ru": "EXTENDED STAY AMERICA PHILADELPHIA MT LAUREL PACIL",
+      "es": "EXTENDED STAY AMERICA PHILADELPHIA MT LAUREL PACIL"
+    }
+  },
+  "207038": {
+    "name": "FAIRFIELD INN BY MARRIOTT LOUISVILLE NORTH",
+    "raw": {
+      "it": "FAIRFIELD INN BY MARRIOTT LOUISVILLE NORTH",
+      "en": "FAIRFIELD INN BY MARRIOTT LOUISVILLE NORTH",
+      "de": "FAIRFIELD INN BY MARRIOTT LOUISVILLE NORTH",
+      "fr": "FAIRFIELD INN BY MARRIOTT LOUISVILLE NORTH",
+      "ru": "FAIRFIELD INN BY MARRIOTT LOUISVILLE NORTH",
+      "es": "FAIRFIELD INN BY MARRIOTT LOUISVILLE NORTH"
+    }
+  },
+  "207046": {
+    "name": "ALLIANCE HOTEL AND SUITES",
+    "raw": {
+      "it": "ALLIANCE HOTEL AND SUITES",
+      "en": "ALLIANCE HOTEL AND SUITES",
+      "de": "ALLIANCE HOTEL AND SUITES",
+      "fr": "ALLIANCE HOTEL AND SUITES",
+      "ru": "ALLIANCE HOTEL AND SUITES",
+      "es": "ALLIANCE HOTEL AND SUITES"
+    }
+  },
+  "207567": {
+    "name": "PULI DIARY",
+    "raw": {
+      "it": "PULI DIARY",
+      "en": "PULI DIARY",
+      "de": "PULI DIARY",
+      "fr": "PULI DIARY",
+      "ru": "PULI DIARY",
+      "es": "PULI DIARY"
+    }
+  },
+  "223624": {
+    "name": null,
+    "error": "{\"error\":\"Error in response from POST http://gateway/statics-matchmaker/hotels/get/223624: {\\\"_index\\\":\\\"hotel-statics\\\",\\\"_id\\\":\\\"223624\\\",\\\"found\\\":false}\"}"
+  },
+  "228743": {
+    "name": "LA JAVA BLEUE HOTEL",
+    "raw": {
+      "it": "LA JAVA BLEUE HOTEL",
+      "en": "LA JAVA BLEUE HOTEL",
+      "de": "LA JAVA BLEUE HOTEL",
+      "fr": "LA JAVA BLEUE HOTEL",
+      "ru": "LA JAVA BLEUE HOTEL",
+      "es": "LA JAVA BLEUE HOTEL"
+    }
+  },
+  "302287": {
+    "name": "Khách Sạn Little Hanoi Dx",
+    "raw": {
+      "it": "Khách Sạn Little Hanoi Dx",
+      "en": "Khách Sạn Little Hanoi Dx",
+      "de": "Khách Sạn Little Hanoi Dx",
+      "fr": "Khách Sạn Little Hanoi Dx",
+      "ru": "Khách Sạn Little Hanoi Dx",
+      "es": "Khách Sạn Little Hanoi Dx"
+    }
+  },
+  "235394": {
+    "name": "THE SHAMBHALA KHAOLAK RESORT",
+    "raw": {
+      "it": "THE SHAMBHALA KHAOLAK RESORT",
+      "en": "THE SHAMBHALA KHAOLAK RESORT",
+      "de": "THE SHAMBHALA KHAOLAK RESORT",
+      "fr": "THE SHAMBHALA KHAOLAK RESORT",
+      "ru": "THE SHAMBHALA KHAOLAK RESORT",
+      "es": "THE SHAMBHALA KHAOLAK RESORT"
+    }
+  },
+  "214491": {
+    "name": "Park Inn by Radisson Toronto-Markham",
+    "raw": {
+      "it": "Park Inn by Radisson Toronto-Markham",
+      "en": "Park Inn by Radisson Toronto-Markham",
+      "de": "Park Inn by Radisson Toronto-Markham",
+      "fr": "Park Inn by Radisson Toronto-Markham",
+      "ru": "Park Inn by Radisson Toronto-Markham",
+      "es": "Park Inn by Radisson Toronto-Markham"
+    }
+  },
+  "213805": {
+    "name": "July",
+    "raw": {
+      "it": "July",
+      "en": "July",
+      "de": "July",
+      "fr": "July",
+      "ru": "July",
+      "es": "July"
+    }
+  },
+  "214482": {
+    "name": "SUZUKI BEACH HOTEL INC",
+    "raw": {
+      "it": "SUZUKI BEACH HOTEL INC",
+      "en": "SUZUKI BEACH HOTEL INC",
+      "de": "SUZUKI BEACH HOTEL INC",
+      "fr": "SUZUKI BEACH HOTEL INC",
+      "ru": "SUZUKI BEACH HOTEL INC",
+      "es": "SUZUKI BEACH HOTEL INC"
+    }
+  },
+  "223721": {
+    "name": "O2 HOTEL M12",
+    "raw": {
+      "it": "O2 HOTEL M12",
+      "en": "O2 HOTEL M12",
+      "de": "O2 HOTEL M12",
+      "fr": "O2 HOTEL M12",
+      "ru": "O2 HOTEL M12",
+      "es": "O2 HOTEL M12"
+    }
+  },
+  "232087": {
+    "name": "La Quinta by Wyndham Pampa",
+    "raw": {
+      "it": "La Quinta by Wyndham Pampa",
+      "en": "La Quinta by Wyndham Pampa",
+      "de": "La Quinta by Wyndham Pampa",
+      "fr": "La Quinta by Wyndham Pampa",
+      "ru": "La Quinta by Wyndham Pampa",
+      "es": "La Quinta by Wyndham Pampa"
+    }
+  },
+  "252877": {
+    "name": "La Catalina ",
+    "raw": {
+      "it": "La Catalina ",
+      "en": "La Catalina ",
+      "de": "La Catalina ",
+      "fr": "La Catalina ",
+      "ru": "La Catalina ",
+      "es": "La Catalina "
+    }
+  },
+  "336959": {
+    "name": "GreenTree Inn Chongqing Yuzhong Jiefangbei Xinming Street Express Hote",
+    "raw": {
+      "it": "GreenTree Inn Chongqing Yuzhong Jiefangbei Xinming Street Express Hote",
+      "en": "GreenTree Inn Chongqing Yuzhong Jiefangbei Xinming Street Express Hote",
+      "de": "GreenTree Inn Chongqing Yuzhong Jiefangbei Xinming Street Express Hote",
+      "fr": "GreenTree Inn Chongqing Yuzhong Jiefangbei Xinming Street Express Hote",
+      "ru": "GreenTree Inn Chongqing Yuzhong Jiefangbei Xinming Street Express Hote",
+      "es": "GreenTree Inn Chongqing Yuzhong Jiefangbei Xinming Street Express Hote"
+    }
+  },
+  "298589": {
+    "name": "Pliades Hotel",
+    "raw": {
+      "it": "Pliades Hotel",
+      "en": "Pliades Hotel",
+      "de": "Pliades Hotel",
+      "fr": "Pliades Hotel",
+      "ru": "Pliades Hotel",
+      "es": "Pliades Hotel"
+    }
+  },
+  "284844": {
+    "name": "Hotel Sahana Castle",
+    "raw": {
+      "it": "Hotel Sahana Castle",
+      "en": "Hotel Sahana Castle",
+      "de": "Hotel Sahana Castle",
+      "fr": "Hotel Sahana Castle",
+      "ru": "Hotel Sahana Castle",
+      "es": "Hotel Sahana Castle"
+    }
+  },
+  "284810": {
+    "name": "A la Couronne d'Or",
+    "raw": {
+      "it": "A la Couronne d'Or",
+      "en": "A la Couronne d'Or",
+      "de": "A la Couronne d'Or",
+      "fr": "A la Couronne d'Or",
+      "ru": "A la Couronne d'Or",
+      "es": "A la Couronne d'Or"
+    }
+  },
+  "291891": {
+    "name": "Polpenazze Halldis Apartments",
+    "raw": {
+      "it": "Polpenazze Halldis Apartments",
+      "en": "Polpenazze Halldis Apartments",
+      "de": "Polpenazze Halldis Apartments",
+      "fr": "Polpenazze Halldis Apartments",
+      "ru": "Polpenazze Halldis Apartments",
+      "es": "Polpenazze Halldis Apartments"
+    }
+  },
+  "284876": {
+    "name": "Cap Océan",
+    "raw": {
+      "it": "Cap Océan",
+      "en": "Cap Océan",
+      "de": "Cap Océan",
+      "fr": "Cap Océan",
+      "ru": "Cap Océan",
+      "es": "Cap Océan"
+    }
+  },
+  "284891": {
+    "name": "Hotel Kamila",
+    "raw": {
+      "it": "Hotel Kamila",
+      "en": "Hotel Kamila",
+      "de": "Hotel Kamila",
+      "fr": "Hotel Kamila",
+      "ru": "Hotel Kamila",
+      "es": "Hotel Kamila"
+    }
+  },
+  "284895": {
+    "name": "Clarion Inn",
+    "raw": {
+      "it": "Clarion Inn",
+      "en": "Clarion Inn",
+      "de": "Clarion Inn",
+      "fr": "Clarion Inn",
+      "ru": "Clarion Inn",
+      "es": "Clarion Inn"
+    }
+  },
+  "106638": {
+    "name": "Grainger Hotel",
+    "raw": {
+      "it": "Grainger Hotel",
+      "en": "Grainger Hotel",
+      "de": "Grainger Hotel",
+      "fr": "Grainger Hotel",
+      "ru": "Grainger Hotel",
+      "es": "Grainger Hotel"
+    }
+  },
+  "295085": {
+    "name": "Hôtel restaurant de la Barque",
+    "raw": {
+      "it": "Hôtel restaurant de la Barque",
+      "en": "Hôtel restaurant de la Barque",
+      "de": "Hôtel restaurant de la Barque",
+      "fr": "Hôtel restaurant de la Barque",
+      "ru": "Hôtel restaurant de la Barque",
+      "es": "Hôtel restaurant de la Barque"
+    }
+  },
+  "299697": {
+    "name": "Hangzhou Xiaoshan 51 Fashion Hotel",
+    "raw": {
+      "it": "Hangzhou Xiaoshan 51 Fashion Hotel",
+      "en": "Hangzhou Xiaoshan 51 Fashion Hotel",
+      "de": "Hangzhou Xiaoshan 51 Fashion Hotel",
+      "fr": "Hangzhou Xiaoshan 51 Fashion Hotel",
+      "ru": "Hangzhou Xiaoshan 51 Fashion Hotel",
+      "es": "Hangzhou Xiaoshan 51 Fashion Hotel"
+    }
+  },
+  "296825": {
+    "name": "OS Lounge of Oriental Sails, Calypso Cruise, Starlight Cruise",
+    "raw": {
+      "it": "OS Lounge of Oriental Sails, Calypso Cruise, Starlight Cruise",
+      "en": "OS Lounge of Oriental Sails, Calypso Cruise, Starlight Cruise",
+      "de": "OS Lounge of Oriental Sails, Calypso Cruise, Starlight Cruise",
+      "fr": "OS Lounge of Oriental Sails, Calypso Cruise, Starlight Cruise",
+      "ru": "OS Lounge of Oriental Sails, Calypso Cruise, Starlight Cruise",
+      "es": "OS Lounge of Oriental Sails, Calypso Cruise, Starlight Cruise"
+    }
+  },
+  "296815": {
+    "name": "Coral Chaungtha Beach Hotel",
+    "raw": {
+      "it": "Coral Chaungtha Beach Hotel",
+      "en": "Coral Chaungtha Beach Hotel",
+      "de": "Coral Chaungtha Beach Hotel",
+      "fr": "Coral Chaungtha Beach Hotel",
+      "ru": "Coral Chaungtha Beach Hotel",
+      "es": "Coral Chaungtha Beach Hotel"
+    }
+  },
+  "298143": {
+    "name": "Yoyamaro Iwasaki",
+    "raw": {
+      "it": "Yoyamaro Iwasaki",
+      "en": "Yoyamaro Iwasaki",
+      "de": "Yoyamaro Iwasaki",
+      "fr": "Yoyamaro Iwasaki",
+      "ru": "Yoyamaro Iwasaki",
+      "es": "Yoyamaro Iwasaki"
+    }
+  },
+  "340620": {
+    "name": "OYO 647 Hotel Chetram",
+    "raw": {
+      "it": "OYO 647 Hotel Chetram",
+      "en": "OYO 647 Hotel Chetram",
+      "de": "OYO 647 Hotel Chetram",
+      "fr": "OYO 647 Hotel Chetram",
+      "ru": "OYO 647 Hotel Chetram",
+      "es": "OYO 647 Hotel Chetram"
+    }
+  },
+  "369146": {
+    "name": "Wenxian Longjiang Hotel",
+    "raw": {
+      "it": "Wenxian Longjiang Hotel",
+      "en": "Wenxian Longjiang Hotel",
+      "de": "Wenxian Longjiang Hotel",
+      "fr": "Wenxian Longjiang Hotel",
+      "ru": "Wenxian Longjiang Hotel",
+      "es": "Wenxian Longjiang Hotel"
+    }
+  },
+  "374491": {
+    "name": "FortEstate Dmitriya Ulyanova Lux",
+    "raw": {
+      "it": "FortEstate Dmitriya Ulyanova Lux",
+      "en": "FortEstate Dmitriya Ulyanova Lux",
+      "de": "FortEstate Dmitriya Ulyanova Lux",
+      "fr": "FortEstate Dmitriya Ulyanova Lux",
+      "ru": "FortEstate Dmitriya Ulyanova Lux",
+      "es": "FortEstate Dmitriya Ulyanova Lux"
+    }
+  }
+}

@@ -1,0 +1,1211 @@
+Travio API Docs
+Revision 2.6.0
+
+Overview
+Introduction
+In this docs you will find the usage and possible operations you
+can do through the API interface of Travio – Tour Operator
+Software.
+API’s main purpose is to give an easy way of accessing the
+internal client database from the outside, allowing - for instance
+- to retrieve hotels static data, looking for availability or make
+a reservation.
+This documentation will be replaced in the future with an online
+version with live updates, circumstance that will be notified to
+all customers.
+
+Basics
+Each request must be performed to the following url:
+https://api.travio.it/<ENDPOINT>
+Authorization is handled via bearer token, which can be requested
+to the following endpoint:
+POST /auth
+The payload of which must be shaped as follows:
+{
+"id": 1,
+"key": "test"
+}
+You will receive an authorization token, that you must then pass
+to all other requests via HTTP header “Authorization” in the
+following form:
+Authorization: Bearer <TOKEN>
+The eventual payload of each request is passed in the raw http
+request body, in JSON format.
+Likewise, each response will also be encoded in JSON format.
+If you want to allow users to log into your website, you can use
+the following request:
+POST /login
+{"username": "", "password":""}
+This will return an updated token with the user info stored in it,
+and you can use that as a replacement in the header of your
+
+requests.
+If you want to check whether a token is owned by a logged user or
+not (and whether it is indeed valid), you can query:
+GET /profile
+It will returns the user data, or “null” if not logged.
+
+Languages management
+Some endpoints support responses in a multilanguage fashion: for
+example, service names in the search results. You can specify what
+language you want to use for a request, passing the HTTP header
+“X-Lang” set to one of the supported languages (this means that,
+obviously, data in that language has to be entered into the
+system).
+At the time of writing, the supported languages are:
+it, en, de, ru, es, fr
+
+Data formats
+Fields of “date” type are in “yyyy-mmd-dd” format.
+Fields of “datetime” type are in “ yyyy-mmd-dd hh:mm:ss” format.
+
+REST endpoints
+Each item in Travio is retrieavable and can be updated via REST
+endpoints.
+You can see the complete list of available repositories along with
+their fields in a Swagger format here:
+https://swagger.travio.it/
+The booking flow and other requests are being implemented on the
+swagger as well, but they are still in progress.
+
+A note on links
+Some fields are classified as “link” type in the Specs above.
+Those are by all means normal integer (therefore, you will receive
+an int and will need to send an int when writing), but they are a
+reference to the id of another repository.
+For instance, the “client” field in “reservations” is the id of
+the client (“master-data” repository) whose that reservation
+belongs to.
+The special behaviour of a “link” field, though, is that you can
+“unfold” them using the “unfold” property, which is a list of the
+field you want to expand, and you will receive the whole object
+instead of the simple id, without the need for performing a
+separate “get” request.
+
+Sublists management
+Many types have their own sub-lists of items, e.g. “pax” in
+“reservations” or “images” in “services” etc
+When reading, those will be returned only in the “get” request
+(i.e. the single item) and not in the general list, and will have
+the form of an array of objects, each object having its own id.
+When writing (in create or update), if you pass the key (keep in
+mind that you can always choose to not pass the key in the update,
+and that list won’t be touched) you have two options:
+• You can set an array of objects, the same way your received
+it. In this case, it will be treated as follows:
+◦ Objects with an “id” will be treated as updates of that
+specific sub-item
+◦ Objects without an id will be added as new items of the
+list
+◦ Important: EVERY item not explicitly set in the list, will
+be deleted. That means that if you have a reservation with,
+say, 3 pax, and you want to change the name to one of them,
+you can do it but you still have to pass all 3 objects even
+if with just the id (you can omit all the other fields that
+you do not intend to change).
+
+Example:
+{
+"pax": [
+{
+"id": 1,
+"name": "John"
+},
+{
+"id": 2
+},
+{
+"id": 3
+}
+]
+}
+•
+
+Alternatively, you can set an object with three optional
+properties: create, update, delete.
+◦ “create” is a list of new objects you want to add to the
+list
+◦ “update” is a list of items you want to update (each with
+an id)
+◦ “delete” is a list of single integers, representing the
+items you want to delete
+Example:
+{
+"pax": {
+"create": [],
+"update": [
+{"id": 1, "name": "John"}
+],
+"delete": [2]
+}
+}
+
+List
+Endpoint: GET /rest/{type}
+Retrieves the paginated list of items. For big item types (like
+“services”) only a portion of the information will be showed, you
+need to call the “get” endpoint to retrieve all the fields.
+Query string parameters
+Parameter
+
+Req
+
+Type
+
+Description
+
+lang
+
+No
+
+String
+
+For multi language fields, you
+can ask for a specific
+language, or “all” for all of
+them (default “all”)
+
+filters
+
+No
+
+String (JSON
+encoded
+array)
+
+List of filters you want to
+apply; each item should be an
+object with the following
+properties:
+- field: name of the field you
+want to filter by
+- operator: optional,
+mathematical operator to apply
+(can be >,>=,<,<=,=,!=) defaults to “=”
+- value: the value to filter to
+
+sort_by
+
+No
+
+String
+List of the fields you want to
+(JSON encoded order by (default ["id"])
+array)
+In case you want to sort a
+field in descending order,
+replace the string with an
+array of two elements like
+this: [["id","DESC"]]
+
+page
+
+No
+
+Int
+
+Page to retrieve (default 1)
+
+per_page
+
+No
+
+Int
+
+How many items per page
+(default 20)
+
+unfold
+
+No
+
+String
+
+Comma-separated list of fields
+
+Get
+Endpoint: GET /rest/{type}/{id}
+Retrieves full data of a specific item
+Query string parameters
+Parameter
+lang
+
+Req
+No
+
+Type
+String
+
+Description
+For multi language fields, you
+can ask for a specific
+
+language, or “all” for all of
+them (default “all”)
+unfold
+
+No
+
+String
+
+Comma-separated list of fields
+
+Create
+Endpoint: POST /rest/{type}
+Creates a new item
+Input parameters
+Parameter
+data
+
+Req
+No
+
+Type
+Object
+
+Description
+The item to be created
+
+Update
+Endpoint: PUT /rest/{type}/{id}
+Updates the data of an item
+Input parameters
+Parameter
+data
+
+Req
+No
+
+Type
+Object
+
+Description
+The data to update
+
+Delete
+Endpoint: DELETE /rest/{type}/{id}
+Deletes the specified item, if allowed
+
+Booking flow
+Introduction
+The booking flow is comprised of an initial “search” request, and
+a number of subsequent “steps”, all performed through the “picks”
+request. The number of the steps can vary, depending on the
+service that you pick and additional subservices that may or may
+not be present.
+You begin performing a “search” request, and you will see the
+first page of the results, and a “search_id” will be returned.
+This search_id must be passed to all subsequent requests of that
+flow.
+You can navigate through results pages via the “results” request.
+You then pick a result from the list, thus performing the first
+“picks” step.
+The “picks” response shall have a “final” boolean flag that tells
+you whether that is the final step or there is one more.
+If there is more to be picked, you proceed with another “picks”
+request and the loop goes on.
+When you arrive at the final step, you can add the booking to the
+cart.
+
+Cart and paxes management
+Each request is associated with a user cart (as if in an common ecommerce) as soon as it’s made. A cart can be seen as a
+“reservation draft”: it is an almost-ready reservation, with
+services, people, dates, it is just not “placed” yet.
+If, in the “search” request, you specify the id of the cart you
+want to add your search to, it will be added to that cart;
+otherwise, a new different cart (=a new reservation) will be
+created. A search cannot be moved to a different cart after it has
+been made.
+The id of the cart which the current search belongs to is returned
+in the “cart” property of every request of the booking flow.
+When a search is finalized, you can confirm the intention of
+adding it to the cart via the “add to cart” request.
+You can then proceed to search for other items, if you wish,
+specifying the cart_id in the search request.
+When you are satisfied with the items in the cart, you can place
+the reservation via the “place” request.
+Whenever you perform a new search, you can choose whether to use
+new paxes (thus, a new “person” will be created and added to the
+reservation) or (if you specify a cart_id) you can associate the
+search to already-existing paxes.
+For example, if you have a cart with an hotel for 2 adults, and
+
+now you want to search a flight for the same 2 persons, you will
+have to tell Travio that you wish to search for a service for
+those 2 very specific paxes.
+You can do this via the “occupancy” property in the search
+request. It is always an array (which is the array of rooms you
+want to request), but the type of each item can vary:
+• If you want to create new paxes, it is an object with the
+“adults” and “children” properties, with the latter being an
+array of children ages.
+E.g.: {“adults”: 2, “children”: [10]}
+• If you want to associate the service to specific alreadyexisting paxes, it is an array of pax-ids.
+E.g.: [123, 534]
+
+Iterative picks: the booking flow
+The booking process begins with a “search”, which yields a list of
+results (hotels, flights, depending upon what has been searched),
+but the most important endpoint afterwards is “picks”, which
+regulates the selection process up to the cart.
+The process consists of a series of “steps”, each one with one or
+more lists from which the user has to choose (pick) something.
+The first step (with index 0) is always represented by the search
+results.
+From that point on, each step can be seen as a “question” asked by
+Travio to the user, for example:
+- Step 0: here is a list of hotels, pick one
+- Step 1: here is a list of rooms, pick one
+- Step 2: here is a list of extras, pick anyone of them you like
+You do not know in advance how many steps there will be, because
+that depends upon the product type and the supplier you are
+talking to (Travio supports several API suppliers behind the
+scenes). You will know you arrived to the final step when its
+response has the property “final: true”.
+A single step may have more than one list (example: step #1 may
+have two independent lists of rooms, if the users asked for 2
+rooms in the search), and you have to pick from each one of them.
+Said lists are represented by the array “groups”.
+The recommended flow is the following:
+When you receive a response from “search” or “picks”, for each
+group:
+• Show the user the list of its items
+• If the group is of type=confirm, its sole purpose is showing
+that list to the user, and there is nothing to be selected
+• If its type is “pick”, the user has to pick something;
+◦ In this case, look at “pick_type”, if it is..:
+▪ one: the user MUST pick one item from the list
+▪ any: the user MAY pick one or more items, or none
+▪ max_one: the user MAY pick one item, but no more
+▪ min_one: the user MUST pick at least one item
+• When the user selects its preferences, you build a “pick”
+request that tells Travio what the user chose for each one of
+the groups.
+For each group:
+◦ If it’s of type=confirm, you just set confirm: true to tell
+Travio that the user acknowledged it
+◦ If it is of type=pick, you set the array “picks” with the
+chosen preferences
+• In the received response, if it is final=true, you can
+proceed to cart, otherwise repeat the procedure from the
+beginning for the new step
+
+search
+Endpoint: POST /booking/search
+The starting point for the booking flow.
+One of geo or ids is mandatory.
+Input parameters
+Parameter
+
+Req
+
+Type
+
+Description
+
+cart
+
+No
+
+String
+
+Identifier of the cart you want to
+add this search to; If not
+provided, a new cart will be
+created
+
+from
+
+Yes
+
+Date
+
+Checkin date
+
+to
+
+Yes
+
+Date
+
+Checkout date
+
+type
+
+Yes
+
+String
+
+Service type (refer to the
+appendix for a full list)
+
+ids
+
+No
+
+String[]
+
+Array of service ids that you want
+to search for
+
+codes
+
+No
+
+String[]
+
+Array of service codes you want to
+search for
+
+geo
+
+No
+
+Int[]
+
+Destination ids that you want to
+search for
+
+client_country
+
+No
+
+String
+
+Client country, 2 digits iso code
+
+occupancy
+
+Yes
+
+Array
+
+Rooms list.
+See the paragraph titled “Cart and
+paxes management” for a more indepth description of how this
+works.
+
+per_page
+
+No
+
+Int
+
+Initial number of items per page
+(can be changed in subsequent
+“results” request)
+
+return_filters
+
+No
+
+String[]
+
+Returns a list of values present
+in the results that you can use to
+populate filters for the users.
+See “results” request for a list
+of available filters.
+
+sort_by
+
+No
+
+Object[]
+
+Sort the results with this order.
+List of objects with two
+properties each one:
+- key: field to sort by
+- dir: asc or desc, default is asc
+
+Examples
+•
+
+Search for 2 adults in geo node 13, from 13/07/2016 to
+16/07/2016
+{
+"type": "hotels",
+"from": "2016-07-13",
+"to": "2016-07-16",
+"geo": [13],
+"occupancy": [
+{"adults": 2}
+]
+}
+
+•
+
+Search in 3 specific hotels for 2 rooms, one with 2 adults
+and one with an adult and a 5-years old child, from
+01/07/2016 to 08/07/2016
+{
+"type": "hotels",
+"from": "2016-07-01",
+"to": "2016-07-08",
+"ids": ["23", "1", "22"],
+"occupancy": [
+{"adults": 2},
+{"adults": 1,"children": [5]}
+]
+}
+
+Response
+Please refer to “picks” response explanation
+
+results
+Endpoint: POST /booking/results
+Read a set of results from a specific step without re-performing
+the search.
+It can be used to request more pages from a search results set,
+sorting them differently, or filtering.
+Available filters are:
+name, price, classification, typology, availability, amenities,
+tags, geo
+Input parameters
+Parameter
+
+Req
+
+Type
+
+Description
+
+search_id
+
+Yes
+
+String
+
+The search_id returned in the
+search request
+
+step
+
+Yes
+
+Int
+
+Step number we are exploring. It
+is returned in the “search” or
+“picks” response (in case it is
+the former, it is always “0”)
+
+per_page
+
+No
+
+Int
+
+How many items have to be split
+into one page
+
+page
+
+Yes
+
+Int
+
+Page to retrieve
+
+filters
+
+No
+
+Object[]
+
+Filter the results. List of
+objects with two parameters each
+one:
+- filter: name of the filter you
+want to use
+- value: value to filter to (can
+be a string, a number, an array,
+that depends upon the filter type)
+
+sort_by
+
+No
+
+Object[]
+
+Sort the results with this order.
+List of objects with two
+properties each one:
+- key: field to sort by
+- dir: asc or desc, default is asc
+
+Response
+Please refer to “picks” response explanation
+
+picks
+Endpoint: POST /booking/picks
+With “search”, “results” or “picks” request, you will be presented
+with a response involving one or more groups, and with each group
+a list of items to confirm or to pick from.
+This is the request you have to use to pick desired items from
+each list.
+Input parameters
+Parameter
+
+Req
+
+Type
+
+Description
+
+search_id
+
+Yes
+
+String
+
+The search_id returned in the
+search request
+
+step
+
+Yes
+
+Int
+
+Step number of the items we are
+going to pick, from the previous
+response
+
+per_page
+
+No
+
+Int
+
+How many items have to be split
+into one page in the next response
+
+picks
+
+Yes
+
+Array
+
+Array of objects. Each object
+represents a group from the
+previous request.
+
+picks.*.group
+
+Yes
+
+Int
+
+Index of the group we’re refering
+to (from the previous response)
+
+picks.*.picks
+
+No
+
+Array
+
+Required if the group type is
+“pick”. (see response explanation)
+Array of objects.
+Each object has a “idx” property
+with the index of our desired
+item.
+If the item you’re picking had
+multiple dates, a “date_idx” is
+required, with the index of the
+specific date you want to pick.
+
+picks.*.confirm
+
+No
+
+Boolean
+
+Required if the group type is
+“confirm”. (see response
+explanation)
+If present, must be true.
+
+filters
+
+No
+
+Object[]
+
+See “filters” in “results” request
+
+sort_by
+
+No
+
+Object[]
+
+See “sort_by” in “results” request
+
+Response
+The main part of the response is the “groups” array. Each group is
+basically a list of items that you have to confirm or pick from,
+with the subsequent “picks” request.
+Once you perform the action the group requires you to do, it is
+satisfied.
+
+The main property “pick_type” tells you if all the groups must be
+satisfied or not.
+It can either be:
+• all = all groups must be satisfied
+• one = only one group must be satisfied
+• min_one = at least one group must be satisfied
+• max_one = at max one group must be satisfied
+• any = at user discretion
+Each group has the following properties:
+•
+•
+
+•
+
+“idx” – The group index (to be used in the next request)
+“type” – Group type, can be one of the following:
+◦ pick = The presented list of items is meant to be a list to
+pick something from
+◦ confirm = The list is presented with informational
+purposes, and the user has only to see and confirm it (e.g.
+a list of mandatory suplements)
+“pick_type” – Only present in “pick” groups, it communicates
+how many items are to be picked:
+◦ one = One and only one item has to be picked (e.g. a room)
+◦ min_one = At least one item has to be picked
+◦ max_one = At max one item has to be picked
+◦ any = You can pick the number of items you prefer, even
+zero
+
+add to cart
+Endpoint: PUT /booking/cart
+When a “picks” response has final=true, you can then add the items
+to the cart.
+You only need to pass the search_id (as the system already knows
+the cart it belongs to).
+The full cart will be returned in response.
+Input parameters
+Parameter
+search_id
+
+Req
+
+Type
+
+Yes
+
+String
+
+Description
+The id of the search you want to
+add
+
+get cart
+Endpoint: GET /booking/cart/{cart_id}
+Retrieves a cart given its id.
+Route parameters
+Parameter
+cart_id
+
+Req
+
+Type
+
+Yes
+
+String
+
+Description
+The id of the cart you want to get
+
+remove from cart
+Endpoint: DELETE /booking/cart
+Removes a search from the cart. You only need to pass the
+search_id (as the system already knows the cart it belongs to).
+The full cart will be returned in response.
+Input parameters
+Parameter
+search_id
+
+Req
+
+Type
+
+Yes
+
+String
+
+Description
+The id of the search you want to
+add
+
+place
+Endpoint: POST /booking/place/{cart_id}
+Place a reservation, given a cart id. This performs the final step
+required to book the selected items.
+Route parameters
+Parameter
+cart_id
+
+Req
+
+Type
+
+Yes
+
+String
+
+Req
+
+Type
+
+Description
+The id of the cart you want to
+place
+
+Input parameters
+Parameter
+pax
+
+Yes
+
+Array
+
+Description
+List of all passengers of the
+reservation, the format is the
+following:
+"pax": [
+{
+"id": 1,
+"name": "Janet",
+"surname": "Clinton"
+},
+{
+"id": 2,
+"name": "Markus",
+"surname": "Clinton"
+}
+]
+You must pass the id (retrieved
+from the cart) for each passenger.
+Please refer to the “pax” schema
+in the swagger for a full list of
+available properties.
+
+notes
+
+No
+
+Array
+
+List of notes you may want to add
+to the reservation. Format:
+"notes": [
+{
+"type": "internal|user",
+"text": "Test note"
+}
+]
+
+status
+
+No
+
+Int
+
+Reservation status (see appendix
+for a list of possible statuses) –
+if not specified, it will be
+
+either “working” (2) or
+“confirmed” (3) depending on
+whether there are on request item
+in the cart or not
+due
+
+No
+
+Datetime
+
+In case the reservation is a quote
+(status 0) or an option (status
+1), it may have a due date, after
+which it will be automatically
+canceled by the system
+
+description
+
+No
+
+String
+
+Reservation custom description
+
+reference
+
+No
+
+String
+
+Client reference
+
+payment_link
+
+No
+
+Boolean
+
+Set to true if you want to receive
+the payment_link in the response
+
+Payments
+When dealing with payments, you have two options:
+- You can take advantage of the integrated payment systems already
+present in Travio (e.g. Paypal, Stripe, etc), if those have been
+properly configured.
+- You can deal with the payment yourself with the system of your
+choice, and then communicate the incoming payment to Travio via
+API.
+In the former case, you have to set “payment_link” to true in the
+place request. The response will have a “payment_link” property
+which is the link you have to redirect your user to, and they will
+follow the on-screen procedure from that point on. The payment
+confirmation will be automatically send to Travio by the chosen
+payment gateway.
+In the latter case, you can use the “pay” API request to manually
+insert a payment in the reservation (see next page), when you
+receive the payment confirmation in your system.
+
+pay
+Endpoint: POST /accounting/pay/{item}/{id}
+Creates a payment row in the system, telling Travio that something
+has been paid (usually a reservation).
+If a reservation is in “option” state, it will be confirmed.
+Route parameters
+Parameter
+
+Req
+
+Type
+
+Description
+
+item
+
+Yes
+
+String
+
+What has been paid. At the moment,
+only “reservation” is supported
+
+id
+
+Yes
+
+Int
+
+The id of what has been paid
+
+Input parameters
+Parameter
+
+Req
+
+Type
+
+Description
+
+amount
+
+Yes
+
+Float
+
+How much has been paid
+
+via
+
+No
+
+Int
+
+The used payment method
+
+send_journal
+
+No
+
+Boolean
+
+Whether to save the payment in the
+accounting journal as well
+(defaults to true)
+
+payment_referen
+ce
+
+No
+
+String
+
+An optional string with a unique
+reference; allows you to retry a
+failed request without the risk of
+double insertions
+
+print
+Endpoint: POST /tools/print/{item}/{id}
+Creates a PDF based on one of the templates created in the system.
+“item” parameter is usually a reservation.
+Route parameters
+Parameter
+
+Req
+
+Type
+
+Description
+
+item
+
+Yes
+
+String
+
+What you want to print. Possible
+values are: reservation, invoice,
+transaction
+
+id
+
+Yes
+
+Int
+
+The id of what you want to print
+
+Input parameters
+Parameter
+
+Req
+
+Type
+
+Description
+
+template
+
+Yes
+
+Int
+
+Id of the template you want to use
+
+archive
+
+No
+
+Boolean
+
+If true, the created pdf will be
+saved into the reservation;
+default false
+
+send
+
+No
+
+Boolean
+
+If true, an email will be send to
+the client with the pdf; default
+false
+
+Appendix
+Item types
+You use the plural form when performing a search, and the
+singular form is returned in the “item_type” property instead.
+Singular
+
+Plural
+
+flight
+
+flights
+
+hotel
+
+hotels
+
+transfer
+
+transfers
+
+tour
+
+tours
+
+rental
+
+rentals
+
+cruise
+
+cruises
+
+ferry
+
+ferries
+
+insurance
+
+insurances
+
+activity
+
+activities
+
+other
+
+others
+
+package
+
+packages
+
+Reservation statuses
+Id
+
+Description
+
+0
+
+Quote
+
+1
+
+Option
+
+2
+
+Working / on request
+
+3
+
+Confiremd
+
+4
+
+Deleted
+
+5
+
+Canceled
+
+

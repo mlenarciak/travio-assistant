@@ -1,0 +1,6 @@
+flowchart TD
+  A[Client] -->|POST auth| B[Auth Service]
+  B -->|Validate credentials| C{Valid?}
+  C -- Yes --> D[Issue JWT]
+  D --> E[Response token]
+  C -- No --> F[401 Unauthorized]

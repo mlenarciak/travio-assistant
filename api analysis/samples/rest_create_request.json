@@ -1,0 +1,14 @@
+{
+  "data": {
+    "profiles": ["customer"],
+    "name": "Mario",
+    "surname": "Rossi",
+    "language": "it",
+    "email": "mario.rossi@example.com"
+  },
+  "options": {
+    "check_vat": false,
+    "allow_id": false
+  }
+}
+

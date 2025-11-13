@@ -1,0 +1,23 @@
+classDiagram
+  class BookingResponse {
+    string cart
+    string search_id
+    int step
+    bool final
+    string pick_type
+    bool allow_partial
+    bool partial
+    Group[] groups
+    string[] warnings
+  }
+  class Group {
+    int idx
+    int service
+    int accommodation
+    int label
+    %% enums modeled as strings for diagram purposes
+    string type  "pick|confirm|input"
+    string pick_type "all|one|max_one|min_one|any"
+    any[] items
+  }
+
