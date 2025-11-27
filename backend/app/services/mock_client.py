@@ -35,6 +35,7 @@ class MockTravioClient:
                 "profile_type": "private",
                 "language": "en",
                 "vat_country": "IT",
+                "categories": [1],
                 "contacts": [
                     {
                         "name": "Primary",
@@ -52,6 +53,7 @@ class MockTravioClient:
                 "profile_type": "private",
                 "language": "en",
                 "vat_country": "US",
+                "categories": [2],
                 "contacts": [
                     {
                         "name": "Primary",
@@ -66,6 +68,11 @@ class MockTravioClient:
         self._search_results: Dict[str, Dict[str, Any]] = {}
         self._carts: Dict[str, Dict[str, Any]] = {}
         self._reservations: Dict[str, Dict[str, Any]] = {}
+        self._master_data_categories: List[Dict[str, Any]] = [
+            {"id": 1, "code": "CLI", "name": "Clienti privati"},
+            {"id": 2, "code": "CORP", "name": "Clienti corporate"},
+            {"id": 3, "code": "SUP", "name": "Fornitori"},
+        ]
 
     async def close(self) -> None:
         """Mock close to align with TravioClient interface."""
@@ -207,6 +214,14 @@ class MockTravioClient:
         payload.setdefault("profiles", ["customer"])
         payload.setdefault("profile_type", "private")
         payload.setdefault("language", self._settings.travio_language)
+        if "categories" in payload:
+            categories = [
+                cat for cat in payload.get("categories", []) if isinstance(cat, int)
+            ]
+            if categories:
+                payload["categories"] = categories
+            else:
+                payload.pop("categories", None)
         self._clients.append(payload)
         logger.debug("Mock client created: {client}", client=payload)
         return payload
@@ -231,9 +246,35 @@ class MockTravioClient:
                     updated["email"] = email
                 if phone is not None:
                     updated["phone"] = phone
+                if "categories" in payload:
+                    categories = [
+                        cat for cat in payload.get("categories", []) if isinstance(cat, int)
+                    ]
+                    if categories:
+                        updated["categories"] = categories
+                    else:
+                        updated.pop("categories", None)
                 self._clients[idx] = updated
                 return updated
         raise ValueError("Client not found")
+
+    async def list_master_data_categories(
+        self, *, page: int = 1, per_page: int = 200
+    ) -> Dict[str, Any]:
+        """Return mock master-data categories."""
+        total = len(self._master_data_categories)
+        start = (page - 1) * per_page
+        end = start + per_page if per_page else None
+        items = self._master_data_categories[start:end]
+        return {
+            "items": items,
+            "list": items,
+            "total": total,
+            "tot": total,
+            "page": page,
+            "per_page": per_page,
+            "pages": ceil(total / per_page) if per_page else 1,
+        }
 
     # --- Booking endpoints ---
 

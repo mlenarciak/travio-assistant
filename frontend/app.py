@@ -83,6 +83,63 @@ def get_crm_clients() -> Dict[int, Dict[str, Any]]:
     return clients
 
 
+CATEGORY_HINTS: Dict[str, List[str]] = {
+    "private": ["PRI", "PRIV", "PRIVATO", "PRIVATE", "CLI"],
+    "company": ["AZI", "AZIENDA", "CORP", "COMPANY", "BUS"],
+    "professional": ["PRO", "PROF", "CONS", "FREELANCE"],
+}
+
+
+def get_crm_categories(force_refresh: bool = False) -> List[Dict[str, Any]]:
+    """Fetch and cache Travio master-data categories."""
+    cache_key = "crm_categories"
+    error_key = "crm_categories_error"
+    if force_refresh or cache_key not in st.session_state:
+        client = get_backend_client()
+        try:
+            response = client.get("/api/crm/categories")
+            records = extract_records(response)
+            if not records and isinstance(response, dict):
+                records = response.get("items") or response.get("list") or []
+            st.session_state[cache_key] = records
+            st.session_state.pop(error_key, None)
+        except Exception as err:  # noqa: BLE001
+            st.session_state[cache_key] = []
+            st.session_state[error_key] = str(err)
+    return st.session_state.get(cache_key, [])
+
+
+def pick_category_label_for_profile(
+    profile_type: str,
+    categories: List[Dict[str, Any]],
+    category_lookup: Dict[str, Optional[int]],
+) -> str:
+    """Choose default category label based on profile type hints."""
+    options = list(category_lookup.keys())
+    if not options:
+        return ""
+    default_label = options[0]
+    hints = [hint.upper() for hint in CATEGORY_HINTS.get(profile_type.lower(), [])]
+    if not hints:
+        return default_label
+
+    by_id = {
+        cat.get("id"): cat
+        for cat in categories
+        if isinstance(cat, dict) and cat.get("id") is not None
+    }
+    for label in options[1:]:
+        category_id = category_lookup.get(label)
+        if not category_id:
+            continue
+        category = by_id.get(category_id, {})
+        code = str(category.get("code", "") or "").upper()
+        name = str(category.get("name", "") or "").upper()
+        if any(hint and (hint in code or hint in name) for hint in hints):
+            return label
+    return default_label
+
+
 def format_client_label(client: Dict[str, Any], include_id: bool = False) -> str:
     """Return human readable label for a CRM client record."""
     name = (
@@ -500,15 +557,67 @@ def crm_search_tab() -> None:
         st.caption(f"Active client: {format_client_label(active, include_id=True)}")
 
     st.subheader("Add New Client")
+    selected_category_id: Optional[int] = None
     with st.form("crm_create_form"):
         first_name = st.text_input("First Name")
         last_name = st.text_input("Last Name")
         email = st.text_input("Email Address", key="create_email")
         phone = st.text_input("Phone Number", key="create_phone")
         country = st.text_input("Country (ISO 3166-1 alpha-2)", value="IT")
+        profile_type_options = {
+            "Privato": "private",
+            "Azienda": "company",
+            "Professionista": "professional",
+        }
+        profile_type_label = st.selectbox(
+            "Profilo cliente",
+            options=list(profile_type_options.keys()),
+            index=0,
+            help="Scegli il tipo di profilo CRM; default ‘Privato’.",
+        )
+        categories = get_crm_categories()
+        category_lookup: Dict[str, Optional[int]] = {"Nessuna categoria": None}
+        for category in categories:
+            cat_id = category.get("id")
+            if cat_id is None:
+                continue
+            code = category.get("code")
+            name = category.get("name") or code or str(cat_id)
+            label = f"{name} ({code})" if code and code not in name else f"{name} (ID {cat_id})"
+            category_lookup[label] = cat_id
+        profile_type_value = profile_type_options[profile_type_label]
+        category_options = list(category_lookup.keys())
+        auto_label = pick_category_label_for_profile(
+            profile_type_value, categories, category_lookup
+        )
+        stored_label = st.session_state.get("crm_selected_category_label")
+        last_profile = st.session_state.get("crm_selected_category_profile")
+        manual_override = st.session_state.get("crm_category_manual", False)
+        if last_profile != profile_type_value:
+            manual_override = False
+        if stored_label not in category_options:
+            stored_label = auto_label
+            manual_override = False
+        elif not manual_override:
+            stored_label = auto_label
+        st.session_state["crm_selected_category_label"] = stored_label
+        st.session_state["crm_selected_category_profile"] = profile_type_value
+        st.session_state["crm_category_manual"] = manual_override
+        category_label = st.selectbox(
+            "Categoria anagrafica",
+            options=category_options,
+            help="Associa la categoria Travio (‘categorie anagrafiche’) se necessario.",
+            key="crm_selected_category_label",
+        )
+        st.session_state["crm_category_manual"] = category_label != auto_label
+        selected_category_id = category_lookup.get(category_label)
         marketing = st.checkbox("Marketing Consent", value=False)
         extra_json = st.text_area("Additional JSON fields", value="{}")
         create_submit = st.form_submit_button("Create Client")
+
+    category_error = st.session_state.get("crm_categories_error")
+    if category_error:
+        st.warning(f"Unable to load CRM categories: {category_error}")
 
     if create_submit:
         client_payload: Dict[str, Any] = {
@@ -519,7 +628,10 @@ def crm_search_tab() -> None:
             "phone": phone,
             "country": country,
             "marketing": marketing,
+            "profile_type": profile_type_options[profile_type_label],
         }
+        if selected_category_id is not None:
+            client_payload["categories"] = [selected_category_id]
         try:
             extra = json.loads(extra_json or "{}")
             if isinstance(extra, dict):

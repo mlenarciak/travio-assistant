@@ -91,6 +91,52 @@ async def search_clients(
     return response
 
 
+@router.get("/categories")
+async def list_client_categories(
+    client: Any = Depends(get_travio_client),
+    activity_log=Depends(get_activity_log),
+) -> Dict[str, Any]:
+    """Return master-data categories to drive CRM client creation."""
+    try:
+        response = await client.list_master_data_categories()
+    except TravioAPIError as exc:
+        record_activity(
+            activity_log,
+            action="crm.categories",
+            method="GET",
+            endpoint="/rest/master-data-categories",
+            status="error",
+            response={"status_code": exc.status_code, "payload": exc.payload},
+        )
+        raise HTTPException(
+            status_code=status.HTTP_502_BAD_GATEWAY,
+            detail="Travio categories retrieval failed",
+        ) from exc
+    except Exception as exc:  # noqa: BLE001
+        record_activity(
+            activity_log,
+            action="crm.categories",
+            method="GET",
+            endpoint="/rest/master-data-categories",
+            status="error",
+            response={"error": str(exc)},
+        )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Unexpected categories retrieval error",
+        ) from exc
+
+    record_activity(
+        activity_log,
+        action="crm.categories",
+        method="GET",
+        endpoint="/rest/master-data-categories",
+        status="success",
+        response=response,
+    )
+    return response
+
+
 @router.get("/{client_id}")
 async def get_client(
     client_id: int = Path(..., ge=0),
@@ -286,6 +332,24 @@ def _prepare_client_payload(
         payload.setdefault("vat_country", country)
 
     payload.pop("marketing", None)
+
+    categories = payload.get("categories")
+    if categories is not None:
+        if isinstance(categories, (int, str)):
+            categories = [categories]
+        if isinstance(categories, list):
+            normalized_categories = []
+            for category in categories:
+                try:
+                    normalized_categories.append(int(category))
+                except (TypeError, ValueError):
+                    continue
+            if normalized_categories:
+                payload["categories"] = normalized_categories
+            else:
+                payload.pop("categories", None)
+        else:
+            payload.pop("categories", None)
 
     if include_defaults:
         payload.setdefault("profiles", ["customer"])

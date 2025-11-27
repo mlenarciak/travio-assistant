@@ -29,3 +29,9 @@ Thumbs.db
 # Local env files
 .env
 .env.local
+
+# Data
+*.csv
+data/
+fattura/
+travio ai/

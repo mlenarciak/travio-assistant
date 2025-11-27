@@ -157,6 +157,13 @@ class TravioClient:
             "PUT", f"/rest/master-data/{client_id}", json={"data": payload}
         )
 
+    async def list_master_data_categories(
+        self, *, page: int = 1, per_page: int = 200
+    ) -> Dict[str, Any]:
+        """Retrieve master-data categories (categorie anagrafiche)."""
+        params = {"page": page, "per_page": per_page}
+        return await self._request("GET", "/rest/master-data-categories", params=params)
+
     # --- Booking/Property endpoints ---
 
     async def booking_search(self, payload: Dict[str, Any]) -> Dict[str, Any]:
